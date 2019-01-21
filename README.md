@@ -1,4 +1,4 @@
-# Signal Android 
+# Signal Android [![Build Status](https://travis-ci.com/eglenceco/SignalAndroid.svg?token=ZrkYzBc8W8bQ9sGFXZjD&branch=master)](https://travis-ci.com/eglenceco/SignalAndroid)
 
 Signal is a messaging app for simple private communication with friends.
 
@@ -7,6 +7,18 @@ Signal uses your phone's data connection (WiFi/3G/4G) to communicate securely, o
 Currently available on the Play store.
 
 <a href='https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='80px'/></a>
+
+## Team Members
+We are team Room3. Our team is composed of 7 members:
+<br>David Bechara (27374054)
+<br>Eglen Cecaj (26746047)
+<br>Erdem Kepenek (27762631)
+<br>Yongtang Lu (40010468)
+<br>Marc-Henry Noon (27477961)
+<br>Mike Salib (27195060)
+<br>Manpreet Singh (27517378)
+
+Our professor is Dr. Weiyi Shang and our teacher's assistant is An Ran Chen.
 
 ## Contributing Bug reports
 We use GitHub for bug tracking. Please search the existing issues for your bug and create a new one if the issue is not yet tracked!
