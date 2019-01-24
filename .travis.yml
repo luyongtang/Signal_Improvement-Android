@@ -1,23 +1,46 @@
 language: android
+sudo: required #Added for license issues
 jdk: oraclejdk8
 
 android:
   components:
   #The versions that our project structures uses
+    - tools
+    - platform-tools
     - build-tools-27.0.3
+    - android-27
     - android-28
+    - extra-google-m2repository
+    - extra-android-m2repository # for design library
+    - extra-android-support
+    - addon-google_apis-google-27 # google play services
+    - addon-google_apis-google-28 # google play services
+    #- sys-img-armeabi-v7a-google_apis-24
+
   licenses:
-  #The first two lines are because, linux in travis sometimes skips it
+  #The first two lines are forcing extra licenses
     - "android-sdk-license-.+"
     - "google-gdk-license-.+"
     - yes | sdkmanager "build-tools;27.0.3"
+    - yes | sdkmanager "platforms;android-27"
     - yes | sdkmanager "platforms;android-28"
 
 before_script:
 #Giving permision
     - chmod +x gradlew
-    
+    #- ./gradlew dependencies || true
+    #- For emulator (later use)
+    #- android list targets
+    #- echo no | android create avd --force -n test -t android-24 --abi google_apis/armeabi-v7a
+    #- emulator -avd test -no-skin -no-audio -no-window &
+    #- android-wait-for-emulator
+    #- adb shell input keyevent 82 &
+
 script:
-#clean build cannot be used, assemblerelease forces the google extension
-  - "./gradlew assemblerelease"
-  - "./gradlew clean"
+    - "./gradlew clean"
+    - "./gradlew generatePlayDebugSources"
+    - "./gradlew compilePlayDebugSources"
+    - "./gradlew mockableAndroidJar"
+    - "./gradlew compilePlayDebugUnitTestSources"
+    - "./gradlew test"
+    - "./gradlew testPlayDebugUnitTest"
