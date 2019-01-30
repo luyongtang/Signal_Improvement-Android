@@ -1,6 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+  <string-array name="pref_background_entries">
+      <item>@string/preferences__default</item>
+      <item>Black</item>
+      <item>White</item>
+      <item>Red</item>
+      <item>Lime</item>
+      <item>Blue</item>
+      <item>Yellow</item>
+      <item>Cyan</item>
+      <item>Magenta</item>
+      <item>Silver</item>
+      <item>Gray</item>
+      <item>Maroon</item>
+      <item>Olive</item>
+      <item>Green</item>
+      <item>Purple</item>
+      <item>Teal</item>
+      <item>Navy</item>
+  </string-array>
+
+  <string-array name="pref_background_values">
+      <item>#000000</item>
+      <item>#FFFFFF</item>
+      <item>#FF0000</item>
+      <item>#00FF00</item>
+      <item>#0000FF</item>
+      <item>#FFFF00</item>
+      <item>#00FFFF</item>
+      <item>#FF00FF</item>
+      <item>#C0C0C0</item>
+      <item>#808080</item>
+      <item>#800000</item>
+      <item>#808000</item>
+      <item>#008000</item>
+      <item>#800080</item>
+      <item>#008080</item>
+      <item>#000080</item>
+  </string-array>
+
+  <string-array name="text_entries">
+      <item>@string/preferences__default</item>
+      <item>Black</item>
+      <item>White</item>
+      <item>Red</item>
+      <item>Lime</item>
+      <item>Blue</item>
+      <item>Yellow</item>
+      <item>Cyan</item>
+      <item>Magenta</item>
+      <item>Silver</item>
+      <item>Gray</item>
+      <item>Maroon</item>
+      <item>Olive</item>
+      <item>Green</item>
+      <item>Purple</item>
+      <item>Teal</item>
+      <item>Navy</item>
+  </string-array>
+
+  <string-array name="text_values">
+      <item>#000000</item>
+      <item>#FFFFFF</item>
+      <item>#FF0000</item>
+      <item>#00FF00</item>
+      <item>#0000FF</item>
+      <item>#FFFF00</item>
+      <item>#00FFFF</item>
+      <item>#FF00FF</item>
+      <item>#C0C0C0</item>
+      <item>#808080</item>
+      <item>#800000</item>
+      <item>#808000</item>
+      <item>#008000</item>
+      <item>#800080</item>
+      <item>#008080</item>
+      <item>#000080</item>
+  </string-array>
+
+    <string-array name="pref_bubble_entries">
+        <item>@string/preferences__default</item>
+        <item>Black</item>
+        <item>White</item>
+        <item>Red</item>
+        <item>Lime</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Cyan</item>
+        <item>Magenta</item>
+        <item>Silver</item>
+        <item>Gray</item>
+        <item>Maroon</item>
+        <item>Olive</item>
+        <item>Green</item>
+        <item>Purple</item>
+        <item>Teal</item>
+        <item>Navy</item>
+    </string-array>
+
+    <string-array name="pref_bubble_values">
+        <item>#000000</item>
+        <item>#FFFFFF</item>
+        <item>#FF0000</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#FFFF00</item>
+        <item>#00FFFF</item>
+        <item>#FF00FF</item>
+        <item>#C0C0C0</item>
+        <item>#808080</item>
+        <item>#800000</item>
+        <item>#808000</item>
+        <item>#008000</item>
+        <item>#800080</item>
+        <item>#008080</item>
+        <item>#000080</item>
+    </string-array>
+
+    <string-array name="font_entries">
+        <item>@string/preferences__default</item>
+        <item>Font 1</item>
+        <item>Font 2</item>
+    </string-array>
+
+// replace with real values
+    <string-array name="font_values">
+        <item>zz</item>
+        <item>en</item>
+        <item>ar</item>
+    </string-array>
+
   <string-array name="language_entries">
       <item>@string/preferences__default</item>
       <item>English</item>
