@@ -203,7 +203,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
     @TargetApi(11)
     private void tintIcons(Context context) {
-      Drawable customization = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.blue_star));
+      Drawable customization = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.star));
       Drawable sms           = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_textsms_white_24dp));
       Drawable notifications = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_notifications_white_24dp));
       Drawable privacy       = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_security_white_24dp));
