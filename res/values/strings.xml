@@ -45,6 +45,7 @@
     <string name="ApplicationPreferencesActivity_sms_mms_summary">SMS %1$s, MMS %2$s</string>
     <string name="ApplicationPreferencesActivity_privacy_summary">Screen lock %1$s, Registration lock %2$s</string>
     <string name="ApplicationPreferencesActivity_appearance_summary">Theme %1$s, Language %2$s</string>
+    <string name="ApplicationPreferencesActivity_customization_summary">Background Color %1$s, Text Color %2$s, Bubble Color %3$s, Text Font %4$s</string>
 
     <!-- AppProtectionPreferenceFragment -->
     <plurals name="AppProtectionPreferenceFragment_minutes">
@@ -1188,9 +1189,14 @@
     <string name="preferences__light_theme">Light</string>
     <string name="preferences__dark_theme">Dark</string>
     <string name="preferences__appearance">Appearance</string>
+    <string name="preferences__customization">Customization</string>
     <string name="preferences__theme">Theme</string>
     <string name="preferences__default">Default</string>
     <string name="preferences__language">Language</string>
+    <string name="preferences__background">Background Color</string>
+    <string name="preferences__text">Text Color</string>
+    <string name="preferences__bubble">Bubble Color</string>
+    <string name="preferences__font">Text Font</string>
     <string name="preferences__signal_messages_and_calls">Signal messages and calls</string>
     <string name="preferences__free_private_messages_and_calls">Free private messages and calls to Signal users</string>
     <string name="preferences__submit_debug_log">Submit debug log</string>
