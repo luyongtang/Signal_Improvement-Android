@@ -12,6 +12,8 @@ import org.thoughtcrime.securesms.util.TextSecurePreferences;
 import java.util.Arrays;
 
 public class CustomizationPreferenceFragment extends ListSummaryPreferenceFragment {
+
+    @Override
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
 
