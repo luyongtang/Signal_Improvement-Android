@@ -46,6 +46,7 @@ import org.thoughtcrime.securesms.preferences.widgets.ProfilePreference;
 import org.thoughtcrime.securesms.service.KeyCachingService;
 import org.thoughtcrime.securesms.util.DynamicLanguage;
 import org.thoughtcrime.securesms.util.DynamicTheme;
+import org.thoughtcrime.securesms.util.DynamicBackground;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
 
 
@@ -73,11 +74,13 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
   private final DynamicTheme    dynamicTheme    = new DynamicTheme();
   private final DynamicLanguage dynamicLanguage = new DynamicLanguage();
+  private final DynamicBackground dynamicBackground = new DynamicBackground();
 
   @Override
   protected void onPreCreate() {
     dynamicTheme.onCreate(this);
     dynamicLanguage.onCreate(this);
+    dynamicBackground.onCreate(this);
   }
 
   @Override
@@ -97,6 +100,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
     super.onResume();
     dynamicTheme.onResume(this);
     dynamicLanguage.onResume(this);
+    dynamicBackground.onResume(this);
   }
 
   @Override

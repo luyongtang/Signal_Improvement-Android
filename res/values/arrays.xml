@@ -2,7 +2,6 @@
 <resources>
 
   <string-array name="pref_background_entries">
-      <item>@string/preferences__default</item>
       <item>Black</item>
       <item>White</item>
       <item>Red</item>
@@ -41,7 +40,6 @@
   </string-array>
 
   <string-array name="text_entries">
-      <item>@string/preferences__default</item>
       <item>Black</item>
       <item>White</item>
       <item>Red</item>
@@ -80,7 +78,6 @@
   </string-array>
 
     <string-array name="pref_bubble_entries">
-        <item>@string/preferences__default</item>
         <item>Black</item>
         <item>White</item>
         <item>Red</item>
