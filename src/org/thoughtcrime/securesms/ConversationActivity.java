@@ -167,6 +167,7 @@ import org.thoughtcrime.securesms.util.Dialogs;
 import org.thoughtcrime.securesms.util.DirectoryHelper;
 import org.thoughtcrime.securesms.util.DynamicLanguage;
 import org.thoughtcrime.securesms.util.DynamicTheme;
+import org.thoughtcrime.securesms.util.DynamicBackground;
 import org.thoughtcrime.securesms.util.ExpirationUtil;
 import org.thoughtcrime.securesms.util.GroupUtil;
 import org.thoughtcrime.securesms.util.IdentityUtil;
@@ -275,12 +276,14 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   private boolean    isMmsEnabled          = true;
   private boolean    isSecurityInitialized = false;
 
-  private final IdentityRecordList identityRecords = new IdentityRecordList();
-  private final DynamicTheme       dynamicTheme    = new DynamicTheme();
-  private final DynamicLanguage    dynamicLanguage = new DynamicLanguage();
+  private final IdentityRecordList identityRecords   = new IdentityRecordList();
+  private final DynamicBackground  dynamicBackground = new DynamicBackground();
+  private final DynamicTheme       dynamicTheme      = new DynamicTheme();
+  private final DynamicLanguage    dynamicLanguage   = new DynamicLanguage();
 
   @Override
   protected void onPreCreate() {
+    dynamicBackground.onCreate(this);
     dynamicTheme.onCreate(this);
     dynamicLanguage.onCreate(this);
   }
@@ -329,6 +332,9 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
         });
       }
     });
+
+    LinearLayout li=(LinearLayout)findViewById(R.id.conversation_container);
+    li.setBackgroundColor(Color.parseColor(dynamicBackground.getSelectedBackground(this)));
   }
 
   @Override
@@ -371,6 +377,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     super.onResume();
     dynamicTheme.onResume(this);
     dynamicLanguage.onResume(this);
+    dynamicBackground.onResume(this);
     quickAttachmentDrawer.onResume();
 
     initializeEnabledCheck();
