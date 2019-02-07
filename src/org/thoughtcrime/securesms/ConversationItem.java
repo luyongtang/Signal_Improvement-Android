@@ -130,7 +130,7 @@ public class ConversationItem extends LinearLayout
   private @NonNull  Stub<SharedContactView>         sharedContactStub;
   private @Nullable EventListener                   eventListener;
 
-  private final DynamicTextColor dynamicTextColor=new DynamicTextColor();
+  private final DynamicTextColor dynamicTextColor = new DynamicTextColor();
   private int defaultBubbleColor;
   private int measureCalls;
 
