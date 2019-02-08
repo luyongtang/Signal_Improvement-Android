@@ -305,7 +305,7 @@ public class ConversationItem extends LinearLayout
 
   private void setBubbleState(MessageRecord messageRecord) {
     if (messageRecord.isOutgoing()) {
-      bodyBubble.getBackground().setColorFilter(Color.parseColor(dynamicBubbleBody.getSelectedBubbleColor(this.context)), PorterDuff.Mode.MULTIPLY);
+      bodyBubble.getBackground().setColorFilter(Color.parseColor(dynamicBubbleBody.getSelectedBubbleColor(context)), PorterDuff.Mode.MULTIPLY);
     } else {
       bodyBubble.getBackground().setColorFilter(messageRecord.getRecipient().getColor().toConversationColor(context), PorterDuff.Mode.MULTIPLY);
     }
