@@ -75,6 +75,7 @@ import org.thoughtcrime.securesms.recipients.RecipientModifiedListener;
 import org.thoughtcrime.securesms.util.DateUtils;
 import org.thoughtcrime.securesms.util.DynamicTheme;
 import org.thoughtcrime.securesms.util.DynamicBubbleBody;
+import org.thoughtcrime.securesms.util.DynamicTextColor;
 import org.thoughtcrime.securesms.util.LongClickCopySpan;
 import org.thoughtcrime.securesms.util.LongClickMovementMethod;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
@@ -130,6 +131,7 @@ public class ConversationItem extends LinearLayout
   private @NonNull  Stub<SharedContactView>         sharedContactStub;
   private @Nullable EventListener                   eventListener;
 
+  private final DynamicTextColor dynamicTextColor = new DynamicTextColor();
   private int defaultBubbleColor;
   private int measureCalls;
   private final DynamicBubbleBody dynamicBubbleBody = new DynamicBubbleBody();
@@ -389,6 +391,17 @@ public class ConversationItem extends LinearLayout
     bodyText.setClickable(false);
     bodyText.setFocusable(false);
     bodyText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TextSecurePreferences.getMessageBodyTextSize(context));
+
+    if (messageRecord.isOutgoing()) {
+      bodyText.setTextColor(Color.parseColor(dynamicTextColor.getSelectedTextColor(getContext())));
+    } else {
+      if(DynamicTheme.LIGHT.equals(TextSecurePreferences.getTheme(context))) {
+      bodyText.setTextColor(getResources().getColor(R.color.core_white));
+    } else {
+        bodyText.setTextColor(getResources().getColor(R.color.core_grey_05));
+      }
+    }
+
 
     if (isCaptionlessMms(messageRecord)) {
       bodyText.setVisibility(View.GONE);
