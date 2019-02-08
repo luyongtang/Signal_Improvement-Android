@@ -74,6 +74,7 @@ import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientModifiedListener;
 import org.thoughtcrime.securesms.util.DateUtils;
 import org.thoughtcrime.securesms.util.DynamicTheme;
+import org.thoughtcrime.securesms.util.DynamicBubbleBody;
 import org.thoughtcrime.securesms.util.DynamicTextColor;
 import org.thoughtcrime.securesms.util.LongClickCopySpan;
 import org.thoughtcrime.securesms.util.LongClickMovementMethod;
@@ -133,6 +134,7 @@ public class ConversationItem extends LinearLayout
   private final DynamicTextColor dynamicTextColor = new DynamicTextColor();
   private int defaultBubbleColor;
   private int measureCalls;
+  private final DynamicBubbleBody dynamicBubbleBody = new DynamicBubbleBody();
 
   private final PassthroughClickListener        passthroughClickListener    = new PassthroughClickListener();
   private final AttachmentDownloadClickListener downloadClickListener       = new AttachmentDownloadClickListener();
@@ -305,7 +307,7 @@ public class ConversationItem extends LinearLayout
 
   private void setBubbleState(MessageRecord messageRecord) {
     if (messageRecord.isOutgoing()) {
-      bodyBubble.getBackground().setColorFilter(defaultBubbleColor, PorterDuff.Mode.MULTIPLY);
+      bodyBubble.getBackground().setColorFilter(Color.parseColor(dynamicBubbleBody.getSelectedBubbleColor(context)), PorterDuff.Mode.MULTIPLY);
     } else {
       bodyBubble.getBackground().setColorFilter(messageRecord.getRecipient().getColor().toConversationColor(context), PorterDuff.Mode.MULTIPLY);
     }
