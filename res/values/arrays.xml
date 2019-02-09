@@ -123,8 +123,8 @@
 
 // replace with real values
     <string-array name="font_values">
-        <item>zz</item>
-        <item>en</item>
+        <item>R.font.vlad</item>
+        <item>R.font.arlb</item>
         <item>ar</item>
     </string-array>
 

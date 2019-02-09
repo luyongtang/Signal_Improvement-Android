@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
@@ -73,6 +74,7 @@ import org.thoughtcrime.securesms.mms.SlidesClickedListener;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientModifiedListener;
 import org.thoughtcrime.securesms.util.DateUtils;
+import org.thoughtcrime.securesms.util.DynamicTextFont;
 import org.thoughtcrime.securesms.util.DynamicTheme;
 import org.thoughtcrime.securesms.util.DynamicBubbleBody;
 import org.thoughtcrime.securesms.util.DynamicTextColor;
@@ -135,6 +137,7 @@ public class ConversationItem extends LinearLayout
   private int defaultBubbleColor;
   private int measureCalls;
   private final DynamicBubbleBody dynamicBubbleBody = new DynamicBubbleBody();
+  private final DynamicTextFont dynamicTextFont = new DynamicTextFont();
 
   private final PassthroughClickListener        passthroughClickListener    = new PassthroughClickListener();
   private final AttachmentDownloadClickListener downloadClickListener       = new AttachmentDownloadClickListener();
@@ -394,6 +397,7 @@ public class ConversationItem extends LinearLayout
 
     if (messageRecord.isOutgoing()) {
       bodyText.setTextColor(Color.parseColor(dynamicTextColor.getSelectedTextColor(getContext())));
+      bodyText.setTypeface(dynamicTextFont.getSelectedTextFont(getContext()));
     } else {
       if(DynamicTheme.LIGHT.equals(TextSecurePreferences.getTheme(context))) {
       bodyText.setTextColor(getResources().getColor(R.color.core_white));
