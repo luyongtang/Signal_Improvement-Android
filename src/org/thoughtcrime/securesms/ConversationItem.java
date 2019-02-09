@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -28,6 +29,7 @@ import android.net.Uri;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -396,9 +398,16 @@ public class ConversationItem extends LinearLayout
     bodyText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TextSecurePreferences.getMessageBodyTextSize(context));
 
     if (messageRecord.isOutgoing()) {
+
       bodyText.setTextColor(Color.parseColor(dynamicTextColor.getSelectedTextColor(getContext())));
-      bodyText.setTypeface(dynamicTextFont.getSelectedTextFont(getContext()));
-    } else {
+      String tf = dynamicTextFont.getSelectedTextFont(getContext());
+      Log.d("Mikeez", "This is my message: " + tf);
+      //Returns whatever is in the array guy
+      Typeface typeface;
+        typeface = ResourcesCompat.getFont(context, Integer.parseInt(tf));
+        Log.d("Mikeez2", "This is my message: " + tf);
+        bodyText.setTypeface(typeface);
+
       if(DynamicTheme.LIGHT.equals(TextSecurePreferences.getTheme(context))) {
       bodyText.setTextColor(getResources().getColor(R.color.core_white));
     } else {
