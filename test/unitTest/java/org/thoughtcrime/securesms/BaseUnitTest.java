@@ -15,6 +15,7 @@ import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.thoughtcrime.securesms.util.TextSecurePreferences;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
