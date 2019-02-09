@@ -74,5 +74,8 @@ public abstract class BaseUnitTest {
     when(sharedPreferences.getFloat(anyString(), anyFloat())).thenReturn(0f);
     when(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPreferences);
     when(context.getPackageName()).thenReturn("org.thoughtcrime.securesms");
+    when(TextSecurePreferences.getBubble(any())).thenReturn("getter called");
+    when(TextSecurePreferences.getBackground(any())).thenReturn("getter called");
+    when(TextSecurePreferences.getText(any())).thenReturn("getter called");
   }
 }
