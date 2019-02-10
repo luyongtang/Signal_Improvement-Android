@@ -116,16 +116,16 @@
     </string-array>
 
     <string-array name="font_entries">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>Default Font</item>
+        <item>Font Script</item>
+        <item>Font Sign</item>
     </string-array>
 
 // replace with real values
     <string-array name="font_values">
-        <item>R.font.vlad</item>
-        <item>R.font.arlb</item>
-        <item>R.font.vlad</item>
+        <item>Roboto-Light.ttf</item>
+        <item>a.ttf</item>
+        <item>b.ttf</item>
     </string-array>
 
   <string-array name="language_entries">

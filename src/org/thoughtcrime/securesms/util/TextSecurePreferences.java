@@ -2,7 +2,6 @@ package org.thoughtcrime.securesms.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.hardware.Camera.CameraInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -816,7 +815,7 @@ public class TextSecurePreferences {
   }
 
   public static String getFont(Context context) {
-    return getStringPreference(context, FONT_PREF, "R.font.vlad");
+    return getStringPreference(context, FONT_PREF, "Roboto-Light.ttf");
   }
 
   public static void setFont(Context context, String font) {
