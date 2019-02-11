@@ -96,7 +96,6 @@
                 android:layout_marginBottom="@dimen/message_bubble_collapsed_footer_padding"
                 android:textColor="?conversation_item_sent_text_primary_color"
                 android:textColorLink="?conversation_item_sent_text_primary_color"
-                android:fontFamily="@font/vlad"
                 app:scaleEmojis="true"
                 tools:text="Mango pickle lorem ipsum" />
 
