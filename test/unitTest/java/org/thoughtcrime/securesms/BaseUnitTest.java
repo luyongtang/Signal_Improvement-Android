@@ -78,5 +78,6 @@ public abstract class BaseUnitTest {
     when(TextSecurePreferences.getBubble(any())).thenReturn("getter called");
     when(TextSecurePreferences.getBackground(any())).thenReturn("getter called");
     when(TextSecurePreferences.getText(any())).thenReturn("getter called");
+    when(TextSecurePreferences.getFont(any())).thenReturn("getter called");
   }
 }
