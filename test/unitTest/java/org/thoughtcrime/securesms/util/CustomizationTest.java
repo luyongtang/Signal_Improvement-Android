@@ -21,5 +21,10 @@ public class CustomizationTest extends BaseUnitTest {
     public void testBubbleColorGetter() {
         assertEquals(TextSecurePreferences.getBubble(context) , "getter called");
     }
+
+    @Test
+    public void testTextFontGetter() {
+        assertEquals(TextSecurePreferences.getFont(context) , "getter called");
+    }
 }
 
