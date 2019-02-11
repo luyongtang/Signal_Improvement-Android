@@ -815,7 +815,7 @@ public class TextSecurePreferences {
   }
 
   public static String getFont(Context context) {
-    return getStringPreference(context, FONT_PREF, "normal");
+    return getStringPreference(context, FONT_PREF, "Roboto-Light.ttf");
   }
 
   public static void setFont(Context context, String font) {
