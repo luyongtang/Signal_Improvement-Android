@@ -7,17 +7,6 @@
       <item>Red</item>
       <item>Lime</item>
       <item>Blue</item>
-      <item>Yellow</item>
-      <item>Cyan</item>
-      <item>Magenta</item>
-      <item>Silver</item>
-      <item>Gray</item>
-      <item>Maroon</item>
-      <item>Olive</item>
-      <item>Green</item>
-      <item>Purple</item>
-      <item>Teal</item>
-      <item>Navy</item>
   </string-array>
 
   <string-array name="pref_background_values">
@@ -26,17 +15,6 @@
       <item>#FF0000</item>
       <item>#00FF00</item>
       <item>#0000FF</item>
-      <item>#FFFF00</item>
-      <item>#00FFFF</item>
-      <item>#FF00FF</item>
-      <item>#C0C0C0</item>
-      <item>#808080</item>
-      <item>#800000</item>
-      <item>#808000</item>
-      <item>#008000</item>
-      <item>#800080</item>
-      <item>#008080</item>
-      <item>#000080</item>
   </string-array>
 
   <string-array name="text_entries">
@@ -45,17 +23,6 @@
       <item>Red</item>
       <item>Lime</item>
       <item>Blue</item>
-      <item>Yellow</item>
-      <item>Cyan</item>
-      <item>Magenta</item>
-      <item>Silver</item>
-      <item>Gray</item>
-      <item>Maroon</item>
-      <item>Olive</item>
-      <item>Green</item>
-      <item>Purple</item>
-      <item>Teal</item>
-      <item>Navy</item>
   </string-array>
 
   <string-array name="text_values">
@@ -64,17 +31,6 @@
       <item>#FF0000</item>
       <item>#00FF00</item>
       <item>#0000FF</item>
-      <item>#FFFF00</item>
-      <item>#00FFFF</item>
-      <item>#FF00FF</item>
-      <item>#C0C0C0</item>
-      <item>#808080</item>
-      <item>#800000</item>
-      <item>#808000</item>
-      <item>#008000</item>
-      <item>#800080</item>
-      <item>#008080</item>
-      <item>#000080</item>
   </string-array>
 
     <string-array name="pref_bubble_entries">
@@ -83,17 +39,6 @@
         <item>Red</item>
         <item>Lime</item>
         <item>Blue</item>
-        <item>Yellow</item>
-        <item>Cyan</item>
-        <item>Magenta</item>
-        <item>Silver</item>
-        <item>Gray</item>
-        <item>Maroon</item>
-        <item>Olive</item>
-        <item>Green</item>
-        <item>Purple</item>
-        <item>Teal</item>
-        <item>Navy</item>
     </string-array>
 
     <string-array name="pref_bubble_values">
@@ -102,17 +47,6 @@
         <item>#FF0000</item>
         <item>#00FF00</item>
         <item>#0000FF</item>
-        <item>#FFFF00</item>
-        <item>#00FFFF</item>
-        <item>#FF00FF</item>
-        <item>#C0C0C0</item>
-        <item>#808080</item>
-        <item>#800000</item>
-        <item>#808000</item>
-        <item>#008000</item>
-        <item>#800080</item>
-        <item>#008080</item>
-        <item>#000080</item>
     </string-array>
 
     <string-array name="font_entries">
