@@ -8,13 +8,16 @@ android:
     - tools
     - platform-tools
     - build-tools-27.0.3
+    - android-22
     - android-27
     - android-28
     - extra-google-m2repository
     - extra-android-m2repository # for design library
     - extra-android-support
+    - addon-google_apis-google-22 # google play services
     - addon-google_apis-google-27 # google play services
     - addon-google_apis-google-28 # google play services
+    - sys-img-armeabi-v7a-android-22
     #- sys-img-armeabi-v7a-google_apis-24
 
   licenses:
@@ -22,6 +25,7 @@ android:
     - "android-sdk-license-.+"
     - "google-gdk-license-.+"
     - yes | sdkmanager "build-tools;27.0.3"
+    - yes | sdkmanager "platforms;android-22"
     - yes | sdkmanager "platforms;android-27"
     - yes | sdkmanager "platforms;android-28"
 
@@ -31,10 +35,11 @@ before_script:
     #- ./gradlew dependencies || true
     #- For emulator (later use)
     #- android list targets
-    #- echo no | android create avd --force -n test -t android-24 --abi google_apis/armeabi-v7a
-    #- emulator -avd test -no-skin -no-audio -no-window &
-    #- android-wait-for-emulator
-    #- adb shell input keyevent 82 &
+    # Platform v. 22 is the one that works best for this project
+    - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+    - emulator -avd test -no-audio -no-window &
+    - android-wait-for-emulator
+    - adb shell input keyevent 82 &
 
 script:
     - "./gradlew clean"
@@ -44,3 +49,4 @@ script:
     - "./gradlew compilePlayDebugUnitTestSources"
     - "./gradlew test"
     - "./gradlew testPlayDebugUnitTest"
+    - "./gradlew connectedAndroidTest" #This one will run the UI test
