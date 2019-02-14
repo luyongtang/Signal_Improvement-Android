@@ -35,7 +35,8 @@ public abstract class BaseUnitTest {
   protected SharedPreferences sharedPreferences = mock(SharedPreferences.class);
 
   @Before
-  public void setUp() throws Exception {
+  public void
+  setUp() throws Exception {
     mockStatic(Looper.class);
     mockStatic(Log.class);
     mockStatic(Handler.class);
