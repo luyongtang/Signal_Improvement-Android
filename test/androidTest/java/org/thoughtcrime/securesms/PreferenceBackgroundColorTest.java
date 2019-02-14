@@ -24,7 +24,7 @@ public class PreferenceBackgroundColorTest {
     @Test
     public void changeBackgroundColorTest(){
         //This is the chosen color to apply on chat background
-        String newColor = "Lime";
+        String newColor = "White";
         //These navigate to the Background Color preference
         onView(withText("Customization")).perform(click());
         onView(withText("Background Color")).perform(click());
