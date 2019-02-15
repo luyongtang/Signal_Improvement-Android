@@ -955,6 +955,7 @@ public class ConversationFragment extends Fragment
           handleDisplayDetails(getSelectedMessageRecord());
           actionMode.finish();
           return true;
+
         case R.id.menu_context_forward:
           handleForwardMessage(getSelectedMessageRecord());
           actionMode.finish();
