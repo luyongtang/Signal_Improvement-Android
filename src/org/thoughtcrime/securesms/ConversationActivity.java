@@ -602,6 +602,8 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       inflater.inflate(R.menu.conversation_add_to_contacts, menu);
     }
 
+    inflater.inflate(R.menu.conversation_starred_messages, menu);
+
     super.onPrepareOptionsMenu(menu);
     return true;
   }
@@ -627,6 +629,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
     case R.id.menu_expiring_messages_off:
     case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
+    case R.id.menu_starred_messages:          handleStarredMessages();                           return true;
     case android.R.id.home:                   handleReturnToConversationList();                  return true;
     }
 
@@ -918,6 +921,12 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     Intent intent = new Intent(ConversationActivity.this, GroupCreateActivity.class);
     intent.putExtra(GroupCreateActivity.GROUP_ADDRESS_EXTRA, recipient.getAddress());
     startActivityForResult(intent, GROUP_EDIT);
+  }
+
+  private void handleStarredMessages(){
+    Intent intent = new Intent(this, RegistrationActivity.class); //This intent is where we'd put the StarredMessageActivity.java
+    intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true); //We have to make an 'extra' string in StarredMessageActivity.java to launch from the menu
+    startActivity(intent);
   }
 
   private void handleDistributionBroadcastEnabled(MenuItem item) {
