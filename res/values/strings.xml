@@ -46,6 +46,7 @@
     <string name="ApplicationPreferencesActivity_privacy_summary">Screen lock %1$s, Registration lock %2$s</string>
     <string name="ApplicationPreferencesActivity_appearance_summary">Theme %1$s, Language %2$s</string>
     <string name="ApplicationPreferencesActivity_customization_summary">Background Color %1$s, Text Color %2$s, Bubble Color %3$s, Text Font %4$s</string>
+    <string name="ApplicationPreferencesActivity_analytics_summary">Messages Received, Messages Sent, Screen Time</string>
 
     <!-- AppProtectionPreferenceFragment -->
     <plurals name="AppProtectionPreferenceFragment_minutes">
@@ -1190,6 +1191,7 @@
     <string name="preferences__dark_theme">Dark</string>
     <string name="preferences__appearance">Appearance</string>
     <string name="preferences__customization">Customization</string>
+    <string name="preferences__analytics">Analytics Report</string>
     <string name="preferences__theme">Theme</string>
     <string name="preferences__default">Default</string>
     <string name="preferences__language">Language</string>

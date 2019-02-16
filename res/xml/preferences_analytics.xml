@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="received_messages"
+        android:title="Messages Received" />
+
+    <Preference
+        android:key="sent_messages"
+        android:title="Messages Sent" />
+
+    <Preference
+        android:key="screen_time"
+        android:title="Screen Time" />
+</PreferenceScreen>
