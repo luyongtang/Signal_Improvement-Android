@@ -369,6 +369,10 @@
 
     </activity>
 
+        <activity android:name=".util.runSample"
+            android:exported="true"
+            />
+
     <activity android:name=".RecipientPreferenceActivity"
               android:theme="@style/TextSecure.LightNoActionBar"
               android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize"/>

@@ -1473,4 +1473,7 @@
     <string name="recipient_preferences__about">About</string>
     <!-- EOF -->
 
+    <!-- preference key value used for Analytic -->
+    <string name="analytic_key">org.thoughtcrime.securesms.analytic_key</string>
+
 </resources>
