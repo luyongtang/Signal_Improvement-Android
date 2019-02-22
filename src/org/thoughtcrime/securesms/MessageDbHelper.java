@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MessageDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "star_db";
@@ -34,17 +35,10 @@ public class MessageDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addMessage(String messageId, String threadId, String isPushGroup, String type, String address, SQLiteDatabase database)
+    public void addMessage(ContentValues contentValues, SQLiteDatabase database)
     {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR , messageId);
-        contentValues.put(StarredMessageContract.MessageEntry.THREAD_ID_STAR, threadId);
-        contentValues.put(StarredMessageContract.MessageEntry.IS_PUSH_GROUP_STAR, isPushGroup);
-        contentValues.put(StarredMessageContract.MessageEntry.TYPE_STAR, type);
-        contentValues.put(StarredMessageContract.MessageEntry.ADDRESS_STAR, address);
-
         database.insert(StarredMessageContract.MessageEntry.TABLE_NAME, null, contentValues);
-        Log.d("Database operations", "One Row Inserted");
+        Log.d("Database operations", "One Row Inserted , Great success, hahahahahhahaha");
 
     }
 

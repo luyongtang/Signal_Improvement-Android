@@ -19,6 +19,7 @@ package org.thoughtcrime.securesms;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,6 +43,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
+import android.database.sqlite.SQLiteDatabase;
 
 import org.thoughtcrime.securesms.components.ConversationTypingView;
 import org.thoughtcrime.securesms.components.recyclerview.SmoothScrollingLinearLayoutManager;
@@ -502,6 +504,20 @@ public class ConversationFragment extends Fragment
     startActivity(intent);
   }
 
+  private void handleStoreMessage(MessageRecord message){
+    MessageDbHelper messageDbHelper = new MessageDbHelper(getActivity());
+    SQLiteDatabase database = messageDbHelper.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+
+    contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR ,  message.getId());
+    contentValues.put(StarredMessageContract.MessageEntry.THREAD_ID_STAR, threadId);
+    contentValues.put(StarredMessageContract.MessageEntry.IS_PUSH_GROUP_STAR,  recipient.isGroupRecipient() && message.isPush());
+    contentValues.put(StarredMessageContract.MessageEntry.TYPE_STAR, message.isMms() ? MmsSmsDatabase.MMS_TRANSPORT : MmsSmsDatabase.SMS_TRANSPORT);
+    contentValues.put(StarredMessageContract.MessageEntry.ADDRESS_STAR, recipient.getAddress().toString());
+
+      messageDbHelper.addMessage(contentValues,database);
+  }
+
   private void handleForwardMessage(MessageRecord message) {
     Intent composeIntent = new Intent(getActivity(), ShareActivity.class);
     composeIntent.putExtra(Intent.EXTRA_TEXT, message.getDisplayBody().toString());
@@ -949,6 +965,10 @@ public class ConversationFragment extends Fragment
           return true;
         case R.id.menu_context_delete_message:
           handleDeleteMessages(getListAdapter().getSelectedItems());
+          actionMode.finish();
+          return true;
+        case R.id.menu_context_star:
+          handleStoreMessage(getSelectedMessageRecord());
           actionMode.finish();
           return true;
         case R.id.menu_context_details:
