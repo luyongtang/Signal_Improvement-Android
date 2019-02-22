@@ -206,13 +206,13 @@ import static org.whispersystems.libsignal.SessionCipher.SESSION_LOCK;
  */
 @SuppressLint("StaticFieldLeak")
 public class ConversationActivity extends PassphraseRequiredActionBarActivity
-    implements ConversationFragment.ConversationFragmentListener,
-               AttachmentManager.AttachmentListener,
-               RecipientModifiedListener,
-               OnKeyboardShownListener,
-               AttachmentDrawerListener,
-               InputPanel.Listener,
-               InputPanel.MediaListener
+        implements ConversationFragment.ConversationFragmentListener,
+        AttachmentManager.AttachmentListener,
+        RecipientModifiedListener,
+        OnKeyboardShownListener,
+        AttachmentDrawerListener,
+        InputPanel.Listener,
+        InputPanel.MediaListener
 {
   private static final String TAG = ConversationActivity.class.getSimpleName();
 
@@ -602,6 +602,8 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       inflater.inflate(R.menu.conversation_add_to_contacts, menu);
     }
 
+    inflater.inflate(R.menu.conversation_scheduled_message, menu);
+
     super.onPrepareOptionsMenu(menu);
     return true;
   }
@@ -627,6 +629,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
     case R.id.menu_expiring_messages_off:
     case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
+    case R.id.menu_scheduled_message:         handleScheduledMessage();                          return true;
     case android.R.id.home:                   handleReturnToConversationList();                  return true;
     }
 
@@ -918,6 +921,11 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     Intent intent = new Intent(ConversationActivity.this, GroupCreateActivity.class);
     intent.putExtra(GroupCreateActivity.GROUP_ADDRESS_EXTRA, recipient.getAddress());
     startActivityForResult(intent, GROUP_EDIT);
+  }
+
+  public void handleScheduledMessage(){
+    Intent intent = new Intent(ConversationActivity.this, ScheduledMessageActivity.class);
+    startActivity(intent);
   }
 
   private void handleDistributionBroadcastEnabled(MenuItem item) {

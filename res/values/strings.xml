@@ -1316,6 +1316,9 @@
     <!-- conversation_callable_insecure -->
     <string name="conversation_add_to_contacts__menu_add_to_contacts">Add to contacts</string>
 
+    <!-- conversation_callable_insecure -->
+    <string name="conversation_scheduled_message__scheduled_message">Scheduled message</string>
+
     <!-- conversation_group_options -->
     <string name="convesation_group_options__recipients_list">Recipients list</string>
     <string name="conversation_group_options__delivery">Delivery</string>
