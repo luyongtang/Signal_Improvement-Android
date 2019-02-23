@@ -11,8 +11,14 @@ public class MessageDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String CREATE_TABLE = "create table "+ StarredMessageContract.MessageEntry.TABLE_NAME+
-            "("+ StarredMessageContract.MessageEntry.MESSAGE_ID_STAR+" text, "+ StarredMessageContract.MessageEntry.THREAD_ID_STAR +" text, "+
-            StarredMessageContract.MessageEntry.IS_PUSH_GROUP_STAR +" text, "+ StarredMessageContract.MessageEntry.TYPE_STAR  +" text, "+ StarredMessageContract.MessageEntry.ADDRESS_STAR +" text);";
+            "("+ StarredMessageContract.MessageEntry.MESSAGE_ID_STAR+" text, "
+            + StarredMessageContract.MessageEntry.THREAD_ID_STAR +" text, "
+            + StarredMessageContract.MessageEntry.TYPE_STAR  +" text, "
+            + StarredMessageContract.MessageEntry.CONTACT +" text, "
+            + StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR +" text, "
+            + StarredMessageContract.MessageEntry.TIME_STAMP +" text, "
+            + StarredMessageContract.MessageEntry.DATE_RECEIVED +" text, "
+            + StarredMessageContract.MessageEntry.DATE_SENT +" text);";
 
     public static final String DROP_TABLE = "drop table if exists "+ StarredMessageContract.MessageEntry.TABLE_NAME;
 
@@ -38,7 +44,7 @@ public class MessageDbHelper extends SQLiteOpenHelper {
     public void addMessage(ContentValues contentValues, SQLiteDatabase database)
     {
         database.insert(StarredMessageContract.MessageEntry.TABLE_NAME, null, contentValues);
-        Log.d("Database operations", "One Row Inserted , Great success, hahahahahhahaha");
+        Log.d("Database operations", "One Row Inserted , Great success");
 
     }
 

@@ -511,9 +511,13 @@ public class ConversationFragment extends Fragment
 
     contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR ,  message.getId());
     contentValues.put(StarredMessageContract.MessageEntry.THREAD_ID_STAR, threadId);
-    contentValues.put(StarredMessageContract.MessageEntry.IS_PUSH_GROUP_STAR,  recipient.isGroupRecipient() && message.isPush());
     contentValues.put(StarredMessageContract.MessageEntry.TYPE_STAR, message.isMms() ? MmsSmsDatabase.MMS_TRANSPORT : MmsSmsDatabase.SMS_TRANSPORT);
-    contentValues.put(StarredMessageContract.MessageEntry.ADDRESS_STAR, recipient.getAddress().toString());
+    contentValues.put(StarredMessageContract.MessageEntry.CONTACT, recipient.getAddress().toString());
+    contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR ,  message.getBody());
+    contentValues.put(StarredMessageContract.MessageEntry.TIME_STAMP ,  message.getTimestamp());
+    contentValues.put(StarredMessageContract.MessageEntry.DATE_RECEIVED ,  message.getDateReceived());
+    contentValues.put(StarredMessageContract.MessageEntry.DATE_SENT ,  message.getDateSent());
+
 
       messageDbHelper.addMessage(contentValues,database);
   }
@@ -975,7 +979,6 @@ public class ConversationFragment extends Fragment
           handleDisplayDetails(getSelectedMessageRecord());
           actionMode.finish();
           return true;
-
         case R.id.menu_context_forward:
           handleForwardMessage(getSelectedMessageRecord());
           actionMode.finish();
