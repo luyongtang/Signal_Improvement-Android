@@ -924,8 +924,8 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   }
 
   private void handleStarredMessages(){
-    Intent intent = new Intent(this, RegistrationActivity.class); //This intent is where we'd put the StarredMessageActivity.java
-    intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true); //We have to make an 'extra' string in StarredMessageActivity.java to launch from the menu
+    Intent intent = new Intent(this, StarredMessageActivity.class); //This intent is where we'd put the StarredMessageActivity.java
+    //intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true); //We have to make an 'extra' string in StarredMessageActivity.java to launch from the menu
     startActivity(intent);
   }
 
