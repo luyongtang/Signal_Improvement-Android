@@ -1,6 +1,7 @@
 package org.thoughtcrime.securesms;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -46,6 +47,13 @@ public class MessageDbHelper extends SQLiteOpenHelper {
         database.insert(StarredMessageContract.MessageEntry.TABLE_NAME, null, contentValues);
         Log.d("Database operations", "One Row Inserted , Great success");
 
+    }
+
+    public Cursor readMessage(SQLiteDatabase database)
+    {
+        String[] projections = {StarredMessageContract.MessageEntry.MESSAGE_ID_STAR, StarredMessageContract.MessageEntry.THREAD_ID_STAR, StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR};
+        Cursor cursor = database.query(StarredMessageContract.MessageEntry.TABLE_NAME, projections,null, null, null, null, null);
+        return cursor;
     }
 
 }
