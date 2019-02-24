@@ -24,9 +24,9 @@ public class runSample extends AppCompatActivity {
         //count incoming message
         Analytic.increaseIncomingMessageCountByOne(getApplicationContext());
         //Save the last person name you sent a message to
-        Analytic.setLastRecipientSentMessage(getApplicationContext(),"Antoine Ferrier");
+       // Analytic.setLastRecipientSentMessage(getApplicationContext(),"Antoine Ferrier");
         //Save the last person you received a message from
-        Analytic.setLastRecipientReceivedMessage(getApplicationContext(),"Alexa Philo");
+       // Analytic.setLastRecipientReceivedMessage(getApplicationContext(),"Alexa Philo");
         //Retrieve the stats and display them
         String count = Long.toString(Analytic.getOutgoingMessageCount(getApplicationContext()));
         String count_in = Long.toString(Analytic.getIncomingMessageCount(getApplicationContext()));
