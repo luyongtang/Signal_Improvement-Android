@@ -926,6 +926,17 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   private void handleStarredMessages(){
     Intent intent = new Intent(this, StarredMessageActivity.class); //This intent is where we'd put the StarredMessageActivity.java
     //intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true); //We have to make an 'extra' string in StarredMessageActivity.java to launch from the menu
+
+        //Creating a bundle
+              Bundle bundle = new Bundle();
+        //convert long id to string
+      StarredMessageContract.MessageEntry.CURRENT_THREAD = Long.toString(threadId);
+        //Adding data to the bundle
+              //bundle.putString("threadId" , current_threadId);
+
+        //Adding the bundle to the intent
+              intent.putExtras(bundle);
+
     startActivity(intent);
   }
 

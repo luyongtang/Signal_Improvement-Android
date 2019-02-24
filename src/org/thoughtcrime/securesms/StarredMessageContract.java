@@ -17,6 +17,7 @@ public final class StarredMessageContract {
         public final static String TIME_STAMP          = "time_stamp";
         public final static String DATE_RECEIVED       = "date_received";
         public final static String DATE_SENT           = "date_sent";
+        public       static String CURRENT_THREAD      = "";
 
     }
 }

@@ -49,10 +49,10 @@ public class MessageDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor readMessage(SQLiteDatabase database)
+    public Cursor readMessage(SQLiteDatabase database,String threadId)
     {
         String[] projections = {StarredMessageContract.MessageEntry.MESSAGE_ID_STAR, StarredMessageContract.MessageEntry.THREAD_ID_STAR, StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR};
-        Cursor cursor = database.query(StarredMessageContract.MessageEntry.TABLE_NAME, projections,null, null, null, null, null);
+        Cursor cursor = database.query(StarredMessageContract.MessageEntry.TABLE_NAME, projections,StarredMessageContract.MessageEntry.THREAD_ID_STAR + "=" + threadId,null, null, null, null, null);
         return cursor;
     }
 

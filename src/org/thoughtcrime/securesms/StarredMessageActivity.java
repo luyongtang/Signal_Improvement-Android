@@ -13,6 +13,14 @@ public class StarredMessageActivity extends AppCompatActivity {
 
     TextView display;
 
+    //Get the bundle
+   // Bundle bundle = getIntent().getExtras();
+
+    //Extract the data
+   // String test = bundle.getString("threadId");
+
+    String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +35,7 @@ public class StarredMessageActivity extends AppCompatActivity {
         MessageDbHelper messageDbHelper = new MessageDbHelper(this);
         SQLiteDatabase database = messageDbHelper.getReadableDatabase();
 
-        Cursor cursor = messageDbHelper.readMessage(database);
+        Cursor cursor = messageDbHelper.readMessage(database, threadId);
         String msgs = "";
 
         while (cursor.moveToNext())
