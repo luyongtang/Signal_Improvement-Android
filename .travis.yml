@@ -49,4 +49,4 @@ script:
     - "./gradlew compilePlayDebugUnitTestSources"
     - "./gradlew test"
     - "./gradlew testPlayDebugUnitTest"
-    - "./gradlew connectedAndroidTest" #This one will run the UI test
+    #- "./gradlew connectedAndroidTest" #This one will run the UI test
