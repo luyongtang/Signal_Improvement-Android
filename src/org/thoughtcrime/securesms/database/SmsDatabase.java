@@ -42,6 +42,7 @@ import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.sms.IncomingGroupMessage;
 import org.thoughtcrime.securesms.sms.IncomingTextMessage;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
+import org.thoughtcrime.securesms.util.Analytic;
 import org.thoughtcrime.securesms.util.JsonUtils;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
 import org.whispersystems.libsignal.util.guava.Optional;
@@ -545,6 +546,12 @@ public class SmsDatabase extends MessagingDatabase {
     else if (message.isIdentityDefault())     type |= Types.KEY_EXCHANGE_IDENTITY_DEFAULT_BIT;
 
     Recipient recipient = Recipient.from(context, message.getSender(), true);
+    if(recipient.getName() != null) {
+      Analytic.setLastRecipientReceivedMessage(context,recipient.getName());
+    }else{
+      Analytic.setLastRecipientReceivedMessage(context,recipient.getAddress().toString());
+    }
+    Analytic.increaseIncomingMessageCountByOne(context);
 
     Recipient groupRecipient;
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="outgoing_messages"
+        android:title="Outgoing Messages" />
+
+    <Preference
+        android:key="incoming_messages"
+        android:title="Incoming Messages" />
+
+    <Preference
+        android:key="last_message_sent"
+        android:title="Last Message Sent To" />
+
+    <Preference
+        android:key="last_message_received"
+        android:title="Last Message Received By" />
+</PreferenceScreen>
