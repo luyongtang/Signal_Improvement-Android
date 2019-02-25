@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class StarredMessageActivity extends AppCompatActivity {
 
     TextView display;
@@ -40,13 +44,27 @@ public class StarredMessageActivity extends AppCompatActivity {
 
         while (cursor.moveToNext())
         {
-            String msgId = Integer.toString(cursor.getInt(cursor.getColumnIndex(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR)));
-            String threadId = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.THREAD_ID_STAR));
             String msgBody = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR));
-            msgs = msgs + "\n\nmsgId : "+msgId+"\nthreadId: "+threadId+"\nbody: "+msgBody;
+            String timeStamp = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.TIME_STAMP));
+            Long tmp = Long.parseLong(timeStamp);
+            timeStamp = convertTime(tmp);
+            msgs = msgs + "\n\nbody: "+msgBody+"\ntime: "+timeStamp;
         }
-        display.setText(msgs);
+        if(msgs.equals("")) {
+            display.setText("No starred messages with this user");
+        }
+        else {
+            display.setText(msgs);
+        }
+
         messageDbHelper.close();
+    }
+
+    // For time format convert
+    public String convertTime(long time){
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(date);
     }
 
     @Override
