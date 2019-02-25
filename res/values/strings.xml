@@ -46,7 +46,7 @@
     <string name="ApplicationPreferencesActivity_privacy_summary">Screen lock %1$s, Registration lock %2$s</string>
     <string name="ApplicationPreferencesActivity_appearance_summary">Theme %1$s, Language %2$s</string>
     <string name="ApplicationPreferencesActivity_customization_summary">Background Color %1$s, Text Color %2$s, Bubble Color %3$s, Text Font %4$s</string>
-    <string name="ApplicationPreferencesActivity_analytics_summary">Messages Received, Messages Sent, Screen Time</string>
+    <string name="ApplicationPreferencesActivity_analytics_summary">Outgoing Messages, Incoming Messages,Last Message Sent, Last Message Received</string>
 
     <!-- AppProtectionPreferenceFragment -->
     <plurals name="AppProtectionPreferenceFragment_minutes">
@@ -1061,6 +1061,7 @@
     <!-- webrtc_answer_decline_button -->
     <string name="webrtc_answer_decline_button__swipe_up_to_answer">Swipe up to answer</string>
     <string name="webrtc_answer_decline_button__swipe_down_to_reject">Swipe down to reject</string>
+
 
     <!-- message_details_header -->
     <string name="message_details_header__issues_need_your_attention">Some issues need your attention.</string>

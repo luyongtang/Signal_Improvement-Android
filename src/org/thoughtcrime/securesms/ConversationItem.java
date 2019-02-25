@@ -326,13 +326,9 @@ public class ConversationItem extends LinearLayout
 
         if (messageRecord.isOutgoing()) {
             //Stats being recorded for sent messages
-            Analytic.increaseOutgoingMessageCountByOne(context);
-            Analytic.setLastRecipientSentMessage(context, messageRecord.getRecipient().getName());
             bodyBubble.getBackground().setColorFilter(Color.parseColor(dynamicBubbleBody.getSelectedBubbleColor(context)), PorterDuff.Mode.MULTIPLY);
         } else {
             //Stats being recorded for received messages
-            Analytic.increaseIncomingMessageCountByOne(context);
-            Analytic.setLastRecipientReceivedMessage(context, messageRecord.getRecipient().getName());
             bodyBubble.getBackground().setColorFilter(messageRecord.getRecipient().getColor().toConversationColor(context), PorterDuff.Mode.MULTIPLY);
         }
 

@@ -2,14 +2,18 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        android:key="received_messages"
-        android:title="Messages Received" />
+        android:key="outgoing_messages"
+        android:title="Outgoing Messages" />
 
     <Preference
-        android:key="sent_messages"
-        android:title="Messages Sent" />
+        android:key="incoming_messages"
+        android:title="Incoming Messages" />
 
     <Preference
-        android:key="screen_time"
-        android:title="Screen Time" />
+        android:key="last_message_sent"
+        android:title="Last Message Sent To" />
+
+    <Preference
+        android:key="last_message_received"
+        android:title="Last Message Received By" />
 </PreferenceScreen>
