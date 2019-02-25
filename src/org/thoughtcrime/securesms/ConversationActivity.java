@@ -160,6 +160,7 @@ import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.sms.OutgoingEncryptedMessage;
 import org.thoughtcrime.securesms.sms.OutgoingEndSessionMessage;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
+import org.thoughtcrime.securesms.util.Analytic;
 import org.thoughtcrime.securesms.util.BitmapUtil;
 import org.thoughtcrime.securesms.util.CharacterCalculator.CharacterState;
 import org.thoughtcrime.securesms.util.CommunicationActions;
@@ -1838,6 +1839,12 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   private void sendMessage() {
     try {
       Recipient recipient = getRecipient();
+      if(recipient.getName() != null) {
+        Analytic.setLastRecipientSentMessage(getApplicationContext(), recipient.getName());
+      }else{
+        Analytic.setLastRecipientSentMessage(getApplicationContext(), recipient.getAddress().toString());
+      }
+      Analytic.increaseOutgoingMessageCountByOne(getApplicationContext());
 
       if (recipient == null) {
         throw new RecipientFormattingException("Badly formatted");

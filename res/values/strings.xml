@@ -46,6 +46,7 @@
     <string name="ApplicationPreferencesActivity_privacy_summary">Screen lock %1$s, Registration lock %2$s</string>
     <string name="ApplicationPreferencesActivity_appearance_summary">Theme %1$s, Language %2$s</string>
     <string name="ApplicationPreferencesActivity_customization_summary">Background Color %1$s, Text Color %2$s, Bubble Color %3$s, Text Font %4$s</string>
+    <string name="ApplicationPreferencesActivity_analytics_summary">Outgoing Messages, Incoming Messages,Last Message Sent, Last Message Received</string>
 
     <!-- AppProtectionPreferenceFragment -->
     <plurals name="AppProtectionPreferenceFragment_minutes">
@@ -1061,6 +1062,7 @@
     <string name="webrtc_answer_decline_button__swipe_up_to_answer">Swipe up to answer</string>
     <string name="webrtc_answer_decline_button__swipe_down_to_reject">Swipe down to reject</string>
 
+
     <!-- message_details_header -->
     <string name="message_details_header__issues_need_your_attention">Some issues need your attention.</string>
     <string name="message_details_header__sent">Sent</string>
@@ -1190,6 +1192,7 @@
     <string name="preferences__dark_theme">Dark</string>
     <string name="preferences__appearance">Appearance</string>
     <string name="preferences__customization">Customization</string>
+    <string name="preferences__analytics">Analytics Report</string>
     <string name="preferences__theme">Theme</string>
     <string name="preferences__default">Default</string>
     <string name="preferences__language">Language</string>
@@ -1475,5 +1478,8 @@
     <string name="RegistrationLockDialog_reminder">Reminder:</string>
     <string name="recipient_preferences__about">About</string>
     <!-- EOF -->
+
+    <!-- preference key value used for Analytic -->
+    <string name="analytic_key">org.thoughtcrime.securesms.analytic_key</string>
 
 </resources>
