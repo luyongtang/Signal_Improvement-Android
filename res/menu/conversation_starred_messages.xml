@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_starred_messages"
+          android:title="@string/conversation_starred_messages__menu_starred_messages"
+          app:showAsAction="never" />
+
+</menu>
