@@ -160,6 +160,7 @@ import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.sms.OutgoingEncryptedMessage;
 import org.thoughtcrime.securesms.sms.OutgoingEndSessionMessage;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
+import org.thoughtcrime.securesms.util.Analytic;
 import org.thoughtcrime.securesms.util.BitmapUtil;
 import org.thoughtcrime.securesms.util.CharacterCalculator.CharacterState;
 import org.thoughtcrime.securesms.util.CommunicationActions;
@@ -167,6 +168,7 @@ import org.thoughtcrime.securesms.util.Dialogs;
 import org.thoughtcrime.securesms.util.DirectoryHelper;
 import org.thoughtcrime.securesms.util.DynamicLanguage;
 import org.thoughtcrime.securesms.util.DynamicTheme;
+import org.thoughtcrime.securesms.util.DynamicBackground;
 import org.thoughtcrime.securesms.util.ExpirationUtil;
 import org.thoughtcrime.securesms.util.GroupUtil;
 import org.thoughtcrime.securesms.util.IdentityUtil;
@@ -275,12 +277,14 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   private boolean    isMmsEnabled          = true;
   private boolean    isSecurityInitialized = false;
 
-  private final IdentityRecordList identityRecords = new IdentityRecordList();
-  private final DynamicTheme       dynamicTheme    = new DynamicTheme();
-  private final DynamicLanguage    dynamicLanguage = new DynamicLanguage();
+  private final IdentityRecordList identityRecords   = new IdentityRecordList();
+  private final DynamicBackground  dynamicBackground = new DynamicBackground();
+  private final DynamicTheme       dynamicTheme      = new DynamicTheme();
+  private final DynamicLanguage    dynamicLanguage   = new DynamicLanguage();
 
   @Override
   protected void onPreCreate() {
+    dynamicBackground.onCreate(this);
     dynamicTheme.onCreate(this);
     dynamicLanguage.onCreate(this);
   }
@@ -329,6 +333,9 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
         });
       }
     });
+
+    LinearLayout li=(LinearLayout)findViewById(R.id.conversation_container);
+    li.setBackgroundColor(Color.parseColor(dynamicBackground.getSelectedBackground(this)));
   }
 
   @Override
@@ -371,6 +378,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     super.onResume();
     dynamicTheme.onResume(this);
     dynamicLanguage.onResume(this);
+    dynamicBackground.onResume(this);
     quickAttachmentDrawer.onResume();
 
     initializeEnabledCheck();
@@ -595,6 +603,8 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       inflater.inflate(R.menu.conversation_add_to_contacts, menu);
     }
 
+    inflater.inflate(R.menu.conversation_starred_messages, menu);
+
     super.onPrepareOptionsMenu(menu);
     return true;
   }
@@ -620,6 +630,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
     case R.id.menu_expiring_messages_off:
     case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
+    case R.id.menu_starred_messages:          handleStarredMessages();                           return true;
     case android.R.id.home:                   handleReturnToConversationList();                  return true;
     }
 
@@ -911,6 +922,23 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     Intent intent = new Intent(ConversationActivity.this, GroupCreateActivity.class);
     intent.putExtra(GroupCreateActivity.GROUP_ADDRESS_EXTRA, recipient.getAddress());
     startActivityForResult(intent, GROUP_EDIT);
+  }
+
+  private void handleStarredMessages(){
+    Intent intent = new Intent(this, StarredMessageActivity.class); //This intent is where we'd put the StarredMessageActivity.java
+    //intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true); //We have to make an 'extra' string in StarredMessageActivity.java to launch from the menu
+
+        //Creating a bundle
+              Bundle bundle = new Bundle();
+        //convert long id to string
+      StarredMessageContract.MessageEntry.CURRENT_THREAD = Long.toString(threadId);
+        //Adding data to the bundle
+              //bundle.putString("threadId" , current_threadId);
+
+        //Adding the bundle to the intent
+              intent.putExtras(bundle);
+
+    startActivity(intent);
   }
 
   private void handleDistributionBroadcastEnabled(MenuItem item) {
@@ -1811,6 +1839,12 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   private void sendMessage() {
     try {
       Recipient recipient = getRecipient();
+      if(recipient.getName() != null) {
+        Analytic.setLastRecipientSentMessage(getApplicationContext(), recipient.getName());
+      }else{
+        Analytic.setLastRecipientSentMessage(getApplicationContext(), recipient.getAddress().toString());
+      }
+      Analytic.increaseOutgoingMessageCountByOne(getApplicationContext());
 
       if (recipient == null) {
         throw new RecipientFormattingException("Badly formatted");

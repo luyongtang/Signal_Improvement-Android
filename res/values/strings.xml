@@ -45,6 +45,8 @@
     <string name="ApplicationPreferencesActivity_sms_mms_summary">SMS %1$s, MMS %2$s</string>
     <string name="ApplicationPreferencesActivity_privacy_summary">Screen lock %1$s, Registration lock %2$s</string>
     <string name="ApplicationPreferencesActivity_appearance_summary">Theme %1$s, Language %2$s</string>
+    <string name="ApplicationPreferencesActivity_customization_summary">Background Color %1$s, Text Color %2$s, Bubble Color %3$s, Text Font %4$s</string>
+    <string name="ApplicationPreferencesActivity_analytics_summary">Outgoing Messages, Incoming Messages,Last Message Sent, Last Message Received</string>
 
     <!-- AppProtectionPreferenceFragment -->
     <plurals name="AppProtectionPreferenceFragment_minutes">
@@ -1060,6 +1062,7 @@
     <string name="webrtc_answer_decline_button__swipe_up_to_answer">Swipe up to answer</string>
     <string name="webrtc_answer_decline_button__swipe_down_to_reject">Swipe down to reject</string>
 
+
     <!-- message_details_header -->
     <string name="message_details_header__issues_need_your_attention">Some issues need your attention.</string>
     <string name="message_details_header__sent">Sent</string>
@@ -1188,9 +1191,15 @@
     <string name="preferences__light_theme">Light</string>
     <string name="preferences__dark_theme">Dark</string>
     <string name="preferences__appearance">Appearance</string>
+    <string name="preferences__customization">Customization</string>
+    <string name="preferences__analytics">Analytics Report</string>
     <string name="preferences__theme">Theme</string>
     <string name="preferences__default">Default</string>
     <string name="preferences__language">Language</string>
+    <string name="preferences__background">Background Color</string>
+    <string name="preferences__text">Text Color</string>
+    <string name="preferences__bubble">Bubble Color</string>
+    <string name="preferences__font">Text Font</string>
     <string name="preferences__signal_messages_and_calls">Signal messages and calls</string>
     <string name="preferences__free_private_messages_and_calls">Free private messages and calls to Signal users</string>
     <string name="preferences__submit_debug_log">Submit debug log</string>
@@ -1249,10 +1258,12 @@
     <!-- conversation_context -->
     <string name="conversation_context__menu_message_details">Message details</string>
     <string name="conversation_context__menu_copy_text">Copy text</string>
+    <string name="conversation_context__menu_star_message">Star Message</string>
     <string name="conversation_context__menu_delete_message">Delete message</string>
     <string name="conversation_context__menu_forward_message">Forward message</string>
     <string name="conversation_context__menu_resend_message">Resend message</string>
     <string name="conversation_context__menu_reply_to_message">Reply to message</string>
+
 
     <!-- conversation_context_image -->
     <string name="conversation_context_image__save_attachment">Save attachment</string>
@@ -1309,6 +1320,9 @@
 
     <!-- conversation_callable_insecure -->
     <string name="conversation_add_to_contacts__menu_add_to_contacts">Add to contacts</string>
+
+    <!-- conversation_starred -->
+    <string name="conversation_starred_messages__menu_starred_messages">Starred messages</string>
 
     <!-- conversation_group_options -->
     <string name="convesation_group_options__recipients_list">Recipients list</string>
@@ -1464,5 +1478,8 @@
     <string name="RegistrationLockDialog_reminder">Reminder:</string>
     <string name="recipient_preferences__about">About</string>
     <!-- EOF -->
+
+    <!-- preference key value used for Analytic -->
+    <string name="analytic_key">org.thoughtcrime.securesms.analytic_key</string>
 
 </resources>

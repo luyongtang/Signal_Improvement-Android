@@ -35,6 +35,8 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.preference.Preference;
 
 import org.thoughtcrime.securesms.preferences.AdvancedPreferenceFragment;
+import org.thoughtcrime.securesms.preferences.AnalyticsPreferenceFragment;
+import org.thoughtcrime.securesms.preferences.CustomizationPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AppProtectionPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AppearancePreferenceFragment;
 import org.thoughtcrime.securesms.preferences.ChatsPreferenceFragment;
@@ -45,7 +47,9 @@ import org.thoughtcrime.securesms.preferences.widgets.ProfilePreference;
 import org.thoughtcrime.securesms.service.KeyCachingService;
 import org.thoughtcrime.securesms.util.DynamicLanguage;
 import org.thoughtcrime.securesms.util.DynamicTheme;
+import org.thoughtcrime.securesms.util.DynamicBackground;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
+
 
 /**
  * The Activity for application preference display and management.
@@ -59,8 +63,9 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 {
   @SuppressWarnings("unused")
   private static final String TAG = ApplicationPreferencesActivity.class.getSimpleName();
-
   private static final String PREFERENCE_CATEGORY_PROFILE        = "preference_category_profile";
+  private static final String PREFERENCE_CATEGORY_ANALYTICS      = "preference_category_analytics";
+  private static final String PREFERENCE_CATEGORY_CUSTOMIZATION  = "preference_category_customization";
   private static final String PREFERENCE_CATEGORY_SMS_MMS        = "preference_category_sms_mms";
   private static final String PREFERENCE_CATEGORY_NOTIFICATIONS  = "preference_category_notifications";
   private static final String PREFERENCE_CATEGORY_APP_PROTECTION = "preference_category_app_protection";
@@ -71,11 +76,13 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
   private final DynamicTheme    dynamicTheme    = new DynamicTheme();
   private final DynamicLanguage dynamicLanguage = new DynamicLanguage();
+  private final DynamicBackground dynamicBackground = new DynamicBackground();
 
   @Override
   protected void onPreCreate() {
     dynamicTheme.onCreate(this);
     dynamicLanguage.onCreate(this);
+    dynamicBackground.onCreate(this);
   }
 
   @Override
@@ -95,6 +102,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
     super.onResume();
     dynamicTheme.onResume(this);
     dynamicLanguage.onResume(this);
+    dynamicBackground.onResume(this);
   }
 
   @Override
@@ -140,6 +148,10 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
       this.findPreference(PREFERENCE_CATEGORY_PROFILE)
           .setOnPreferenceClickListener(new ProfileClickListener());
+      this.findPreference(PREFERENCE_CATEGORY_ANALYTICS)
+          .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_ANALYTICS));
+      this.findPreference(PREFERENCE_CATEGORY_CUSTOMIZATION)
+          .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_CUSTOMIZATION));
       this.findPreference(PREFERENCE_CATEGORY_SMS_MMS)
         .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_SMS_MMS));
       this.findPreference(PREFERENCE_CATEGORY_NOTIFICATIONS)
@@ -176,7 +188,10 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
     private void setCategorySummaries() {
       ((ProfilePreference)this.findPreference(PREFERENCE_CATEGORY_PROFILE)).refresh();
-
+      this.findPreference(PREFERENCE_CATEGORY_ANALYTICS)
+          .setSummary(AnalyticsPreferenceFragment.getSummary(getActivity()));
+      this.findPreference(PREFERENCE_CATEGORY_CUSTOMIZATION)
+          .setSummary(CustomizationPreferenceFragment.getSummary(getActivity()));
       this.findPreference(PREFERENCE_CATEGORY_SMS_MMS)
           .setSummary(SmsMmsPreferenceFragment.getSummary(getActivity()));
       this.findPreference(PREFERENCE_CATEGORY_NOTIFICATIONS)
@@ -198,6 +213,8 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
     @TargetApi(11)
     private void tintIcons(Context context) {
+      Drawable analytics     = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.analytics_report));
+      Drawable customization = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.star));
       Drawable sms           = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_textsms_white_24dp));
       Drawable notifications = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_notifications_white_24dp));
       Drawable privacy       = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_security_white_24dp));
@@ -211,6 +228,8 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
       int        color      = typedArray.getColor(0, 0x0);
       typedArray.recycle();
 
+      DrawableCompat.setTint(analytics, color);
+      DrawableCompat.setTint(customization, color);
       DrawableCompat.setTint(sms, color);
       DrawableCompat.setTint(notifications, color);
       DrawableCompat.setTint(privacy, color);
@@ -219,6 +238,8 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
       DrawableCompat.setTint(devices, color);
       DrawableCompat.setTint(advanced, color);
 
+      this.findPreference(PREFERENCE_CATEGORY_ANALYTICS).setIcon(analytics);
+      this.findPreference(PREFERENCE_CATEGORY_CUSTOMIZATION).setIcon(customization);
       this.findPreference(PREFERENCE_CATEGORY_SMS_MMS).setIcon(sms);
       this.findPreference(PREFERENCE_CATEGORY_NOTIFICATIONS).setIcon(notifications);
       this.findPreference(PREFERENCE_CATEGORY_APP_PROTECTION).setIcon(privacy);
@@ -240,6 +261,12 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
         Fragment fragment = null;
 
         switch (category) {
+        case PREFERENCE_CATEGORY_ANALYTICS:
+          fragment = new AnalyticsPreferenceFragment();
+          break;
+        case PREFERENCE_CATEGORY_CUSTOMIZATION:
+          fragment = new CustomizationPreferenceFragment();
+          break;
         case PREFERENCE_CATEGORY_SMS_MMS:
           fragment = new SmsMmsPreferenceFragment();
           break;

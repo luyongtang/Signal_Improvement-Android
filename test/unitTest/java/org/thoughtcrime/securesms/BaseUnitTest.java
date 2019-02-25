@@ -15,6 +15,7 @@ import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.thoughtcrime.securesms.util.TextSecurePreferences;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
@@ -34,7 +35,8 @@ public abstract class BaseUnitTest {
   protected SharedPreferences sharedPreferences = mock(SharedPreferences.class);
 
   @Before
-  public void setUp() throws Exception {
+  public void
+  setUp() throws Exception {
     mockStatic(Looper.class);
     mockStatic(Log.class);
     mockStatic(Handler.class);
@@ -74,5 +76,9 @@ public abstract class BaseUnitTest {
     when(sharedPreferences.getFloat(anyString(), anyFloat())).thenReturn(0f);
     when(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPreferences);
     when(context.getPackageName()).thenReturn("org.thoughtcrime.securesms");
+    when(TextSecurePreferences.getBubble(any())).thenReturn("getter called");
+    when(TextSecurePreferences.getBackground(any())).thenReturn("getter called");
+    when(TextSecurePreferences.getText(any())).thenReturn("getter called");
+    when(TextSecurePreferences.getFont(any())).thenReturn("getter called");
   }
 }

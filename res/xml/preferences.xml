@@ -5,6 +5,14 @@
     <org.thoughtcrime.securesms.preferences.widgets.ProfilePreference
             android:key="preference_category_profile"/>
 
+    <Preference android:key="preference_category_analytics"
+        android:title="@string/preferences__analytics"
+        android:icon="@drawable/analytics_report"/>
+
+    <Preference android:key="preference_category_customization"
+                android:title="@string/preferences__customization"
+                android:icon="@drawable/star"/>
+
     <Preference android:key="preference_category_sms_mms"
                 android:title="@string/preferences__sms_mms"
                 android:icon="@drawable/ic_textsms_24dp"/>
