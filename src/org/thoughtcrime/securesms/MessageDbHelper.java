@@ -44,6 +44,7 @@ public class MessageDbHelper extends SQLiteOpenHelper {
 
     public void addMessage(ContentValues contentValues, SQLiteDatabase database)
     {
+        System.out.println("DbHelper Test");
         database.insert(StarredMessageContract.MessageEntry.TABLE_NAME, null, contentValues);
         Log.d("Database operations", "One Row Inserted , Great success");
 
@@ -53,7 +54,17 @@ public class MessageDbHelper extends SQLiteOpenHelper {
     {
         String[] projections = {StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR, StarredMessageContract.MessageEntry.TIME_STAMP};
         Cursor cursor = database.query(true,StarredMessageContract.MessageEntry.TABLE_NAME, projections,StarredMessageContract.MessageEntry.THREAD_ID_STAR + "=" + threadId,null, null, null, StarredMessageContract.MessageEntry.TIME_STAMP+" DESC", null);
+        Log.d("readMessage", "Messages are retrieved successfully");
         return cursor;
+    }
+
+    // For future use
+    public void deleteMessage(SQLiteDatabase database, String msgId, String threadId)
+    {
+        String selection = StarredMessageContract.MessageEntry.MESSAGE_ID_STAR+" = "+msgId+" AND "+StarredMessageContract.MessageEntry.THREAD_ID_STAR+" = "+threadId;
+        Log.d("deleteMessage", selection);
+        database.delete(StarredMessageContract.MessageEntry.TABLE_NAME, selection,null);
+        Log.d("deleteMessage", "Messages are removed successfully");
     }
 
 }
