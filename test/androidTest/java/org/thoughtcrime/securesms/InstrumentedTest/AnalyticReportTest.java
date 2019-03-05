@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedTest;
 
 
 import org.junit.Before;

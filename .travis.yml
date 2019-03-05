@@ -49,4 +49,9 @@ script:
     - "./gradlew compilePlayDebugUnitTestSources"
     - "./gradlew test"
     - "./gradlew testPlayDebugUnitTest"
-    #- "./gradlew connectedAndroidTest" #This one will run the UI test
+    # Perform instrumental test from the InstrumentedTest package only
+    - "./gradlew -Pandroid.testInstrumentationRunnerArguments.package=org.thoughtcrime.securesms.InstrumentedTest connectedAndroidTest"
+    # command to run all instrumental regardless of their package
+    #- "./gradlew connectedAndroidTest"
+    # In case the adb command might be needed for future use
+    #- "adb shell am instrument -w -r   -e package org.thoughtcrime.securesms.InstrumentedTest -e debug false org.thoughtcrime.securesms.test/androidx.test.runner.AndroidJUnitRunner"

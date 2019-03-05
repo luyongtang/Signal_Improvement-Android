@@ -1,8 +1,9 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.UIInstrumentedTest;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
 
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -16,22 +17,22 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class PreferenceBackgroundColorTest {
+public class PreferenceBubbleBodyColorTest {
     @Rule
-    //This starts the application at ApplicationPreferencesActivity
+    //Start application at chosen activity: ApplicationPreferencesActivity
     public ActivityTestRule<ApplicationPreferencesActivity> myActivity = new ActivityTestRule<>(ApplicationPreferencesActivity.class);
 
     @Test
-    public void changeBackgroundColorTest(){
-        //This is the chosen color to apply on chat background
-        String newColor = "White";
-        //These navigate to the Background Color preference
+    public void changeBodyBubbleColorTest(){
+        //Chosen color to apply on bubble body chat
+        String newColor = "Lime";
+        //Navigate to Bubble Color preference
         onView(withText("Customization")).perform(click());
-        onView(withText("Background Color")).perform(click());
-        //This selects the color from list
+        onView(withText("Bubble Color")).perform(click());
+        //select the color from list
         onView(withText(newColor)).perform(click());
-        /*The new selected color will now be displayed as the chosen one,
-        the reference value used to create the color for the background chat*/
+        //the new selected color is now displayed as the selected one,
+        // which is the reference value used to create the color for the bubble body chat
         onView(withText(newColor)).check(matches(isDisplayed()));
     }
 }

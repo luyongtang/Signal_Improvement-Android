@@ -1,9 +1,10 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.UIInstrumentedTest;
 
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
 
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
