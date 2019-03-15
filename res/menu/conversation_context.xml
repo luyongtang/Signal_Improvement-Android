@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:title="@string/conversation_context__menu_message_details"
-          android:id="@+id/menu_context_details"
-          android:icon="?menu_info_icon"
-          app:showAsAction="always" />
-
-    <item android:title="@string/conversation_context__menu_delete_message"
-        android:id="@+id/menu_context_delete_message"
-        android:icon="?menu_trash_icon"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_context_details"
+        android:icon="?menu_info_icon"
+        android:title="@string/conversation_context__menu_message_details"
         app:showAsAction="always" />
 
-    <item android:title="@string/conversation_context__menu_copy_text"
-          android:id="@+id/menu_context_copy"
-          android:icon="?menu_copy_icon"
-          app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_context_delete_message"
+        android:icon="?menu_trash_icon"
+        android:title="@string/conversation_context__menu_delete_message"
+        app:showAsAction="always" />
 
-    <item android:title="@string/conversation_context__menu_forward_message"
-          android:id="@+id/menu_context_forward"
-          android:icon="?menu_forward_icon"
-          app:showAsAction="always" />
 
-    <item android:title="@string/conversation_context__menu_resend_message"
-          android:id="@+id/menu_context_resend"
-          android:visible="false"
-          app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_context_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="?menu_star_icon"
+        android:title="@string/conversation_context__menu_star_message"
+        app:showAsAction="always" />
 
-    <item android:title="@string/conversation_context_image__save_attachment"
-          android:id="@+id/menu_context_save_attachment"
-          android:visible="false"
-          android:icon="?menu_save_icon"
-          app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_context_copy"
+        android:icon="?menu_copy_icon"
+        android:title="@string/conversation_context__menu_copy_text"
+        app:showAsAction="always" />
 
-    <item android:title="@string/conversation_context__menu_reply_to_message"
-          android:id="@+id/menu_context_reply"
-          android:visible="true"
-          android:icon="?menu_reply_icon"
-          app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_context_forward"
+        android:icon="?menu_forward_icon"
+        android:title="@string/conversation_context__menu_forward_message"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_context_resend"
+        android:title="@string/conversation_context__menu_resend_message"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_context_save_attachment"
+        android:icon="?menu_save_icon"
+        android:title="@string/conversation_context_image__save_attachment"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_context_reply"
+        android:icon="?menu_reply_icon"
+        android:title="@string/conversation_context__menu_reply_to_message"
+        android:visible="true"
+        app:showAsAction="always" />
+
 
 </menu>

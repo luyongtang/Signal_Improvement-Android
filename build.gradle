@@ -153,13 +153,21 @@ dependencies {
     }
     /*Espresso UI Testing
     all other required dependencies https://developer.android.com/training/testing/set-up-project */
+    androidTestImplementation 'androidx.test:core:1.0.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation 'androidx.test:core:1.0.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.0.0'
+    androidTestImplementation 'androidx.test.ext:truth:1.0.0'
+    androidTestImplementation 'com.google.truth:truth:0.42'
 
 }
 
+//Verification Dependency
 dependencyVerification {
     verify = [
             'com.android.support:design:7874ad1904eedc74aa41cffffb7f759d8990056f3bbbc9264911651c67c42f5f',
@@ -223,6 +231,10 @@ android {
     buildToolsVersion '27.0.3'
     useLibrary 'org.apache.http.legacy'
 
+    // added for unit test
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     dexOptions {
         javaMaxHeapSize project.hasProperty('javaMaxHeapSize') ? project.getProperty('javaMaxHeapSize') : "4g"
     }

@@ -74,6 +74,7 @@ import org.thoughtcrime.securesms.mms.SlideClickListener;
 import org.thoughtcrime.securesms.mms.SlidesClickedListener;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientModifiedListener;
+import org.thoughtcrime.securesms.util.Analytic;
 import org.thoughtcrime.securesms.util.DateUtils;
 import org.thoughtcrime.securesms.util.DynamicBubbleBody;
 import org.thoughtcrime.securesms.util.DynamicTextColor;
@@ -318,12 +319,16 @@ public class ConversationItem extends LinearLayout
         return messageRecord;
     }
 
+
     /// MessageRecord Attribute Parsers
 
     private void setBubbleState(MessageRecord messageRecord) {
+
         if (messageRecord.isOutgoing()) {
+            //Stats being recorded for sent messages
             bodyBubble.getBackground().setColorFilter(Color.parseColor(dynamicBubbleBody.getSelectedBubbleColor(context)), PorterDuff.Mode.MULTIPLY);
         } else {
+            //Stats being recorded for received messages
             bodyBubble.getBackground().setColorFilter(messageRecord.getRecipient().getColor().toConversationColor(context), PorterDuff.Mode.MULTIPLY);
         }
 

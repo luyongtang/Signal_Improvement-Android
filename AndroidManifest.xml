@@ -103,7 +103,7 @@
         android:supportsRtl="true"
         android:theme="@style/TextSecure.LightTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".ScheduledMessageActivity"></activity>
+        <activity android:name=".StarredMessageActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
