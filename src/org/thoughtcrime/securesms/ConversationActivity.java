@@ -928,7 +928,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   }
 
   public void handleScheduledMessage(){
-    Intent intent = new Intent(ConversationActivity.this, ScheduledMessageActivity.class);
+    Intent intent = new Intent(this, ScheduledMessageActivity.class);
     startActivity(intent);
   }
 
