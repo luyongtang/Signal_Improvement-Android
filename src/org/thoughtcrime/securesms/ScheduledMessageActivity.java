@@ -1,19 +1,11 @@
 package org.thoughtcrime.securesms;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import org.thoughtcrime.securesms.util.DynamicLanguage;
-import org.thoughtcrime.securesms.util.DynamicTheme;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.view.View;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import android.view.View;
+import android.widget.TextView;
 
 public class ScheduledMessageActivity extends AppCompatActivity {
     TextView display;
@@ -42,4 +34,14 @@ public class ScheduledMessageActivity extends AppCompatActivity {
         /*dynamicTheme.onCreate(this);
         dynamicLanguage.onCreate(this);*/
     }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
 }
