@@ -365,16 +365,6 @@ android {
         }
     }
 
-    // This was found for Gradle 4.1 to be effective (Enables Test Coverage to default location)
-    // Enable the coverage report for unit test
-    android.testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-            }
-        }
-    }
-
     productFlavors {
         play {
             dimension "none"
@@ -470,6 +460,16 @@ task signProductionWebsiteRelease << {
     def variant = android.applicationVariants.find({ it.name.equals("websiteRelease") })
     File signedRelease = signProductionRelease(variant)
     assembleWebsiteDescriptor(variant, signedRelease);
+}
+
+// This was found for Gradle 4.1 to be effective (Enables Test Coverage to default location)
+// Enable the coverage report for unit test
+android.testOptions {
+    unitTests.all {
+        jacoco {
+            includeNoLocationClasses = true
+        }
+    }
 }
 
 // Jacoco new task created called jacocoDebugReport
