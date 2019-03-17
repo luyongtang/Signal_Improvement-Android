@@ -52,7 +52,7 @@ public class MessageDbHelper extends SQLiteOpenHelper {
 
     public Cursor readMessage(SQLiteDatabase database,String threadId)
     {
-        String[] projections = {StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR, StarredMessageContract.MessageEntry.TIME_STAMP};
+        String[] projections = {StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR, StarredMessageContract.MessageEntry.TIME_STAMP, StarredMessageContract.MessageEntry.CONTACT};
         Cursor cursor = database.query(true,StarredMessageContract.MessageEntry.TABLE_NAME, projections,StarredMessageContract.MessageEntry.THREAD_ID_STAR + "=" + threadId,null, null, null, StarredMessageContract.MessageEntry.TIME_STAMP+" DESC", null);
         Log.d("readMessage", "Messages are retrieved successfully");
         return cursor;
@@ -65,6 +65,27 @@ public class MessageDbHelper extends SQLiteOpenHelper {
         Log.d("deleteMessage", selection);
         database.delete(StarredMessageContract.MessageEntry.TABLE_NAME, selection,null);
         Log.d("deleteMessage", "Messages are removed successfully");
+    }
+
+    public boolean checkMessageStar(SQLiteDatabase database, String threadId, Long msgId)
+    {
+        boolean isStarred = false;
+        Cursor cursor = database.query(true,StarredMessageContract.MessageEntry.TABLE_NAME, null,StarredMessageContract.MessageEntry.THREAD_ID_STAR + "=" + threadId,null, null, null, StarredMessageContract.MessageEntry.TIME_STAMP+" DESC", null);
+        for (int i = 0; i < cursor.getColumnNames().length; i++)
+        {
+        Log.d("column names", cursor.getColumnNames()[i]);
+        }
+        while(cursor.moveToNext())
+        {
+            Long dbMsgId = cursor.getLong(cursor.getColumnIndex(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR));
+            //long dbMsgId = Long.parseLong(dbMsgIdStr);
+            if (dbMsgId == msgId)
+            {
+                isStarred = true;
+                break;
+            }
+        }
+        return isStarred;
     }
 
 }
