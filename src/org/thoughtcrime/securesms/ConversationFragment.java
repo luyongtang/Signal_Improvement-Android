@@ -59,6 +59,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -137,6 +140,7 @@ public class ConversationFragment extends Fragment
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
     this.locale = (Locale) getArguments().getSerializable(PassphraseRequiredActionBarActivity.LOCALE_EXTRA);
+
   }
 
   @Override
@@ -241,6 +245,12 @@ public class ConversationFragment extends Fragment
 
     OnScrollListener scrollListener = new ConversationScrollListener(getActivity());
     list.addOnScrollListener(scrollListener);
+  }
+  //TODO Move the reaction drop-down menu below after testing
+  public void onItemSelected(AdapterView<?> parent, View view,
+                             int pos, long id) {
+    // An item was selected. You can retrieve the selected item using
+    // parent.getItemAtPosition(pos)
   }
 
   private void initializeListAdapter() {
@@ -420,7 +430,14 @@ public class ConversationFragment extends Fragment
     lastSeenDecoration = new ConversationAdapter.LastSeenHeader(getListAdapter(), lastSeen);
     list.addItemDecoration(lastSeenDecoration);
   }
-
+  private void handleReactionMenu (final Set<MessageRecord> messageRecord){
+    //Record the reaction using another activity
+    //TODO to be tested with layout file
+    Intent intent = new Intent(getActivity().getBaseContext(), ReactionActivity.class);
+    Long messageId = messageRecord.iterator().next().getId();
+    intent.putExtra("messages",messageId);
+    startActivity(intent);
+  }
   private void handleCopyMessage(final Set<MessageRecord> messageRecords) {
     List<MessageRecord> messageList = new LinkedList<>(messageRecords);
     Collections.sort(messageList, new Comparator<MessageRecord>() {
@@ -431,7 +448,6 @@ public class ConversationFragment extends Fragment
         else                                                     return 1;
       }
     });
-
     StringBuilder    bodyBuilder = new StringBuilder();
     ClipboardManager clipboard   = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
@@ -963,6 +979,10 @@ public class ConversationFragment extends Fragment
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
       switch(item.getItemId()) {
+        case R.id.menu_react:
+          handleReactionMenu(getListAdapter().getSelectedItems());
+          actionMode.finish();
+          return true;
         case R.id.menu_context_copy:
           handleCopyMessage(getListAdapter().getSelectedItems());
           actionMode.finish();
