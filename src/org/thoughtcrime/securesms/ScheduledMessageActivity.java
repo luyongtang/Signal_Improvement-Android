@@ -1,5 +1,6 @@
 package org.thoughtcrime.securesms;
 
+import android.app.AlarmManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,10 @@ public class ScheduledMessageActivity extends AppCompatActivity {
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void scheduleMessage(View v) {
+        AlarmManager alarmManager =
     }
 
 }

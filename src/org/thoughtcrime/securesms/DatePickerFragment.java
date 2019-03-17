@@ -1,11 +1,13 @@
 package org.thoughtcrime.securesms;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +39,19 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-     /*   TextView textView = getView().findViewById(R.id.dateDisplay);*/
-       // textView.setText("Hello");
-        // Do something with the date chosen by the user
+        final Calendar c = Calendar.getInstance();
+
+        Calendar chosenDate = Calendar.getInstance();
+        chosenDate.set(year, month, day);
+        if (c.after(chosenDate)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Date must be in the future");
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        else{
+            TextView textview = getActivity().findViewById(R.id.dateDisplay);
+            textview.setText(day + "-" + month + "-" + year);
+        }
     }
 }
