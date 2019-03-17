@@ -158,7 +158,7 @@ public class IncomingMessageObserver implements InjectableType, RequirementListe
               Log.i(TAG, "Reading message...");
               localPipe.read(REQUEST_TIMEOUT_MINUTES, TimeUnit.MINUTES,
                              envelope -> {
-                               Log.i(TAG, "Retrieved envelope! " + String.valueOf(envelope.getSource()));
+                               Log.i(TAG, "Retrieved envelope, Manpreet wants to know! " + String.valueOf(envelope.getSource()));
                                new PushContentReceiveJob(context).processEnvelope(envelope);
                              });
             } catch (TimeoutException e) {

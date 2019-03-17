@@ -1482,4 +1482,13 @@
     <!-- preference key value used for Analytic -->
     <string name="analytic_key">org.thoughtcrime.securesms.analytic_key</string>
 
+    <!-- reaction drop down list for Message Reaction  -->
+    <string-array name="reactions_array">
+        <item>:)</item>
+        <item>:(</item>
+        <item>:/</item>
+        <item>;)</item>
+        <item>:p</item>
+    </string-array>
+
 </resources>

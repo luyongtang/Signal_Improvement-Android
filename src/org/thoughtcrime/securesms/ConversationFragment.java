@@ -466,6 +466,11 @@ public class ConversationFragment extends Fragment
     if (!TextUtils.isEmpty(result))
         clipboard.setText(result);
   }
+  private void handleReactionMessage(final Set<MessageRecord> messageRecords) {
+    List<MessageRecord> messageList = new LinkedList<>(messageRecords);
+
+
+  }
 
   private void handleDeleteMessages(final Set<MessageRecord> messageRecords) {
     int                 messagesCount = messageRecords.size();
@@ -979,6 +984,7 @@ public class ConversationFragment extends Fragment
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
       switch(item.getItemId()) {
+
         case R.id.menu_react:
           handleReactionMenu(getListAdapter().getSelectedItems());
           actionMode.finish();
