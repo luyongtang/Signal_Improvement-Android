@@ -430,12 +430,18 @@ public class ConversationFragment extends Fragment
     lastSeenDecoration = new ConversationAdapter.LastSeenHeader(getListAdapter(), lastSeen);
     list.addItemDecoration(lastSeenDecoration);
   }
-  private void handleReactionMenu (final Set<MessageRecord> messageRecord){
+  private void handleReactionMenu (MessageRecord messageRecord){
     //Record the reaction using another activity
-    //TODO to be tested with layout file
+      Log.i(TAG,"Manpreet");
     Intent intent = new Intent(getActivity().getBaseContext(), ReactionActivity.class);
-    Long messageId = messageRecord.iterator().next().getId();
-    intent.putExtra("messages",messageId);
+      Log.i(TAG,"Manpreet");
+    Long messageId = messageRecord.getId();
+    Long timeStamp = messageRecord.getTimestamp();
+    intent.putExtra("messages",messageId.toString());
+    intent.putExtra("date_time",timeStamp.toString());
+    intent.putExtra("phone_number",recipient.getAddress().toString());
+
+    Log.i(TAG,"Manpreet");
     startActivity(intent);
   }
   private void handleCopyMessage(final Set<MessageRecord> messageRecords) {
@@ -986,7 +992,7 @@ public class ConversationFragment extends Fragment
       switch(item.getItemId()) {
 
         case R.id.menu_react:
-          handleReactionMenu(getListAdapter().getSelectedItems());
+          handleReactionMenu(getSelectedMessageRecord());
           actionMode.finish();
           return true;
         case R.id.menu_context_copy:
