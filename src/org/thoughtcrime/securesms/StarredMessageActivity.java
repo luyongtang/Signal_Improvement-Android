@@ -45,10 +45,11 @@ public class StarredMessageActivity extends AppCompatActivity {
         while (cursor.moveToNext())
         {
             String msgBody = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR));
+            String cntc = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.CONTACT));
             String timeStamp = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.TIME_STAMP));
             Long tmp = Long.parseLong(timeStamp);
             timeStamp = convertTime(tmp);
-            msgs = msgs + "\n\nbody: "+msgBody+"\ntime: "+timeStamp;
+            msgs = msgs + "\n\nsender: "+cntc+"\nbody: "+msgBody+"\ntime: "+timeStamp;
         }
         if(msgs.equals("")) {
             display.setText("No starred messages with this user");

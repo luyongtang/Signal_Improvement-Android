@@ -18,7 +18,6 @@ package org.thoughtcrime.securesms;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,7 +26,6 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -38,7 +36,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.ClipboardManager;
@@ -49,7 +46,6 @@ import org.thoughtcrime.securesms.components.ConversationTypingView;
 import org.thoughtcrime.securesms.components.recyclerview.SmoothScrollingLinearLayoutManager;
 import org.thoughtcrime.securesms.logging.Log;
 
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -326,10 +322,12 @@ public class ConversationFragment extends Fragment
   }
 
   private void setCorrectMenuVisibility(Menu menu) {
-    Set<MessageRecord> messageRecords = getListAdapter().getSelectedItems();
-    boolean            actionMessage  = false;
-    boolean            hasText        = false;
-    boolean            sharedContact  = false;
+    Set<MessageRecord> messageRecords    = getListAdapter().getSelectedItems();
+    MessageDbHelper    messageDbHelper   = new MessageDbHelper(getActivity());
+    SQLiteDatabase     database          = messageDbHelper.getWritableDatabase();
+    boolean            sharedContact     = false;
+    boolean            actionMessage     = false;
+    boolean            hasText           = false;
 
     if (actionMode != null && messageRecords.size() == 0) {
       actionMode.finish();
@@ -360,6 +358,8 @@ public class ConversationFragment extends Fragment
       menu.findItem(R.id.menu_context_details).setVisible(false);
       menu.findItem(R.id.menu_context_save_attachment).setVisible(false);
       menu.findItem(R.id.menu_context_resend).setVisible(false);
+      menu.findItem(R.id.menu_context_star).setVisible(false);
+      menu.findItem(R.id.menu_context_unstar).setVisible(false);
     } else {
       MessageRecord messageRecord = messageRecords.iterator().next();
 
@@ -375,7 +375,13 @@ public class ConversationFragment extends Fragment
                                                         !messageRecord.isPending() &&
                                                         !messageRecord.isFailed()  &&
                                                         messageRecord.isSecure());
+
+      menu.findItem(R.id.menu_context_star).setVisible(!messageDbHelper.checkMessageStar(database, ""+messageRecord.getThreadId(), messageRecord.getId()));
+      menu.findItem(R.id.menu_context_unstar).setVisible(messageDbHelper.checkMessageStar(database, ""+messageRecord.getThreadId(), messageRecord.getId()));
     }
+
+    messageDbHelper.close();
+
     menu.findItem(R.id.menu_context_copy).setVisible(!actionMessage && hasText);
   }
 
@@ -504,15 +510,36 @@ public class ConversationFragment extends Fragment
     startActivity(intent);
   }
 
-  private void handleStoreMessage(MessageRecord message){
+  private void handleStarMessage(MessageRecord message){
     MessageDbHelper messageDbHelper = new MessageDbHelper(getActivity());
     SQLiteDatabase database = messageDbHelper.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
+    String sender = "You";
+
+    if(!message.isOutgoing()) {
+      if (recipient.isGroupRecipient()){
+        if (message.getIndividualRecipient().getName() != null) {
+          sender = message.getIndividualRecipient().getName();
+        } else if(!TextUtils.isEmpty(message.getIndividualRecipient().getProfileName())) {
+          sender = "~" + message.getIndividualRecipient().getProfileName();
+        } else {
+          sender = message.getIndividualRecipient().getAddress().toString();
+        }
+      } else {
+        if (recipient.getName() != null) {
+          sender = recipient.getName();
+        } else if(!TextUtils.isEmpty(recipient.getProfileName())) {
+          sender = "~" + recipient.getProfileName();
+        } else {
+          sender = recipient.getAddress().toString();
+        }
+      }
+    }
 
     contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR ,  message.getId());
     contentValues.put(StarredMessageContract.MessageEntry.THREAD_ID_STAR, threadId);
     contentValues.put(StarredMessageContract.MessageEntry.TYPE_STAR, message.isMms() ? MmsSmsDatabase.MMS_TRANSPORT : MmsSmsDatabase.SMS_TRANSPORT);
-    contentValues.put(StarredMessageContract.MessageEntry.CONTACT, recipient.getAddress().toString());
+    contentValues.put(StarredMessageContract.MessageEntry.CONTACT, sender);
     contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR ,  message.getBody());
     contentValues.put(StarredMessageContract.MessageEntry.TIME_STAMP ,  message.getTimestamp());
     contentValues.put(StarredMessageContract.MessageEntry.DATE_RECEIVED ,  message.getDateReceived());
@@ -521,6 +548,13 @@ public class ConversationFragment extends Fragment
 
       messageDbHelper.addMessage(contentValues,database);
   }
+
+    private void handleUnstarMessage(MessageRecord message){
+        MessageDbHelper messageDbHelper = new MessageDbHelper(getActivity());
+        SQLiteDatabase database = messageDbHelper.getWritableDatabase();
+
+        messageDbHelper.deleteMessage(database, ""+message.getId(), ""+threadId);
+    }
 
   private void handleForwardMessage(MessageRecord message) {
     Intent composeIntent = new Intent(getActivity(), ShareActivity.class);
@@ -971,8 +1005,12 @@ public class ConversationFragment extends Fragment
           handleDeleteMessages(getListAdapter().getSelectedItems());
           actionMode.finish();
           return true;
+        case R.id.menu_context_unstar:
+          handleUnstarMessage(getSelectedMessageRecord());
+          actionMode.finish();
+          return true;
         case R.id.menu_context_star:
-          handleStoreMessage(getSelectedMessageRecord());
+          handleStarMessage(getSelectedMessageRecord());
           actionMode.finish();
           return true;
         case R.id.menu_context_details:
