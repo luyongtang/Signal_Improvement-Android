@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_react"
+        android:icon="@drawable/ic_emoji_people_normal_dark"
+        android:title="@string/conversation_context__menu_message_details"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/menu_context_details"
         android:icon="?menu_info_icon"

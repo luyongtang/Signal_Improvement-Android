@@ -31,20 +31,25 @@ public abstract class PushReceivedJob extends ContextJob {
   }
 
   public void processEnvelope(@NonNull SignalServiceEnvelope envelope) {
+    Log.i("Eglen","PROCESSING");
     synchronized (RECEIVE_LOCK) {
       if (envelope.hasSource()) {
+        Log.i("Eglen","has source");
         Address   source    = Address.fromExternal(context, envelope.getSource());
         Recipient recipient = Recipient.from(context, source, false);
 
         if (!isActiveNumber(recipient)) {
           DatabaseFactory.getRecipientDatabase(context).setRegistered(recipient, RecipientDatabase.RegisteredState.REGISTERED);
           ApplicationContext.getInstance(context).getJobManager().add(new DirectoryRefreshJob(context, recipient, false));
+          Log.i("Eglen","is MIDDLE");
         }
       }
 
       if (envelope.isReceipt()) {
+        Log.i("Eglen","is Receipt");
         handleReceipt(envelope);
       } else if (envelope.isPreKeySignalMessage() || envelope.isSignalMessage() || envelope.isUnidentifiedSender()) {
+        Log.i("Eglen","is MESSAGE");
         handleMessage(envelope);
       } else {
         Log.w(TAG, "Received envelope of unknown type: " + envelope.getType());
