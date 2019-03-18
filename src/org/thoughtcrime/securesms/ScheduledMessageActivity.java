@@ -66,7 +66,7 @@ public class ScheduledMessageActivity extends AppCompatActivity {
         calendar.set(Calendar.YEAR, DatePickerFragment.DATE_YEAR);
         calendar.set(Calendar.MONTH, DatePickerFragment.DATE_MONTH);
         calendar.set(Calendar.DAY_OF_MONTH, DatePickerFragment.DATE_DAY);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sendMessage);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sendMessage());
     }
 
     public PendingIntent sendMessage() {
