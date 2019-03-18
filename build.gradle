@@ -1,4 +1,6 @@
 import org.signal.signing.ApkSignerUtil
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 import java.security.MessageDigest
 
@@ -21,6 +23,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'witness'
+apply plugin: 'jacoco'
 
 repositories {
     maven {
@@ -139,6 +142,7 @@ dependencies {
     testCompile 'org.powermock:powermock-module-junit4:1.6.1'
     testCompile 'org.powermock:powermock-module-junit4-rule:1.6.1'
     testCompile 'org.powermock:powermock-classloading-xstream:1.6.1'
+    androidTestUtil 'com.android.support.test:orchestrator:1.0.1'
 
     implementation 'com.android.support:multidex:1.0.3'
     androidTestCompile 'com.android.support:multidex-instrumentation:1.0.3'
@@ -167,7 +171,9 @@ dependencies {
 
 }
 
-//Verification Dependency
+// Gerate Dependecy Verification by
+// gradle -q calculateChecksums
+
 dependencyVerification {
     verify = [
             'com.android.support:design:7874ad1904eedc74aa41cffffb7f759d8990056f3bbbc9264911651c67c42f5f',
@@ -224,6 +230,47 @@ dependencyVerification {
     ]
 }
 
+
+// For each file containing @Test
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.append = false
+    jacoco.classDumpDir = file("$buildDir/jacoco/classDump")
+    testLogging {
+        // Set options for log level LIFECYCLE
+        events TestLogEvent.FAILED,
+                TestLogEvent.PASSED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.STANDARD_OUT
+        exceptionFormat TestExceptionFormat.FULL
+        showExceptions true
+        showCauses true
+        showStackTraces true
+
+        // Set options for log level DEBUG and INFO
+        debug {
+            events TestLogEvent.STARTED,
+                    TestLogEvent.FAILED,
+                    TestLogEvent.PASSED,
+                    TestLogEvent.SKIPPED,
+                    TestLogEvent.STANDARD_ERROR,
+                    TestLogEvent.STANDARD_OUT
+            exceptionFormat TestExceptionFormat.FULL
+        }
+        info.events = debug.events
+        info.exceptionFormat = debug.exceptionFormat
+
+        afterSuite { desc, result ->
+            // Need to match the outermost suite
+            if (!desc.parent) {
+                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+}
 
 android {
     flavorDimensions "none"
@@ -287,6 +334,7 @@ android {
 
     buildTypes {
         debug {
+            testCoverageEnabled true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     'proguard-google-play-services.pro',
@@ -412,6 +460,61 @@ task signProductionWebsiteRelease << {
     def variant = android.applicationVariants.find({ it.name.equals("websiteRelease") })
     File signedRelease = signProductionRelease(variant)
     assembleWebsiteDescriptor(variant, signedRelease);
+}
+
+// This was found for Gradle 4.1 to be effective (Enables Test Coverage to default location)
+// Enable the coverage report for unit test
+android.testOptions {
+    unitTests.all {
+        jacoco {
+            includeNoLocationClasses = true
+        }
+    }
+}
+
+// Jacoco new task created called jacocoDebugReport
+task("jacocoDebugReport", type: JacocoReport, dependsOn: "test") {
+    group "Reporting"
+    description "Generate Jacoco coverage reports."
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*$ViewInjector*.*',
+                      '**/*$ViewBinder*.*',
+                      '**/*$Lambda$*.*', // Jacoco can not handle several "$" in class name.
+                      '**/*Module.*', // Modules for Dagger.
+                      '**/*Dagger*.*', // Dagger auto-generated code.
+                      '**/*MembersInjector*.*', // Dagger auto-generated code.
+                      '**/*_Provide*Factory*.*',
+                      '**/*_Factory.*', //Dagger auto-generated code
+                      '**/*Factory.*',
+                      '**/*$*$*.*', // Anonymous classes generated
+                      '**/*Test*.*',
+                      '**/*Mock*.*',
+                      //add libraries
+                      'android/**/*.*',
+                      'com/**/*.*',
+                      'uk/**/*.*',
+                      'io/**/*.*',
+                      //remove what we don't test
+                      'androidTest/**/*.*',
+                      'test/**/*.*',
+                      '**/**_ViewBinding**',
+                      '**/*EventType.*',
+                      '**/**Mocked']
+
+    executionData = files("${buildDir}/jacoco/testPlayDebugUnitTest.exec", "${buildDir}/jacoco/testWebsiteDebugUnitTest.exec")
+    def mainSrc = files(["src/", "test/unitTest/java"])
+    sourceDirectories = files([mainSrc])
+    classDirectories = fileTree(dir: "${buildDir}/intermediates/classes/play/debug", excludes: fileFilter)
+//    classDirectories += fileTree(dir: "${buildDir}/intermediates/classes/website/debug", excludes: fileFilter)
 }
 
 tasks.whenTaskAdded { task ->
