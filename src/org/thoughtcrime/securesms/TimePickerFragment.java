@@ -13,7 +13,8 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
-
+    public static int TIME_HOURS;
+    public static int TIME_MINUTE;
     //Empty Constructor
     public TimePickerFragment(){
 
@@ -35,5 +36,7 @@ public class TimePickerFragment extends DialogFragment
         // Do something with the time chosen by the user
         TextView textview = getActivity().findViewById(R.id.timeDisplay);
         textview.setText(hourOfDay + ":" + minute);
+        TIME_HOURS= hourOfDay;
+        TIME_MINUTE= minute;
     }
 }

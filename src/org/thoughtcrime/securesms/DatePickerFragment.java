@@ -21,7 +21,9 @@ import java.util.zip.Inflater;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-
+    public static int DATE_YEAR;
+    public static int DATE_MONTH;
+    public static int DATE_DAY;
     public DatePickerFragment(){
 
     }
@@ -52,6 +54,9 @@ public class DatePickerFragment extends DialogFragment
         else{
             TextView textview = getActivity().findViewById(R.id.dateDisplay);
             textview.setText(day + "-" + month + "-" + year);
+            DATE_DAY= day;
+            DATE_MONTH= month;
+            DATE_YEAR= year;
         }
     }
 }
