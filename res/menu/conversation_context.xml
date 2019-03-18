@@ -26,9 +26,18 @@
         android:id="@+id/menu_context_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="?menu_star_icon"
+        android:icon="?attr/menu_star_icon"
         android:title="@string/conversation_context__menu_star_message"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_context_unstar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="?attr/menu_unstar_icon"
+        android:title="@string/conversation_context__menu_unstar_message"
+        app:showAsAction="always" />
+
 
     <item
         android:id="@+id/menu_context_copy"
