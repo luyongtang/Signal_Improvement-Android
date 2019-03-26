@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/navigation_bar_call_logs"
+        android:icon="?menu_call_icon"
+        android:title="@string/navigation_bar__navigation_bar_call_logs"/>
+
+    <item
+        android:id="@+id/navigation_bar_chats"
+        android:icon="@drawable/ic_forum_white_24dp"
+        android:title="@string/navigation_bar__navigation_bar_chats"/>
+
+    <item
+        android:id="@+id/navigation_bar_settings"
+        android:icon="@drawable/ic_delivery_status_sending"
+        android:title="@string/navigation_bar__navigation_bar_settings"/>
+
+
+</menu>

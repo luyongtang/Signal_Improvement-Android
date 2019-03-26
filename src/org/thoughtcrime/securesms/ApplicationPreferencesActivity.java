@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.preference.Preference;
 
+import org.thoughtcrime.securesms.components.NavigationBarFragment;
 import org.thoughtcrime.securesms.preferences.AdvancedPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AnalyticsPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.CustomizationPreferenceFragment;
@@ -59,7 +61,7 @@ import org.thoughtcrime.securesms.util.TextSecurePreferences;
  */
 
 public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarActivity
-    implements SharedPreferences.OnSharedPreferenceChangeListener
+    implements SharedPreferences.OnSharedPreferenceChangeListener, NavigationBarFragment.OnFragmentInteractionListener
 {
   @SuppressWarnings("unused")
   private static final String TAG = ApplicationPreferencesActivity.class.getSimpleName();
@@ -89,11 +91,14 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
   protected void onCreate(Bundle icicle, boolean ready) {
     //noinspection ConstantConditions
     this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setContentView(R.layout.application_preference_activity);
+
+    initFragment(R.id.application_preference_navigation_bar_container, new NavigationBarFragment());
 
     if (getIntent() != null && getIntent().getCategories() != null && getIntent().getCategories().contains("android.intent.category.NOTIFICATION_PREFERENCES")) {
       initFragment(android.R.id.content, new NotificationsPreferenceFragment());
     } else if (icicle == null) {
-      initFragment(android.R.id.content, new ApplicationPreferenceFragment());
+      initFragment(R.id.preferences_fragment, new ApplicationPreferenceFragment());
     }
   }
 
@@ -109,7 +114,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
   protected void onActivityResult(int requestCode, int resultCode, Intent data)
   {
     super.onActivityResult(requestCode, resultCode, data);
-    Fragment fragment = getSupportFragmentManager().findFragmentById(android.R.id.content);
+    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.preferences_fragment);
     fragment.onActivityResult(requestCode, resultCode, data);
   }
 
@@ -122,6 +127,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
       Intent intent = new Intent(this, ConversationListActivity.class);
       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(intent);
+      overridePendingTransition(R.anim.stationary, R.anim.stationary);
       finish();
     }
     return true;
@@ -139,6 +145,23 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
       startService(intent);
     }
   }
+
+  @Override
+  public void onBackPressed() {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    if (fragmentManager.getBackStackEntryCount() > 0) {
+      fragmentManager.popBackStack();
+    } else {
+      Intent intent = new Intent(this, ConversationListActivity.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      startActivity(intent);
+      overridePendingTransition(R.anim.stationary, R.anim.stationary);
+      finish();
+    }
+  }
+
+  @Override
+  public void onFragmentInteraction(Uri uri){}
 
   public static class ApplicationPreferenceFragment extends CorrectedPreferenceFragment {
 
@@ -299,7 +322,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
 
           FragmentManager     fragmentManager     = getActivity().getSupportFragmentManager();
           FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-          fragmentTransaction.replace(android.R.id.content, fragment);
+          fragmentTransaction.replace(R.id.preferences_fragment, fragment);
           fragmentTransaction.addToBackStack(null);
           fragmentTransaction.commit();
         }

@@ -1334,6 +1334,11 @@
     <string name="conversation_group_options__conversation">Conversation</string>
     <string name="conversation_group_options__broadcast">Broadcast</string>
 
+    <!-- navigation_bar -->
+    <string name="navigation_bar__navigation_bar_call_logs">Call Logs</string>
+    <string name="navigation_bar__navigation_bar_chats">Chats</string>
+    <string name="navigation_bar__navigation_bar_settings">Settings</string>
+
     <!-- text_secure_normal -->
     <string name="text_secure_normal__menu_new_group">New group</string>
     <string name="text_secure_normal__menu_settings">Settings</string>
@@ -1494,5 +1499,8 @@
         <item>;)</item>
         <item>:p</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

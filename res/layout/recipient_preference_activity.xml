@@ -88,7 +88,7 @@
 
             <include layout="@layout/preference_divider"/>
 
-            <FrameLayout android:id="@+id/preference_fragment"
+            <FrameLayout android:id="@+id/preferences_fragment"
                          android:layout_width="match_parent"
                          android:layout_height="wrap_content"/>
 
