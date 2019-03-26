@@ -37,11 +37,11 @@ public class NavigationBarFragment extends Fragment {
         Log.d("ConvListAct", ConversationListActivity.class.getSimpleName());
 
         if (tag.equals(ConversationListActivity.class.getSimpleName())) {
-            navigationBarView.getMenu().findItem(R.id.navigation_bar_chats).setChecked(true);
+            navigationBarView.setSelectedItemId(R.id.navigation_bar_chats);
         } else if (tag.equals(ApplicationPreferencesActivity.class.getSimpleName())) {
-            navigationBarView.getMenu().findItem(R.id.navigation_bar_settings).setChecked(true);
+            navigationBarView.setSelectedItemId(R.id.navigation_bar_settings);
         } else {
-            navigationBarView.getMenu().findItem(R.id.navigation_bar_call_logs).setChecked(true);
+            navigationBarView.setSelectedItemId(R.id.navigation_bar_call_logs);
         }
 
         return view;
