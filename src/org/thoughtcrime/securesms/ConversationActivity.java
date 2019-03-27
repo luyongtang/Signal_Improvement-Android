@@ -609,7 +609,6 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     if(isSingleConversation()){
       inflater.inflate(R.menu.conversation_scheduled_message, menu);
     }
-
     super.onPrepareOptionsMenu(menu);
     return true;
   }
