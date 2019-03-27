@@ -25,11 +25,6 @@ public class ScheduledMessageActivity extends AppCompatActivity {
     private Recipient recipient;
     private long threadId;
 
-    protected void onPreCreate() {
-        setContentView(R.layout.activity_scheduled_message);
-
-        display = findViewById(R.id.debug_display);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
