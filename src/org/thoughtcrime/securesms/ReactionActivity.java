@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.thoughtcrime.securesms.database.Address;
-import org.thoughtcrime.securesms.jobs.SendReactReceiptJob;
 import org.thoughtcrime.securesms.jobs.SendReadReceiptJob;
 import org.thoughtcrime.securesms.logging.Log;
 
@@ -22,6 +21,7 @@ public class ReactionActivity extends AppCompatActivity {
     private TextView textView;
     private String message;
     private String timeStamp;
+    private String reaction_timeStamp;
     private String phoneNumber;
     private RadioButton radioButton;
     private ReactMessageDbHelper db_react;
@@ -41,7 +41,8 @@ public class ReactionActivity extends AppCompatActivity {
         read_database = db_react.getReadableDatabase();
 
         message = getIntent().getStringExtra("message");
-        timeStamp = getIntent().getStringExtra("date_time").concat("99");
+        timeStamp = getIntent().getStringExtra("date_time");
+        reaction_timeStamp=timeStamp.concat("99");
         phoneNumber = getIntent().getStringExtra("phone_number");
 
         timeStampList = new ArrayList<Long>();
@@ -53,7 +54,7 @@ public class ReactionActivity extends AppCompatActivity {
         if(address1==null) Log.i("Manpreeeet","NULLLLLLL");
         else Log.i("Manpreeeet","NOTTTTT NULLLLLLL");
 
-        timeStampList.add(Long.parseLong(timeStamp));
+        timeStampList.add(Long.parseLong(reaction_timeStamp));
         textView=findViewById(R.id.sample);
         textView.setText(message);
 
@@ -80,7 +81,6 @@ public class ReactionActivity extends AppCompatActivity {
 
     private void handleSelectedReaction(String reaction){
 
-
         Log.i("I break here ","BOOOOOOOM");
         Log.i("i am the address to be sent ",address1.serialize());
        ApplicationContext.getInstance(ReactionActivity.this)
@@ -92,7 +92,8 @@ public class ReactionActivity extends AppCompatActivity {
         contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, phoneNumber);
         contentValues.put(ReactMessageContract.ReactionEntry.REACTION , reaction);
 
-        db_react.saveReaction(contentValues,read_database,write_database);        finish();
+        db_react.saveReaction(contentValues,read_database,write_database);
+        finish();
     }
     private void applyPreviousReaction(){
 
