@@ -443,6 +443,11 @@ public class ConversationFragment extends Fragment
       Log.i(TAG,"Manpreet");
     String message = messageRecord.getBody();
     Long timeStamp = messageRecord.getTimestamp();
+    String time = timeStamp.toString();
+    Log.i("MessageReaction","HEEEEYYYY");
+    Log.i("MessageReaction",time);
+    Log.i("MessageReaction","PASSED");
+    intent.putExtra("address_serialize",messageRecord.getRecipient().getAddress().serialize());
     intent.putExtra("message",message);
     intent.putExtra("date_time",timeStamp.toString());
     intent.putExtra("phone_number",recipient.getAddress().toString());

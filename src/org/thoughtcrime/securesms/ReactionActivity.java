@@ -3,13 +3,20 @@ package org.thoughtcrime.securesms;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import org.thoughtcrime.securesms.database.Address;
+import org.thoughtcrime.securesms.jobs.SendReactReceiptJob;
+import org.thoughtcrime.securesms.jobs.SendReadReceiptJob;
 import org.thoughtcrime.securesms.logging.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReactionActivity extends AppCompatActivity {
     private TextView textView;
@@ -20,6 +27,9 @@ public class ReactionActivity extends AppCompatActivity {
     private ReactMessageDbHelper db_react;
     private SQLiteDatabase write_database;
     private SQLiteDatabase read_database;
+    private List<Long> timeStampList;
+    private String address;
+    private Address address1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,22 @@ public class ReactionActivity extends AppCompatActivity {
         timeStamp = getIntent().getStringExtra("date_time");
         phoneNumber = getIntent().getStringExtra("phone_number");
 
+        timeStampList = new ArrayList<Long>();
+        address = getIntent().getStringExtra("address_serialize");
+        Log.i("address printing Manpreeeeet",address);
+
+        /*
+        Parcel c = Parcel.obtain();
+        c.writeString(address);
+        c.setDataPosition(0);
+        address1 = new Address(c);
+        */
+
+        //address1 = Address.fromSerialized(address);
+        if(address1==null) Log.i("Manpreeeet","NULLLLLLL");
+        else Log.i("Manpreeeet","NOTTTTT NULLLLLLL");
+
+        timeStampList.add(Long.parseLong(timeStamp));
         textView=findViewById(R.id.sample);
         textView.setText(message);
 
@@ -67,6 +93,13 @@ public class ReactionActivity extends AppCompatActivity {
         contentValues.put(ReactMessageContract.ReactionEntry.REACTION , reaction);
 
         db_react.saveReaction(contentValues,read_database,write_database);
+        Log.i("I break here ","BOOOOOOOM");
+
+        /* ApplicationContext.getInstance(ReactionActivity.this)
+                .getJobManager()
+                .add(new SendReactReceiptJob(ReactionActivity.this, address1,timeStampList ));
+        */
+
         finish();
     }
     private void applyPreviousReaction(){
