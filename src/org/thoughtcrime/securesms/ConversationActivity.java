@@ -185,6 +185,7 @@ import org.whispersystems.libsignal.InvalidMessageException;
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Collections;
@@ -605,7 +606,9 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
 
     inflater.inflate(R.menu.conversation_starred_messages, menu);
 
-    inflater.inflate(R.menu.conversation_scheduled_message, menu);
+    if(isSingleConversation()){
+      inflater.inflate(R.menu.conversation_scheduled_message, menu);
+    }
 
     super.onPrepareOptionsMenu(menu);
     return true;
@@ -928,7 +931,11 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   }
 
   public void handleScheduledMessage(){
+    Bundle extras = new Bundle();
+    extras.putSerializable("address", recipient.getAddress().serialize());
+    extras.putLong("threadId", threadId);
     Intent intent = new Intent(this, ScheduledMessageActivity.class);
+    intent.putExtras(extras);
     startActivity(intent);
   }
 
