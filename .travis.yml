@@ -50,10 +50,9 @@ jobs:
     script:
     - "./gradlew generatePlayDebugSources"
     - "./gradlew compilePlayDebugSources"
-    - "./gradlew mockableAndroidJar"
+    - "./gradlew createMockableJar"
   - stage: Test
     script:
-    - "./gradlew generatePlayDebugSources"
     - "./gradlew compilePlayDebugUnitTestSources"
     - "./gradlew test"
     - "./gradlew testPlayDebugUnitTest"
