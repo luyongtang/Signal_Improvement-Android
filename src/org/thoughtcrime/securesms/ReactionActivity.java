@@ -41,21 +41,15 @@ public class ReactionActivity extends AppCompatActivity {
         read_database = db_react.getReadableDatabase();
 
         message = getIntent().getStringExtra("message");
-        timeStamp = getIntent().getStringExtra("date_time");
+        timeStamp = getIntent().getStringExtra("date_time").concat("99");
         phoneNumber = getIntent().getStringExtra("phone_number");
 
         timeStampList = new ArrayList<Long>();
         address = getIntent().getStringExtra("address_serialize");
         Log.i("address printing Manpreeeeet",address);
 
-        /*
-        Parcel c = Parcel.obtain();
-        c.writeString(address);
-        c.setDataPosition(0);
-        address1 = new Address(c);
-        */
 
-        //address1 = Address.fromSerialized(address);
+        address1 = Address.fromSerialized(address);
         if(address1==null) Log.i("Manpreeeet","NULLLLLLL");
         else Log.i("Manpreeeet","NOTTTTT NULLLLLLL");
 
@@ -86,23 +80,22 @@ public class ReactionActivity extends AppCompatActivity {
 
     private void handleSelectedReaction(String reaction){
 
+
+        Log.i("I break here ","BOOOOOOOM");
+        Log.i("i am the address to be sent ",address1.serialize());
+       ApplicationContext.getInstance(ReactionActivity.this)
+                .getJobManager()
+                .add(new SendReadReceiptJob(ReactionActivity.this, address1,timeStampList ));
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(ReactMessageContract.ReactionEntry.DATE_TIME ,  timeStamp);
         contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, phoneNumber);
         contentValues.put(ReactMessageContract.ReactionEntry.REACTION , reaction);
 
-        db_react.saveReaction(contentValues,read_database,write_database);
-        Log.i("I break here ","BOOOOOOOM");
-
-        /* ApplicationContext.getInstance(ReactionActivity.this)
-                .getJobManager()
-                .add(new SendReactReceiptJob(ReactionActivity.this, address1,timeStampList ));
-        */
-
-        finish();
+        db_react.saveReaction(contentValues,read_database,write_database);        finish();
     }
     private void applyPreviousReaction(){
+
         Cursor cursor = db_react.readReaction(read_database, timeStamp, phoneNumber);
         String reaction = "";
         if(cursor.getCount()==1){
@@ -136,20 +129,24 @@ public class ReactionActivity extends AppCompatActivity {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
         String reaction="";
+        int emoji_proxy;
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.radio_sad:
                 if (checked)
                     // Pirates are the best
                     reaction=":(";
+                    emoji_proxy=1;
                     break;
             case R.id.radio_happy:
                 if (checked)
                     reaction=":)";
+                    emoji_proxy=2;
                     break;
             case R.id.radio_wow:
                 if (checked)
                     reaction=":O";
+                    emoji_proxy=3;
                     break;
         }
         handleSelectedReaction(reaction);

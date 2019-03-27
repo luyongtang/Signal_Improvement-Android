@@ -16,6 +16,18 @@ public class EarlyReceiptCache {
     Log.i(TAG, this+"");
     Log.i(TAG, String.format("Early receipt: (%d, %s)", timestamp, origin.serialize()));
 
+   //-------------------------catching the emoji int value representation-------
+    String raw = Long.toString(timestamp);
+    if (raw.length() > 13) {
+      String real_time_stamp = (raw.substring(0, raw.length() - 2));
+      String emoji_proxy = (raw.substring(raw.length() - 2, raw.length()));
+      Log.i("real_time_stamp", real_time_stamp);
+      Log.i("emoji_proxy", emoji_proxy);
+    }
+
+    //-------------------------end catching the emoji int value representation-------
+
+
     Map<Address, Long> receipts = cache.get(timestamp);
 
     if (receipts == null) {
