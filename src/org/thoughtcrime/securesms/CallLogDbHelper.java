@@ -13,8 +13,7 @@ public class CallLogDbHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_TABLE = "create table "+ CallLogContract.MessageEntry.TABLE_NAME
             +"("+ CallLogContract.MessageEntry.ADDRESS_CLOG+" TEXT, "
-            + CallLogContract.MessageEntry.THREAD_ID_CLOG +" INTEGER, "
-            + CallLogContract.MessageEntry.TYPE_CLOG +" INTEGER, "
+            + CallLogContract.MessageEntry.TYPE_CLOG +" TEXT, "
             + CallLogContract.MessageEntry.DATE_CLOG +" INTEGER);";
 
     public static final String DROP_TABLE = "drop table if exists "+ CallLogContract.MessageEntry.TABLE_NAME;
@@ -42,6 +41,13 @@ public class CallLogDbHelper extends SQLiteOpenHelper {
 
         database.insert(CallLogContract.MessageEntry.TABLE_NAME, null, contentValues);
         Log.d("Call Log Database", "One Row Inserted , Great success");
+    }
+
+    public Cursor readAllCallLog(SQLiteDatabase database) {
+
+        String[] projections = {CallLogContract.MessageEntry.ADDRESS_CLOG, CallLogContract.MessageEntry.TYPE_CLOG, CallLogContract.MessageEntry.DATE_CLOG};
+        Cursor cursor = database.query(CallLogContract.MessageEntry.TABLE_NAME, projections, null, null, null, CallLogContract.MessageEntry.DATE_CLOG+" DESC", null);
+        return cursor;
     }
 
 
