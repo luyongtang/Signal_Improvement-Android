@@ -1,27 +1,37 @@
 package org.thoughtcrime.securesms.components;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
 import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.InviteActivity;
 import org.thoughtcrime.securesms.R;
 
-public class NavigationBarFragment extends Fragment {
+public class NavigationBarFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
 
     private BottomNavigationView navigationBarView;
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
+    private int x=0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -30,6 +40,31 @@ public class NavigationBarFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_navigation_bar, container, false);
 
         navigationBarView = view.findViewById(R.id.navigation_bar);
+
+        navigationBarView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_bar_chats: {
+                        Intent intent = new Intent(getActivity(), ConversationListActivity.class);
+                        startActivity(intent);
+                        /*startActivity(new Intent(getActivity(), ConversationListActivity.class));*/
+                    }
+                    break;
+                    case R.id.navigation_bar_settings: {
+                        Intent intent = new Intent(getActivity(), InviteActivity.class);
+                        startActivity(intent);
+                        /*startActivity(new Intent(getActivity(), ApplicationPreferencesActivity.class));*/
+                    }
+                    break;
+                }
+                return true;
+            }
+        });
+
+      /*  navigationBarView.setOnNavigationItemSelectedListener(this);*/
+
+
 
         String tag = getActivity().getClass().getSimpleName();
 
@@ -46,6 +81,7 @@ public class NavigationBarFragment extends Fragment {
 
         return view;
     }
+
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

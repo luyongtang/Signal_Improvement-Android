@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Signal</string>
   <string name="yes">Iawn</string>
   <string name="no">Na</string>
@@ -13,14 +13,14 @@
   <!--ApplicationPreferencesActivity-->
   <string name="ApplicationPreferencesActivity_currently_s">Yn gyfredol: %s</string>
   <string name="ApplicationPreferenceActivity_you_havent_set_a_passphrase_yet">Nid ydych wedi gosod cyfrinymadrodd eto!</string>
-  <plurals name="ApplicationPreferencesActivity_messages_per_conversation">
+  <plurals name="ApplicationPreferencesActivity_messages_per_conversation" tools:ignore="MissingQuantity">
     <item quantity="one">%d neges i bob sgwrs</item>
     <item quantity="two">%d neges i bob sgwrs</item>
     <item quantity="many">%d neges i bob sgwrs</item>
     <item quantity="other">%d neges i bob sgwrs</item>
   </plurals>
   <string name="ApplicationPreferencesActivity_delete_all_old_messages_now">Dileu hen negeseuon nawr?</string>
-  <plurals name="ApplicationPreferencesActivity_this_will_immediately_trim_all_conversations_to_the_d_most_recent_messages">
+  <plurals name="ApplicationPreferencesActivity_this_will_immediately_trim_all_conversations_to_the_d_most_recent_messages" tools:ignore="MissingQuantity">
     <item quantity="one">Bydd hyn yn tocio pob sgwrs i\'r neges ddiweddaraf.</item>
     <item quantity="two">Bydd hyn yn tocio pob sgwrs i\'r %d neges ddiweddaraf.</item>
     <item quantity="many">Bydd hyn yn tocio pob sgwrs i\'r %d neges ddiweddaraf.</item>
@@ -47,7 +47,7 @@
   <string name="ApplicationPreferencesActivity_privacy_summary">Clo sgrin %1$s, Clo cofrestru %2$s</string>
   <string name="ApplicationPreferencesActivity_appearance_summary">Thema %1$s, Iaith %2$s</string>
   <!--AppProtectionPreferenceFragment-->
-  <plurals name="AppProtectionPreferenceFragment_minutes">
+  <plurals name="AppProtectionPreferenceFragment_minutes" tools:ignore="MissingQuantity">
     <item quantity="one">%d munud</item>
     <item quantity="two">%d munud</item>
     <item quantity="many">%d munud </item>
@@ -163,46 +163,46 @@ Send neges heb ei ddiogelu?</string>
   <string name="ConversationActivity_signal_needs_camera_permissions_to_take_photos_or_video">Angen Signal angen caniatâd camera i dynnu lluniau neu fideo</string>
   <string name="ConversationActivity_quoted_contact_message">%1$s %2$s</string>
   <!--ConversationAdapter-->
-  <plurals name="ConversationAdapter_n_unread_messages">
+  <plurals name="ConversationAdapter_n_unread_messages" tools:ignore="MissingQuantity">
     <item quantity="one">%d neges heb ei ddarllen</item>
     <item quantity="two">%d neges heb eu darllen</item>
     <item quantity="many">%d neges heb eu darllen</item>
     <item quantity="other">%d neges heb eu darllen</item>
   </plurals>
   <!--ConversationFragment-->
-  <plurals name="ConversationFragment_delete_selected_messages">
+  <plurals name="ConversationFragment_delete_selected_messages" tools:ignore="MissingQuantity">
     <item quantity="one">Dileu\'r negeseuon hyn?</item>
     <item quantity="two">Dileu\'r negeseuon hyn?</item>
     <item quantity="many">Dileu\'r negeseuon hyn?</item>
     <item quantity="other">Dileu\'r negeseuon hyn?</item>
   </plurals>
-  <plurals name="ConversationFragment_this_will_permanently_delete_all_n_selected_messages">
+  <plurals name="ConversationFragment_this_will_permanently_delete_all_n_selected_messages" tools:ignore="MissingQuantity">
     <item quantity="one">Bydd hyn yn dileu yn barhaol y sgwrs sydd wedi\'i dewis.</item>
     <item quantity="two">Bydd hyn yn dileu yn barhaol y %1$d neges sydd wedi\'u dewis.</item>
     <item quantity="many">Bydd hyn yn dileu yn barhaol y %1$d neges sydd wedi\'u dewis.</item>
     <item quantity="other">Bydd hyn yn dileu yn barhaol y %1$d neges sydd wedi\'u dewis.</item>
   </plurals>
   <string name="ConversationFragment_save_to_sd_card">Cadw i\'r storio?</string>
-  <plurals name="ConversationFragment_saving_n_media_to_storage_warning">
+  <plurals name="ConversationFragment_saving_n_media_to_storage_warning" tools:ignore="MissingQuantity">
     <item quantity="one">Bydd cadw\'r cyfryngau hyn i\'r storfa yn caniatáu i apiau eraill ar eich dyfais gael mynediad iddynt.\n\Parhau?</item>
     <item quantity="two">Bydd cadw\'r holl gyfryngau %1$d i\'r storfa yn caniatáu i unrhyw apiau eraill ar eich dyfais gael mynediad iddynt.\n\Parhau?</item>
     <item quantity="many">Bydd cadw\'r holl gyfryngau %1$d i\'r storfa yn caniatáu i apiau eraill ar eich dyfais gael mynediad iddynt.\n\Parhau?</item>
     <item quantity="other">Bydd cadw\'r holl gyfryngau %1$d i\'r storfa yn caniatáu i apiau eraill ar eich dyfais gael mynediad iddynt.\n\Parhau?</item>
   </plurals>
-  <plurals name="ConversationFragment_error_while_saving_attachments_to_sd_card">
+  <plurals name="ConversationFragment_error_while_saving_attachments_to_sd_card" tools:ignore="MissingQuantity">
     <item quantity="one">Gwall wrth gadw atodiad i\'r storio!</item>
     <item quantity="two">Gwall wrth gadw atodiadau i\'r storio!</item>
     <item quantity="many">Gwall wrth gadw atodiadau i\'r storio!</item>
     <item quantity="other">Gwall wrth gadw atodiadau i\'r storio!</item>
   </plurals>
   <string name="ConversationFragment_unable_to_write_to_sd_card_exclamation">Methu ysgrifennu at y storfa!</string>
-  <plurals name="ConversationFragment_saving_n_attachments">
+  <plurals name="ConversationFragment_saving_n_attachments" tools:ignore="MissingQuantity">
     <item quantity="one">Cadw atodiad</item>
     <item quantity="two">Cadw %1$d atodiad</item>
     <item quantity="many">Cadw %1$d atodiad</item>
     <item quantity="other">Cadw %1$d atodiad</item>
   </plurals>
-  <plurals name="ConversationFragment_saving_n_attachments_to_sd_card">
+  <plurals name="ConversationFragment_saving_n_attachments_to_sd_card" tools:ignore="MissingQuantity">
     <item quantity="one">Cadw atodiad i\'r storfa...</item>
     <item quantity="two">Cadw %1$d atodiad i\'r storfa</item>
     <item quantity="many">Cadw %1$d atodiad i\'r storfa</item>
@@ -220,13 +220,13 @@ Send neges heb ei ddiogelu?</string>
   <string name="ConversationListActivity_there_is_no_browser_installed_on_your_device">Nid oes porwr wedi\'i osod ar eich dyfais.</string>
   <!--ConversationListFragment-->
   <string name="ConversationListFragment_no_results_found_for_s_">Dim canlyniadau ar gyfer \'%s\'</string>
-  <plurals name="ConversationListFragment_delete_selected_conversations">
+  <plurals name="ConversationListFragment_delete_selected_conversations" tools:ignore="MissingQuantity">
     <item quantity="one">Dileu\'r sgyrsiau hyn?</item>
     <item quantity="two">Dileu\'r sgyrsiau hyn?</item>
     <item quantity="many">Dileu\'r sgyrsiau hyn?</item>
     <item quantity="other">Dileu\'r sgyrsiau hyn?</item>
   </plurals>
-  <plurals name="ConversationListFragment_this_will_permanently_delete_all_n_selected_conversations">
+  <plurals name="ConversationListFragment_this_will_permanently_delete_all_n_selected_conversations" tools:ignore="MissingQuantity">
     <item quantity="one">Bydd hyn yn dileu yn barhaol y sgwrs sydd wedi\'i dewis.</item>
     <item quantity="two">Bydd hyn yn dileu yn barhaol y %1$d sgwrs sydd wedi\'u dewis.</item>
     <item quantity="many">Bydd hyn yn dileu yn barhaol y %1$d sgwrs sydd wedi\'u dewis.</item>
@@ -234,14 +234,14 @@ Send neges heb ei ddiogelu?</string>
   </plurals>
   <string name="ConversationListFragment_deleting">Wrthi\'n dileu</string>
   <string name="ConversationListFragment_deleting_selected_conversations">Dileu\'r sgyrsiau hyn...</string>
-  <plurals name="ConversationListFragment_conversations_archived">
+  <plurals name="ConversationListFragment_conversations_archived" tools:ignore="MissingQuantity">
     <item quantity="one">Sgwrs wedi\'i archifo</item>
     <item quantity="two">% d sgwrs wedi\'u harchifo</item>
     <item quantity="many">% d sgwrs wedi\'u harchifo</item>
     <item quantity="other">% d sgwrs wedi\'u harchifo</item>
   </plurals>
   <string name="ConversationListFragment_undo">DADWNEUD</string>
-  <plurals name="ConversationListFragment_moved_conversations_to_inbox">
+  <plurals name="ConversationListFragment_moved_conversations_to_inbox" tools:ignore="MissingQuantity">
     <item quantity="one">Symudwyd sgwrs i\'r blwch derbyn</item>
     <item quantity="two">Symudwyd %d sgwrs i\'r blwch derbyn</item>
     <item quantity="many">Symudwyd %d sgwrs i\'r blwch derbyn</item>
@@ -353,13 +353,13 @@ Send neges heb ei ddiogelu?</string>
   <string name="InviteActivity_heart_content_description">Calon</string>
   <string name="InviteActivity_invitations_sent">Gwahoddiadau wedi\'u anfon!</string>
   <string name="InviteActivity_invite_to_signal">Gwahodd i Signal</string>
-  <plurals name="InviteActivity_send_sms_to_friends">
+  <plurals name="InviteActivity_send_sms_to_friends" tools:ignore="MissingQuantity">
     <item quantity="one">ANFON SMS AT %d FFRIND</item>
     <item quantity="two">ANFON SMS AT %d FFRIND</item>
     <item quantity="many">ANFON SMS AT %d FFRIND</item>
     <item quantity="other">ANFON SMS AT %d FFRIND</item>
   </plurals>
-  <plurals name="InviteActivity_send_sms_invites">
+  <plurals name="InviteActivity_send_sms_invites" tools:ignore="MissingQuantity">
     <item quantity="one">Anfon %d gwahoddiad SMS</item>
     <item quantity="two">Anfon %d gwahoddiad SMS</item>
     <item quantity="many">Anfon %d gwahoddiad SMS</item>
@@ -380,13 +380,13 @@ Send neges heb ei ddiogelu?</string>
   <string name="MmsDownloader_error_reading_mms_settings">Gwall wrth ddarllen gosodiadau darparwr MMS diwifr</string>
   <!--MediaOverviewActivity-->
   <string name="MediaOverviewActivity_Media">Cyfryngau</string>
-  <plurals name="MediaOverviewActivity_Media_delete_confirm_title">
+  <plurals name="MediaOverviewActivity_Media_delete_confirm_title" tools:ignore="MissingQuantity">
     <item quantity="one">Dileu\'r negeseuon hyn?</item>
     <item quantity="two">Dileu\'r negeseuon hyn?</item>
     <item quantity="many">Dileu\'r negeseuon hyn?</item>
     <item quantity="other">Dileu\'r negeseuon hyn?</item>
   </plurals>
-  <plurals name="MediaOverviewActivity_Media_delete_confirm_message">
+  <plurals name="MediaOverviewActivity_Media_delete_confirm_message" tools:ignore="MissingQuantity">
     <item quantity="one">Bydd hyn yn dileu yn barhaol y sgwrs sydd wedi\'i dewis.</item>
     <item quantity="two">Bydd hyn yn dileu yn barhaol y %1$d neges sydd wedi\'u dewis.</item>
     <item quantity="many">Bydd hyn yn dileu yn barhaol y %1$d neges sydd wedi\'u dewis.</item>
@@ -478,7 +478,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="RecipientPreferenceActivity_block_this_contact_question">Rhwystro\'r cysllwt hwn?</string>
   <string name="RecipientPreferenceActivity_you_will_no_longer_receive_messages_and_calls_from_this_contact">Ni fyddwch bellach yn derbyn negeseuon a galwadau o\'r cyswllt hwn.</string>
   <string name="RecipientPreferenceActivity_block_and_leave_group">Rhwystro a gadael y grŵp hwn?</string>
-  <string name="RecipientPreferenceActivity_block_group">Rhwystro\\'r grŵp hwn?</string>
+  <string name="RecipientPreferenceActivity_block_group">Rhwystro\'r grŵp hwn?</string>
   <string name="RecipientPreferenceActivity_block_and_leave_group_description">Fyddwch chi ddim yn derbyn negeseuon na diweddariadau gan y grŵp hwn.</string>
   <string name="RecipientPreferenceActivity_block">Rhwystro</string>
   <string name="RecipientPreferenceActivity_unblock_this_contact_question">Dadrwystro\'r cyswllt hwn?</string>
@@ -525,7 +525,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="RegistrationActivity_signal_needs_access_to_your_contacts_and_media_in_order_to_connect_with_friends">Mae Signal angen mynediad i\'ch cysylltiadau a\'ch cyfryngau er mwyn cysylltu â ffrindiau, cyfnewid negeseuon, a gwneud galwadau diogel</string>
   <string name="RegistrationActivity_unable_to_connect_to_service">Methu cysylltu â\'r gwasanaeth. Gwiriwch y cysylltiad rhwydwaith a cheisio eto.</string>
   <string name="RegistrationActivity_to_easily_verify_your_phone_number_signal_can_automatically_detect_your_verification_code">I wirio eich rhif ffôn yn hawdd, gall Signal ganfod eich cod dilysu yn awtomatig os ydych yn caniatáu i Signal weld negeseuon SMS.</string>
-  <plurals name="RegistrationActivity_debug_log_hint">
+  <plurals name="RegistrationActivity_debug_log_hint" tools:ignore="MissingQuantity">
     <item quantity="one">Rydych chi nawr %d cam cyn cyflwyno cofnod dadfygio.</item>
     <item quantity="two">Rydych chi nawr %d gam cyn cyflwyno cofnod dadfygio.</item>
     <item quantity="many">Rydych chi nawr %dcam cyn cyflwyno cofnod dadfygio.</item>
@@ -673,7 +673,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="SingleRecipientNotificationBuilder_signal">Signal</string>
   <string name="SingleRecipientNotificationBuilder_new_message">Neges newydd</string>
   <!--TransferControlView-->
-  <plurals name="TransferControlView_n_items">
+  <plurals name="TransferControlView_n_items" tools:ignore="MissingQuantity">
     <item quantity="one">%d Eitem</item>
     <item quantity="two">%d Eitem</item>
     <item quantity="many">%d Eitem</item>
@@ -784,35 +784,35 @@ Send neges heb ei ddiogelu?</string>
   <string name="experience_upgrade_preference_fragment__enable_read_receipts">Galluogi derbynebau darllen</string>
   <!--expiration-->
   <string name="expiration_off">Diffodd</string>
-  <plurals name="expiration_seconds">
+  <plurals name="expiration_seconds" tools:ignore="MissingQuantity">
     <item quantity="one">%d eiliad</item>
     <item quantity="two">%d eiliad</item>
     <item quantity="many">%d eiliad</item>
     <item quantity="other">%d eiliad</item>
   </plurals>
   <string name="expiration_seconds_abbreviated">%de</string>
-  <plurals name="expiration_minutes">
+  <plurals name="expiration_minutes" tools:ignore="MissingQuantity">
     <item quantity="one">%d munud</item>
     <item quantity="two">%d munud</item>
     <item quantity="many">%d munud</item>
     <item quantity="other">%d munud</item>
   </plurals>
   <string name="expiration_minutes_abbreviated">%dm</string>
-  <plurals name="expiration_hours">
+  <plurals name="expiration_hours" tools:ignore="MissingQuantity">
     <item quantity="one">%d awr</item>
     <item quantity="two">%d awr</item>
     <item quantity="many">%d awr</item>
     <item quantity="other">%d awr</item>
   </plurals>
   <string name="expiration_hours_abbreviated">%da</string>
-  <plurals name="expiration_days">
+  <plurals name="expiration_days" tools:ignore="MissingQuantity">
     <item quantity="one">%d diwrnod</item>
     <item quantity="two">%d diwrnod</item>
     <item quantity="many">%d diwrnod</item>
     <item quantity="other">%d diwrnod</item>
   </plurals>
   <string name="expiration_days_abbreviated">%dd</string>
-  <plurals name="expiration_weeks">
+  <plurals name="expiration_weeks" tools:ignore="MissingQuantity">
     <item quantity="one">%d wythnos</item>
     <item quantity="two">%d wythnos</item>
     <item quantity="many">%d wythnos</item>
@@ -829,7 +829,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="IdentityUtil_untrusted_dialog_one">Mae\'ch rhif diogelwch gyda %1$s wedi newid yn ddiweddar.</string>
   <string name="IdentityUtil_untrusted_dialog_two">Mae\'ch rhif diogelwch gyda %1$s wedi newid yn ddiweddar.</string>
   <string name="IdentityUtil_untrusted_dialog_many">Mae\'ch rhif diogelwch gyda %1$s a %3$s wedi newid.</string>
-  <plurals name="identity_others">
+  <plurals name="identity_others" tools:ignore="MissingQuantity">
     <item quantity="one">%d arall</item>
     <item quantity="two">%d arall</item>
     <item quantity="many">%d arall</item>
@@ -880,7 +880,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="message_recipients_list_item__resend">AIL ANFON</string>
   <string name="message_recipients_list_item__resending">Ail anfon...</string>
   <!--GroupUtil-->
-  <plurals name="GroupUtil_joined_the_group">
+  <plurals name="GroupUtil_joined_the_group" tools:ignore="MissingQuantity">
     <item quantity="one">Ymunodd %1$s â\'r grŵp.</item>
     <item quantity="two">Ymunodd %1$s â\'r grŵp.</item>
     <item quantity="many">Ymunodd %1$s â\'r grŵp.</item>
@@ -893,7 +893,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="prompt_passphrase_activity__unlock">Datgloi</string>
   <!--prompt_mms_activity-->
   <string name="prompt_mms_activity__signal_requires_mms_settings_to_deliver_media_and_group_messages">Mae Signal angen gosodiadau MMS i ddarparu negeseuon cyfrwng a grŵp trwy\'ch cludwr di-wifr. Nid yw\'ch dyfais yn gwneud y wybodaeth hon ar gael, sydd weithiau\'n wir ar gyfer dyfeisiau wedi\'u cloi a ffurfweddiadau cyfyngol eraill.</string>
-  <string name="prompt_mms_activity__to_send_media_and_group_messages_tap_ok">I anfon negeseuon cyfryngau a grŵp, tapiwch 'Iawn' a chwblhau\'r gosodiadau gofynnol. Yn gyffredinol, gall lleoliadau MMS eich cludwr gael eu lleoli trwy chwilio am 'eich APN cludwr'. Dim ond unwaith y bydd angen i chi wneud hyn.</string>
+  <string name="prompt_mms_activity__to_send_media_and_group_messages_tap_ok">I anfon negeseuon cyfryngau a grŵp, tapiwch ,Iawn, a chwblhau\'r gosodiadau gofynnol. Yn gyffredinol, gall lleoliadau MMS eich cludwr gael eu lleoli trwy chwilio am ,eich APN cludwr. Dim ond unwaith y bydd angen i chi wneud hyn.</string>
   <!--profile_create_activity-->
   <string name="profile_create_activity__set_later">Gosod yn hwyrach</string>
   <string name="profile_create_activity__finish">GORFFEN</string>
@@ -989,7 +989,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="arrays__high">Uchel</string>
   <string name="arrays__max">Mwyaf</string>
   <!--plurals.xml-->
-  <plurals name="hours_ago">
+  <plurals name="hours_ago" tools:ignore="MissingQuantity">
     <item quantity="one">%d awr</item>
     <item quantity="two">%d awr</item>
     <item quantity="many">%d awr</item>
@@ -1177,7 +1177,7 @@ Send neges heb ei ddiogelu?</string>
   <string name="verify_display_fragment_context_menu__compare_with_clipboard">Cymharu â\'r clipfwrdd</string>
   <!--reminder_header-->
   <string name="reminder_header_outdated_build">Mae\'ch fersiwn o Signal yn hen</string>
-  <plurals name="reminder_header_outdated_build_details">
+  <plurals name="reminder_header_outdated_build_details" tools:ignore="MissingQuantity">
     <item quantity="one">Bydd eich fersiwn o Signal yn dod i ben ymhen %d diwrnod. Tapiwch i ddiweddaru i\'r fersiwn ddiweddaraf.</item>
     <item quantity="two">Bydd eich fersiwn o Signal yn dod i ben ymhen %d diwrnod. Tapiwch i ddiweddaru i\'r fersiwn ddiweddaraf.</item>
     <item quantity="many">Bydd eich fersiwn o Signal yn dod i ben ymhen %d diwrnod. Tapiwch i ddiweddaru i\'r fersiwn ddiweddaraf.</item>
