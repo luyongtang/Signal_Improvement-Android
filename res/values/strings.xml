@@ -1503,4 +1503,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- call logs -->
+    <string name="call_logs">Call Log</string>
+
 </resources>
