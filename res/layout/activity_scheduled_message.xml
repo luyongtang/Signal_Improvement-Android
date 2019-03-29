@@ -82,7 +82,7 @@
                     android:id="@+id/scheduled_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/red"
+                    android:background="@color/white"
                     android:gravity="top"
                     android:inputType="textShortMessage|textMultiLine"
                     android:minLines="2"
@@ -102,7 +102,7 @@
                     android:id="@+id/button2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="setAlarm"
+                    android:onClick="sendScheduledMessage"
                     android:text="Confirm" />
             </RelativeLayout>
         </LinearLayout>
