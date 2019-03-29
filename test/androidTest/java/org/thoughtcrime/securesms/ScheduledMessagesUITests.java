@@ -18,7 +18,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class ScheduledMessagesTest {
+public class ScheduledMessagesUITests {
     @Rule
     //Start application at chosen activity: ApplicationPreferencesActivity
     public ActivityTestRule<ScheduledMessageActivity> myActivity = new ActivityTestRule<>(ScheduledMessageActivity.class);
