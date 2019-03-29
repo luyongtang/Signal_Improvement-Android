@@ -442,7 +442,7 @@ public class ConversationFragment extends Fragment
     Intent intent = new Intent(getActivity().getBaseContext(), ReactionActivity.class);
       Log.i(TAG,"Manpreet");
     String message = messageRecord.getBody();
-    Long timeStamp = messageRecord.getTimestamp();
+    Long timeStamp = messageRecord.getDateSent();
     String time = timeStamp.toString();
     Log.i("MessageReaction","HEEEEYYYY");
     Log.i("MessageReaction",time);

@@ -51,7 +51,7 @@ public class ReactionActivity extends AppCompatActivity {
         textView.setText(message);
         applyPreviousReaction();
         //Simple test of database for loggin purpose
-        Cursor cursor = db_react.readReaction(read_database, timeStamp, phoneNumber);
+        Cursor cursor = db_react.readReaction(read_database, timeStamp);
         Log.i("data_raw", Integer.toString(cursor.getCount()));
         while(cursor.moveToNext()){
             Log.i("data_raw",cursor.getString(1));
@@ -76,6 +76,7 @@ public class ReactionActivity extends AppCompatActivity {
                 .add(new SendReadReceiptJob(ReactionActivity.this, Address.fromSerialized(address),timeStampList ));
         // Save reaction to database
         ContentValues contentValues = new ContentValues();
+        Log.i("timestamp_sent_reaction",timeStamp);
         contentValues.put(ReactMessageContract.ReactionEntry.DATE_TIME ,  timeStamp);
         contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, phoneNumber);
         contentValues.put(ReactMessageContract.ReactionEntry.REACTION , reaction);
@@ -83,7 +84,8 @@ public class ReactionActivity extends AppCompatActivity {
         finish();
     }
     private void applyPreviousReaction(){
-        Cursor cursor = db_react.readReaction(read_database, timeStamp, phoneNumber);
+        Cursor cursor = db_react.readReaction(read_database, timeStamp);
+
         String reaction = "";
         if(cursor.getCount()==1){
             cursor.moveToNext();

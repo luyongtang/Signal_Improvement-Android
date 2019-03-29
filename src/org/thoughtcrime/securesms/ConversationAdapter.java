@@ -201,15 +201,21 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
     int           adapterPosition = viewHolder.getAdapterPosition();
     MessageRecord previousRecord  = adapterPosition < getItemCount() - 1 && !isFooterPosition(adapterPosition + 1) ? getRecordForPositionOrThrow(adapterPosition + 1) : null;
     MessageRecord nextRecord      = adapterPosition > 0 && !isHeaderPosition(adapterPosition - 1) ? getRecordForPositionOrThrow(adapterPosition - 1) : null;
-    Long timeStamp = messageRecord.getTimestamp();
+    Long timeStampL = (messageRecord.getDateSent());
+    String timeStamp = timeStampL.toString();
     String address = messageRecord.getRecipient().getAddress().toString();
-    Cursor cursor = db_react.readReaction(read_database, timeStamp.toString(), address);
+    Cursor cursor = db_react.readReaction(read_database, timeStamp.toString());
     Log.i("ClassType",messageRecord.getClass().getSimpleName());
-
+    Log.i("retrieveTimeSignal",timeStamp);
+    Log.i("retrieveCount", Integer.toString(cursor.getCount()));
     if(cursor.getCount()==1 && messageRecord.getClass().getSimpleName().equals("SmsMessageRecord")){
+      Log.i("retrieveFound", "YES");
       SmsMessageRecord message = (SmsMessageRecord)messageRecord;
       cursor.moveToNext();
       message.setReaction(cursor.getString(0));
+    }
+    else {
+      Log.i("retrieveFound", "NO");
     }
 
     Log.i("Body", messageRecord.getClass().toString()+" "+messageRecord.getBody());
