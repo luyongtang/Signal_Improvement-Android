@@ -37,6 +37,7 @@ public class ConversationItemFooter extends LinearLayout {
   private ImageView           insecureIndicatorView;
   private DeliveryStatusView  deliveryStatusView;
   private TextView            messageReaction;
+  private ImageView           messageReactionEmoji;
 
   public ConversationItemFooter(Context context) {
     super(context);
@@ -61,7 +62,8 @@ public class ConversationItemFooter extends LinearLayout {
     timerView             = findViewById(R.id.footer_expiration_timer);
     insecureIndicatorView = findViewById(R.id.footer_insecure_indicator);
     deliveryStatusView    = findViewById(R.id.footer_delivery_status);
-    messageReaction    = findViewById(R.id.footer_reaction);
+    messageReaction       = findViewById(R.id.footer_reaction);
+    messageReactionEmoji  = findViewById(R.id.footer_emoji_reaction);
 
     if (attrs != null) {
       TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ConversationItemFooter, 0, 0);
@@ -91,7 +93,7 @@ public class ConversationItemFooter extends LinearLayout {
     timerView.setVisibility(GONE);
     insecureIndicatorView.setVisibility(GONE);
     deliveryStatusView.setVisibility(GONE);
-    messageReaction.setVisibility(VISIBLE);
+    messageReaction.setVisibility(GONE);
     presentReaction(messageRecord);
   }
   public void presentReaction(MessageRecord messageRecord){
@@ -99,8 +101,11 @@ public class ConversationItemFooter extends LinearLayout {
       SmsMessageRecord message = (SmsMessageRecord)messageRecord;
       if(message.hasReaction()){
         Log.i("FooterReaction","Found reaction");
-        messageReaction.setText(message.getReaction());
-        messageReaction.setVisibility(VISIBLE);
+        int emoji_id = ReactionActivity.reactionNumberToDrawableId(message.getReaction());
+        //messageReaction.setText(message.getReaction());
+        //messageReaction.setVisibility(VISIBLE);
+        messageReactionEmoji.setImageResource(emoji_id);
+        messageReactionEmoji.setVisibility(VISIBLE);
       }
     }
   }

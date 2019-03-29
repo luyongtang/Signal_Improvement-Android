@@ -342,32 +342,21 @@ public class SmsDatabase extends MessagingDatabase {
           }
         }
       }
-
+      //-------------------------catching the emoji int value representation-------
       if (!foundMessage) {
-        //-------------------------catching the emoji int value representation-------
         String raw = Long.toString(messageId.getTimetamp());
-
         if (raw.length() > 13) {
-
-
-
-
           String real_time_stamp = (raw.substring(0, raw.length() - 2));
           String emoji_proxy = (raw.substring(raw.length() - 2, raw.length()));
           Log.i("real_time_stamp", real_time_stamp);
           Log.i("emoji_proxy", emoji_proxy);
-          Log.i("emoji_proxy", emoji_proxy);
-
+          //Save reaction to database
           ContentValues contentValues = new ContentValues();
-
           contentValues.put(ReactMessageContract.ReactionEntry.DATE_TIME, real_time_stamp);
           contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, messageId.getAddress().serialize());
-          contentValues.put(ReactMessageContract.ReactionEntry.REACTION, ":)");
-
+          contentValues.put(ReactMessageContract.ReactionEntry.REACTION, emoji_proxy);
           db_react.saveReaction(contentValues, read_database, write_database);
-
         }
-
         //-------------------------end catching the emoji int value representation-------
         else {
           if (deliveryReceipt)
