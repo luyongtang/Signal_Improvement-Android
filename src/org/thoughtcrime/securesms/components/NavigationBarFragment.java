@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
 import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.CallLogsActivity;
 import org.thoughtcrime.securesms.InviteActivity;
 import org.thoughtcrime.securesms.R;
 
@@ -25,8 +26,6 @@ public class NavigationBarFragment extends Fragment{
 
     private BottomNavigationView navigationBarView;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
-    private int x=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,32 +39,6 @@ public class NavigationBarFragment extends Fragment{
         final View view = inflater.inflate(R.layout.fragment_navigation_bar, container, false);
 
         navigationBarView = view.findViewById(R.id.navigation_bar);
-
-        navigationBarView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_bar_chats: {
-                        Intent intent = new Intent(getActivity(), ConversationListActivity.class);
-                        startActivity(intent);
-                        /*startActivity(new Intent(getActivity(), ConversationListActivity.class));*/
-                    }
-                    break;
-                    case R.id.navigation_bar_settings: {
-                        Intent intent = new Intent(getActivity(), InviteActivity.class);
-                        startActivity(intent);
-                        /*startActivity(new Intent(getActivity(), ApplicationPreferencesActivity.class));*/
-                    }
-                    break;
-                }
-                return true;
-            }
-        });
-
-      /*  navigationBarView.setOnNavigationItemSelectedListener(this);*/
-
-
-
         String tag = getActivity().getClass().getSimpleName();
 
         Log.d("this activity", tag);
@@ -78,6 +51,33 @@ public class NavigationBarFragment extends Fragment{
         } else {
             navigationBarView.setSelectedItemId(R.id.navigation_bar_call_logs);
         }
+
+        navigationBarView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_bar_chats: {
+                        Intent intent = new Intent(getActivity(), ConversationListActivity.class);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.stationary, R.anim.stationary);
+                        break;
+                    }
+                    case R.id.navigation_bar_settings: {
+                        Intent intent = new Intent(getActivity(), ApplicationPreferencesActivity.class);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.stationary, R.anim.stationary);
+                        break;
+                    }
+                    case R.id.navigation_bar_call_logs:{
+                        Intent intent = new Intent(getActivity(), CallLogsActivity.class);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.stationary, R.anim.stationary);
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
 
         return view;
     }
