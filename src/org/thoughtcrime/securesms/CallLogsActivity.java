@@ -29,7 +29,7 @@ public class CallLogsActivity extends PassphraseRequiredActionBarActivity implem
 
 
 
-        @Override
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
