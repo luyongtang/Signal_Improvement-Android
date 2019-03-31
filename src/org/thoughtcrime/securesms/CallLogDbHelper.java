@@ -14,7 +14,7 @@ public class CallLogDbHelper extends SQLiteOpenHelper {
     public static final String CREATE_TABLE = "create table "+ CallLogContract.MessageEntry.TABLE_NAME
             +"("+ CallLogContract.MessageEntry.ADDRESS_CLOG+" TEXT, "
             + CallLogContract.MessageEntry.TYPE_CLOG +" TEXT, "
-            + CallLogContract.MessageEntry.DATE_CLOG +" INTEGER);";
+            + CallLogContract.MessageEntry.DATE_CLOG +" TEXT);";
 
     public static final String DROP_TABLE = "drop table if exists "+ CallLogContract.MessageEntry.TABLE_NAME;
 
@@ -48,6 +48,14 @@ public class CallLogDbHelper extends SQLiteOpenHelper {
         String[] projections = {CallLogContract.MessageEntry.ADDRESS_CLOG, CallLogContract.MessageEntry.TYPE_CLOG, CallLogContract.MessageEntry.DATE_CLOG};
         Cursor cursor = database.query(CallLogContract.MessageEntry.TABLE_NAME, projections, null, null, null, CallLogContract.MessageEntry.DATE_CLOG+" DESC", null);
         return cursor;
+    }
+
+    // used for testing
+    public void deleteCallLog(SQLiteDatabase database, String address, String date) {
+
+        String selection = CallLogContract.MessageEntry.ADDRESS_CLOG+" = "+address+" AND "+CallLogContract.MessageEntry.DATE_CLOG+" = "+date;
+        database.delete(CallLogContract.MessageEntry.TABLE_NAME, selection, null);
+        Log.i("CallLogDbHelper", "A call log is deleted");
     }
 
 
