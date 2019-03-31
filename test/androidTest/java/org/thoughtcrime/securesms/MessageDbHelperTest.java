@@ -48,7 +48,7 @@ public class MessageDbHelperTest {
         contentValues.put(StarredMessageContract.MessageEntry.DATE_SENT ,  "1");
     }
     @Test
-    public void addMessage() {
+    public void addAndDeletePass() {
 
         messageDbHelper.addMessage(contentValues, writableDatabase);
         Cursor cursor = messageDbHelper.readMessage(readableDatabase,"200");
@@ -62,6 +62,31 @@ public class MessageDbHelperTest {
 
         // message body should be "Hello World"
         assertEquals("Hello World",bodyFromCursor);
+
+        messageDbHelper.deleteMessage(writableDatabase,"100","200");
+        cursor = messageDbHelper.readMessage(readableDatabase,"200");
+
+        // No record should be return after delete
+        assertFalse(cursor.moveToNext());
+    }
+
+    @Test
+    public void addAndDeleteMessageWrongMessageBody() {
+
+        contentValues.put(StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR ,  "Bye World");
+
+        messageDbHelper.addMessage(contentValues, writableDatabase);
+        Cursor cursor = messageDbHelper.readMessage(readableDatabase,"200");
+
+        String bodyFromCursor = "";
+        if (cursor.moveToNext())
+        {
+            bodyFromCursor = cursor.getString(cursor.getColumnIndex(StarredMessageContract.MessageEntry.MESSAGE_BODY_STAR));
+
+        }
+
+        // message body should be "Hello World"
+        assertNotEquals("Hello World",bodyFromCursor);
 
         messageDbHelper.deleteMessage(writableDatabase,"100","200");
         cursor = messageDbHelper.readMessage(readableDatabase,"200");

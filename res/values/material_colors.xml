@@ -173,7 +173,7 @@
     <color name="amber_900">#FF6F00</color>
     <color name="amber_A100">#FFE57F</color>
     <color name="amber_A200">#FFD740</color>
-    <color name="amber_A400">#FFC400</color>
+    <color name="amber_A400">#ffc400</color>
     <color name="amber_A700">#FFAB00</color>
 
     <color name="brown_50">#EFEBE9</color>

@@ -103,8 +103,10 @@
         android:supportsRtl="true"
         android:theme="@style/TextSecure.LightTheme"
         tools:replace="android:allowBackup">
+
         <activity android:name=".StarredMessageActivity"></activity>
         <activity android:name=".ScheduledMessageActivity"></activity>
+      
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -698,6 +700,8 @@
         <meta-data
             android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
             android:value="598.0dip" />
+
+        <activity android:name=".ReactionActivity"></activity>
     </application>
 
 </manifest>
