@@ -16,6 +16,7 @@ import android.widget.TextView;
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.ReactionActivity;
+import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.model.MessageRecord;
 import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
@@ -101,7 +102,7 @@ public class ConversationItemFooter extends LinearLayout {
       SmsMessageRecord message = (SmsMessageRecord)messageRecord;
       if(message.hasReaction()){
         Log.i("FooterReaction","Found reaction");
-        int emoji_id = ReactionActivity.reactionNumberToDrawableId(message.getReaction());
+        int emoji_id = ReactionUtil.reactionNumberToDrawableId(message.getReaction());
         //messageReaction.setText(message.getReaction());
         //messageReaction.setVisibility(VISIBLE);
         messageReactionEmoji.setImageResource(emoji_id);
