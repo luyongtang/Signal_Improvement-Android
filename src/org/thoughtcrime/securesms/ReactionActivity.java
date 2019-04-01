@@ -42,22 +42,21 @@ public class ReactionActivity extends AppCompatActivity {
         // Setup view attributes
         textView=findViewById(R.id.sample);
         textView.setText(message);
-        applyPreviousReaction();
+        applyPreviousReactionOnView();
         /*For logging purpose*/
         Log.i("intent_loader",message);
         Log.i("intent_loader", sentTimeStamp);
         Log.i("intent_loader",phoneNumber);
     }
-
     private void handleSelectedReaction(String reaction){
         //Send reaction
         reactUtil.sendReactionToRecipient(sentTimeStamp, reaction, address, ReactionActivity.this);
         // Save reaction to database
         reactUtil.saveReactionToDatabase(sentTimeStamp, reaction, address);
-        //return to previous reaciton
+        //return to previous reaction
         finish();
     }
-    private void applyPreviousReaction(){
+    private void applyPreviousReactionOnView(){
         String reaction = reactUtil.getReactionForCurrentMessage(sentTimeStamp);
         if(reaction!=null) {
             int radioId = reactUtil.reactionStringToRadioButtonId(reaction);
@@ -72,6 +71,21 @@ public class ReactionActivity extends AppCompatActivity {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
         String reaction="";
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_sad:
+                if (checked)
+                    reaction="10";
+                break;
+            case R.id.radio_happy:
+                if (checked)
+                    reaction="11";
+                break;
+            case R.id.radio_wow:
+                if (checked)
+                    reaction="12";
+                break;
+        }
         handleSelectedReaction(reaction);
     }
 }

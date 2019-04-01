@@ -32,6 +32,7 @@ import net.sqlcipher.database.SQLiteStatement;
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.ReactMessageContract;
 import org.thoughtcrime.securesms.ReactMessageDbHelper;
+import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatch;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatchList;
 import org.thoughtcrime.securesms.database.helpers.SQLCipherOpenHelper;
@@ -110,17 +111,14 @@ public class SmsDatabase extends MessagingDatabase {
 
   private final JobManager jobManager;
 
-  private ReactMessageDbHelper db_react;
+  private ReactionUtil reactUtil;
   private android.database.sqlite.SQLiteDatabase write_database;
   private android.database.sqlite.SQLiteDatabase read_database;
 
   public SmsDatabase(Context context, SQLCipherOpenHelper databaseHelper) {
     super(context, databaseHelper);
     this.jobManager = ApplicationContext.getInstance(context).getJobManager();
-    db_react = new ReactMessageDbHelper(context);
-
-    write_database = db_react.getWritableDatabase();
-    read_database = db_react.getReadableDatabase();
+    reactUtil = new ReactionUtil(context);
   }
 
   protected String getTableName() {
@@ -346,16 +344,13 @@ public class SmsDatabase extends MessagingDatabase {
       if (!foundMessage) {
         String raw = Long.toString(messageId.getTimetamp());
         if (raw.length() > 13) {
-          String real_time_stamp = (raw.substring(0, raw.length() - 2));
+          String sentTimeStamp = (raw.substring(0, raw.length() - 2));
           String emoji_proxy = (raw.substring(raw.length() - 2, raw.length()));
-          Log.i("real_time_stamp", real_time_stamp);
+          /*Testing and logging purpose*/
+          Log.i("real_time_stamp", sentTimeStamp);
           Log.i("emoji_proxy", emoji_proxy);
           //Save reaction to database
-          ContentValues contentValues = new ContentValues();
-          contentValues.put(ReactMessageContract.ReactionEntry.DATE_TIME, real_time_stamp);
-          contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, messageId.getAddress().serialize());
-          contentValues.put(ReactMessageContract.ReactionEntry.REACTION, emoji_proxy);
-          db_react.saveReaction(contentValues, read_database, write_database);
+          reactUtil.saveReactionToDatabase(sentTimeStamp, emoji_proxy, messageId.getAddress().serialize());
         }
         //-------------------------end catching the emoji int value representation-------
         else {
