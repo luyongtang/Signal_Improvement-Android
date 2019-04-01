@@ -441,9 +441,14 @@ public class ConversationFragment extends Fragment
       Log.i(TAG,"Manpreet");
     Intent intent = new Intent(getActivity().getBaseContext(), ReactionActivity.class);
       Log.i(TAG,"Manpreet");
-    Long messageId = messageRecord.getId();
-    Long timeStamp = messageRecord.getTimestamp();
-    intent.putExtra("messages",messageId.toString());
+    String message = messageRecord.getBody();
+    Long timeStamp = messageRecord.getDateSent();
+    String time = timeStamp.toString();
+    Log.i("MessageReaction","HEEEEYYYY");
+    Log.i("MessageReaction",time);
+    Log.i("MessageReaction","PASSED");
+    intent.putExtra("address_serialize",messageRecord.getRecipient().getAddress().serialize());
+    intent.putExtra("message",message);
     intent.putExtra("date_time",timeStamp.toString());
     intent.putExtra("phone_number",recipient.getAddress().toString());
 

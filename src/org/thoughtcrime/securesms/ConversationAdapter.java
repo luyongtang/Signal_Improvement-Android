@@ -18,11 +18,14 @@ package org.thoughtcrime.securesms;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
+
+import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
 import org.thoughtcrime.securesms.logging.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,6 +105,8 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
   private final @NonNull  MessageDigest     digest;
 
   private MessageRecord recordToPulseHighlight;
+  private ReactMessageDbHelper db_react;
+  private SQLiteDatabase read_database;
 
   protected static class ViewHolder extends RecyclerView.ViewHolder {
     public <V extends View & BindableConversationItem> ViewHolder(final @NonNull V itemView) {
@@ -165,6 +170,8 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
                              @NonNull Recipient recipient)
   {
     super(context, cursor);
+    db_react = new ReactMessageDbHelper(getContext());
+    read_database = db_react.getReadableDatabase();
 
     try {
       this.glideRequests = glideRequests;
@@ -194,7 +201,24 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
     int           adapterPosition = viewHolder.getAdapterPosition();
     MessageRecord previousRecord  = adapterPosition < getItemCount() - 1 && !isFooterPosition(adapterPosition + 1) ? getRecordForPositionOrThrow(adapterPosition + 1) : null;
     MessageRecord nextRecord      = adapterPosition > 0 && !isHeaderPosition(adapterPosition - 1) ? getRecordForPositionOrThrow(adapterPosition - 1) : null;
+    Long timeStampL = (messageRecord.getDateSent());
+    String timeStamp = timeStampL.toString();
+    String address = messageRecord.getRecipient().getAddress().toString();
+    Cursor cursor = db_react.readReaction(read_database, timeStamp.toString());
+    Log.i("ClassType",messageRecord.getClass().getSimpleName());
+    Log.i("retrieveTimeSignal",timeStamp);
+    Log.i("retrieveCount", Integer.toString(cursor.getCount()));
+    if(cursor.getCount()==1 && messageRecord.getClass().getSimpleName().equals("SmsMessageRecord")){
+      Log.i("retrieveFound", "YES");
+      SmsMessageRecord message = (SmsMessageRecord)messageRecord;
+      cursor.moveToNext();
+      message.setReaction(cursor.getString(0));
+    }
+    else {
+      Log.i("retrieveFound", "NO");
+    }
 
+    Log.i("Body", messageRecord.getClass().toString()+" "+messageRecord.getBody());
     viewHolder.getView().bind(messageRecord,
                               Optional.fromNullable(previousRecord),
                               Optional.fromNullable(nextRecord),
@@ -211,7 +235,6 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
 
   @Override
   public ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-    long start = System.currentTimeMillis();
     final V itemView = ViewUtil.inflate(inflater, parent, getLayoutForViewType(viewType));
     itemView.setOnClickListener(view -> {
       if (clickListener != null) {
@@ -224,6 +247,7 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
       }
       return true;
     });
+    long start = System.currentTimeMillis();
     itemView.setEventListener(clickListener);
     Log.d(TAG, "Inflate time: " + (System.currentTimeMillis() - start));
     return new ViewHolder(itemView);

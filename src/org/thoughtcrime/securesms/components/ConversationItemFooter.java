@@ -15,8 +15,12 @@ import android.widget.TextView;
 
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.ReactionActivity;
+import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.model.MessageRecord;
+import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.permissions.Permissions;
 import org.thoughtcrime.securesms.service.ExpiringMessageManager;
 import org.thoughtcrime.securesms.util.DateUtils;
@@ -33,6 +37,8 @@ public class ConversationItemFooter extends LinearLayout {
   private ExpirationTimerView timerView;
   private ImageView           insecureIndicatorView;
   private DeliveryStatusView  deliveryStatusView;
+  private TextView            messageReaction;
+  private ImageView           messageReactionEmoji;
 
   public ConversationItemFooter(Context context) {
     super(context);
@@ -57,6 +63,8 @@ public class ConversationItemFooter extends LinearLayout {
     timerView             = findViewById(R.id.footer_expiration_timer);
     insecureIndicatorView = findViewById(R.id.footer_insecure_indicator);
     deliveryStatusView    = findViewById(R.id.footer_delivery_status);
+    messageReaction       = findViewById(R.id.footer_reaction);
+    messageReactionEmoji  = findViewById(R.id.footer_emoji_reaction);
 
     if (attrs != null) {
       TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ConversationItemFooter, 0, 0);
@@ -78,8 +86,30 @@ public class ConversationItemFooter extends LinearLayout {
     presentTimer(messageRecord);
     presentInsecureIndicator(messageRecord);
     presentDeliveryStatus(messageRecord);
+    presentReaction(messageRecord);
   }
-
+  public void setFooterReaction(MessageRecord messageRecord){
+    dateView.setVisibility(GONE);
+    simView.setVisibility(GONE);
+    timerView.setVisibility(GONE);
+    insecureIndicatorView.setVisibility(GONE);
+    deliveryStatusView.setVisibility(GONE);
+    messageReaction.setVisibility(GONE);
+    presentReaction(messageRecord);
+  }
+  public void presentReaction(MessageRecord messageRecord){
+    if(messageRecord.getClass().getSimpleName().equals("SmsMessageRecord")){
+      SmsMessageRecord message = (SmsMessageRecord)messageRecord;
+      if(message.hasReaction()){
+        Log.i("FooterReaction","Found reaction");
+        int emoji_id = ReactionUtil.reactionNumberToDrawableId(message.getReaction());
+        //messageReaction.setText(message.getReaction());
+        //messageReaction.setVisibility(VISIBLE);
+        messageReactionEmoji.setImageResource(emoji_id);
+        messageReactionEmoji.setVisibility(VISIBLE);
+      }
+    }
+  }
   public void setTextColor(int color) {
     dateView.setTextColor(color);
     simView.setTextColor(color);

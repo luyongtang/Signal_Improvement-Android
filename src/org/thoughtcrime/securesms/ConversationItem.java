@@ -62,6 +62,7 @@ import org.thoughtcrime.securesms.database.model.MediaMmsMessageRecord;
 import org.thoughtcrime.securesms.database.model.MessageRecord;
 import org.thoughtcrime.securesms.database.model.MmsMessageRecord;
 import org.thoughtcrime.securesms.database.model.Quote;
+import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
 import org.thoughtcrime.securesms.jobs.AttachmentDownloadJob;
 import org.thoughtcrime.securesms.jobs.MmsDownloadJob;
 import org.thoughtcrime.securesms.jobs.MmsSendJob;
@@ -678,7 +679,6 @@ public class ConversationItem extends LinearLayout
 
     private void setFooter(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> next, @NonNull Locale locale, boolean isGroupThread) {
         ViewUtil.updateLayoutParams(footer, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
         footer.setVisibility(GONE);
         if (sharedContactStub.resolved()) sharedContactStub.get().getFooter().setVisibility(GONE);
         if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().getFooter().setVisibility(GONE);
@@ -691,6 +691,11 @@ public class ConversationItem extends LinearLayout
             activeFooter.setVisibility(VISIBLE);
             activeFooter.setMessageRecord(current, locale);
         }
+        else if (current.getClass().getSimpleName().equals("SmsMessageRecord") && ((SmsMessageRecord)(messageRecord)).hasReaction()){
+            footer.setFooterReaction(messageRecord);
+            footer.setVisibility(VISIBLE);
+        }
+
     }
 
     private ConversationItemFooter getActiveFooter(@NonNull MessageRecord messageRecord) {
