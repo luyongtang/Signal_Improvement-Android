@@ -55,7 +55,7 @@ public class ReactionUtil {
         db_react.saveReaction(contentValues,read_database,write_database);
     }
     //Adapter method to radio id using reaction
-    public static int reactionStringToRadioButtonId(String reaction){
+    public int reactionStringToRadioButtonId(String reaction){
         int radio_type = -1;
         //Better code should exists instead of using switch case
         switch(reaction){
