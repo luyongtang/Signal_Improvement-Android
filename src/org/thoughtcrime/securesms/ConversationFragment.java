@@ -26,6 +26,8 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -113,6 +115,7 @@ public class ConversationFragment extends Fragment
 
   private ConversationFragmentListener listener;
 
+  private TextToSpeech                textToSpeech;
   private Recipient                   recipient;
   private long                        threadId;
   private long                        lastSeen;
@@ -136,6 +139,25 @@ public class ConversationFragment extends Fragment
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
     this.locale = (Locale) getArguments().getSerializable(PassphraseRequiredActionBarActivity.LOCALE_EXTRA);
+
+    textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+      @Override
+      public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS){
+          int result = textToSpeech.setLanguage(Locale.ENGLISH);
+
+          if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+            Log.d("Text To Speech", "LANGUAGE NOT SUPPORTED");
+
+          }else{
+            Log.d("Text To Speech", "IT WORRKSSSS");
+
+          }
+        }
+        Log.d("Text To Speech", "hELLO");
+
+      }
+    });
 
   }
 
@@ -366,6 +388,7 @@ public class ConversationFragment extends Fragment
       menu.findItem(R.id.menu_context_forward).setVisible(false);
       menu.findItem(R.id.menu_context_reply).setVisible(false);
       menu.findItem(R.id.menu_context_details).setVisible(false);
+      menu.findItem(R.id.menu_context_textToSpeech_message).setVisible(false);
       menu.findItem(R.id.menu_context_save_attachment).setVisible(false);
       menu.findItem(R.id.menu_context_resend).setVisible(false);
       menu.findItem(R.id.menu_context_star).setVisible(false);
@@ -587,6 +610,11 @@ public class ConversationFragment extends Fragment
 
         messageDbHelper.deleteMessage(database, ""+message.getId(), ""+threadId);
     }
+
+  private void handleTextToSpeechMessage(MessageRecord message){
+    textToSpeech.speak(message.getDisplayBody().toString(), TextToSpeech.QUEUE_FLUSH,null);
+
+  }
 
   private void handleForwardMessage(MessageRecord message) {
     Intent composeIntent = new Intent(getActivity(), ShareActivity.class);
@@ -1040,6 +1068,10 @@ public class ConversationFragment extends Fragment
           return true;
         case R.id.menu_context_delete_message:
           handleDeleteMessages(getListAdapter().getSelectedItems());
+          actionMode.finish();
+          return true;
+        case R.id.menu_context_textToSpeech_message:
+          handleTextToSpeechMessage(getSelectedMessageRecord());
           actionMode.finish();
           return true;
         case R.id.menu_context_unstar:
