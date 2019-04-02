@@ -46,7 +46,7 @@ public class CallLogDbHelper extends SQLiteOpenHelper {
     public Cursor readAllCallLog(SQLiteDatabase database) {
 
         String[] projections = {CallLogContract.MessageEntry.ADDRESS_CLOG, CallLogContract.MessageEntry.TYPE_CLOG, CallLogContract.MessageEntry.DATE_CLOG};
-        Cursor cursor = database.query(CallLogContract.MessageEntry.TABLE_NAME, projections, null, null, null, CallLogContract.MessageEntry.DATE_CLOG+" DESC", null);
+        Cursor cursor = database.query(CallLogContract.MessageEntry.TABLE_NAME, projections, null, null, null, null, null);
         return cursor;
     }
 
