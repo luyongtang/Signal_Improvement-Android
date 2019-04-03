@@ -1,13 +1,23 @@
 package org.thoughtcrime.securesms;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import org.thoughtcrime.securesms.components.NavigationBarFragment;
+import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.CallLogsActivity;
+import org.thoughtcrime.securesms.InviteActivity;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -16,6 +26,10 @@ import java.util.Date;
 public class CallLogsActivity extends AppCompatActivity {
 
     TextView display;
+    private static final String SELECTED_ITEM = "arg_selected_item";
+
+    private NavigationBarFragment mBottomNav;
+    private int mSelectedItem;
 
     //Get the bundle
     // Bundle bundle = getIntent().getExtras();
@@ -29,8 +43,30 @@ public class CallLogsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_logs);
-
         display = findViewById(R.id.debug_display);
+
+        BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.bottomNavigationView2);
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_bar_chats: {
+                        Intent intent = new Intent(CallLogsActivity.this, ConversationListActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case R.id.navigation_bar_settings: {
+                        Intent intent = new Intent(CallLogsActivity.this, ApplicationPreferencesActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+
+                }
+                return true;
+            }
+        });
+
+
 
     }
 
