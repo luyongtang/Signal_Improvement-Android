@@ -1,5 +1,10 @@
 package org.thoughtcrime.securesms.database;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
+import org.thoughtcrime.securesms.ReactMessageContract;
+import org.thoughtcrime.securesms.ReactMessageDbHelper;
 import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.util.LRUCache;
 
@@ -7,6 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EarlyReceiptCache {
+  private ReactMessageDbHelper db_react;
+  private SQLiteDatabase write_database;
+  private SQLiteDatabase read_database;
 
   private static final String TAG = EarlyReceiptCache.class.getSimpleName();
 
@@ -15,6 +23,7 @@ public class EarlyReceiptCache {
   public synchronized void increment(long timestamp, Address origin) {
     Log.i(TAG, this+"");
     Log.i(TAG, String.format("Early receipt: (%d, %s)", timestamp, origin.serialize()));
+
 
     Map<Address, Long> receipts = cache.get(timestamp);
 

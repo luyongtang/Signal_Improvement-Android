@@ -270,6 +270,7 @@ public class PushDecryptJob extends ContextJob {
 
         if      (message.isReadReceipt())     handleReadReceipt(content, message);
         else if (message.isDeliveryReceipt()) handleDeliveryReceipt(content, message);
+
       } else if (content.getTypingMessage().isPresent()) {
         handleTypingMessage(content, content.getTypingMessage().get());
       } else {
@@ -937,6 +938,9 @@ public class PushDecryptJob extends ContextJob {
   private void handleReadReceipt(@NonNull SignalServiceContent content,
                                  @NonNull SignalServiceReceiptMessage message)
   {
+    Log.i("EGLENREAD","passing by handleReadReceipt" );
+    Log.i("EGLENREAD",content.getDataMessage().toString() );
+    Log.i("EGLENREAD",message.toString());
     if (TextSecurePreferences.isReadReceiptsEnabled(context)) {
       for (long timestamp : message.getTimestamps()) {
         Log.i(TAG, String.format("Received encrypted read receipt: (XXXXX, %d)", timestamp));

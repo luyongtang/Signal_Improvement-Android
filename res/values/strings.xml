@@ -1257,6 +1257,7 @@
 
     <!-- conversation_context -->
     <string name="conversation_context__menu_message_details">Message details</string>
+    <string name="conversation_context_menu_textToSpeech_message">Text to Speech Message</string>
     <string name="conversation_context__menu_copy_text">Copy text</string>
     <string name="conversation_context__menu_star_message">Star Message</string>
     <string name="conversation_context__menu_unstar_message">Unstar Message</string>
@@ -1333,6 +1334,11 @@
     <string name="conversation_group_options__delivery">Delivery</string>
     <string name="conversation_group_options__conversation">Conversation</string>
     <string name="conversation_group_options__broadcast">Broadcast</string>
+
+    <!-- navigation_bar -->
+    <string name="navigation_bar__navigation_bar_call_logs">Call Logs</string>
+    <string name="navigation_bar__navigation_bar_chats">Chats</string>
+    <string name="navigation_bar__navigation_bar_settings">Settings</string>
 
     <!-- text_secure_normal -->
     <string name="text_secure_normal__menu_new_group">New group</string>
@@ -1494,5 +1500,11 @@
         <item>;)</item>
         <item>:p</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- call logs -->
+    <string name="call_logs">Call Log</string>
 
 </resources>

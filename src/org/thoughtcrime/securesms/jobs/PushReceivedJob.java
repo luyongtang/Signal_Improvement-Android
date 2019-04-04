@@ -50,6 +50,7 @@ public abstract class PushReceivedJob extends ContextJob {
         handleReceipt(envelope);
       } else if (envelope.isPreKeySignalMessage() || envelope.isSignalMessage() || envelope.isUnidentifiedSender()) {
         Log.i("Eglen","is MESSAGE");
+        Log.i("Eglen Handling", envelope.getLegacyMessage().toString());
         handleMessage(envelope);
       } else {
         Log.w(TAG, "Received envelope of unknown type: " + envelope.getType());

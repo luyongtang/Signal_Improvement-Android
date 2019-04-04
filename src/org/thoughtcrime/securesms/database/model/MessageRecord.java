@@ -76,7 +76,6 @@ public abstract class MessageRecord extends DisplayRecord {
     this.expireStarted       = expireStarted;
     this.unidentified        = unidentified;
   }
-
   public abstract boolean isMms();
   public abstract boolean isMmsNotification();
 

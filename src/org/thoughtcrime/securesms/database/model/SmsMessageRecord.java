@@ -37,6 +37,8 @@ import java.util.List;
  */
 
 public class SmsMessageRecord extends MessageRecord {
+  //Proper way to extend from SmsMessageRecord?
+  private String reaction;
 
   public SmsMessageRecord(Context context, long id,
                           String body, Recipient recipient,
@@ -53,8 +55,20 @@ public class SmsMessageRecord extends MessageRecord {
           dateSent, dateReceived, threadId, status, deliveryReceiptCount, type,
           mismatches, new LinkedList<>(), subscriptionId,
           expiresIn, expireStarted, readReceiptCount, unidentified);
+    reaction="";
   }
-
+  public void setReaction(String reaction){
+    this.reaction=reaction;
+  }
+  public boolean hasReaction(){
+    if(!reaction.equals("")){
+      return true;
+    }
+    return false;
+  }
+  public String getReaction(){
+    return reaction;
+  }
   public long getType() {
     return type;
   }

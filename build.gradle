@@ -520,7 +520,7 @@ task signProductionPlayRelease {
 
 task signProductionWebsiteRelease {
     doLast {
-        def  variant       = android.applicationVariants.find({ it.name.equals("websiteRelease") })
+        def variant = android.applicationVariants.find({ it.name.equals("websiteRelease") })
         File signedRelease = signProductionRelease(variant)
         assembleWebsiteDescriptor(variant, signedRelease);
     }

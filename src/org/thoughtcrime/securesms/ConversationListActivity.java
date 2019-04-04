@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.thoughtcrime.securesms.color.MaterialColor;
+import org.thoughtcrime.securesms.components.NavigationBarFragment;
 import org.thoughtcrime.securesms.components.RatingManager;
 import org.thoughtcrime.securesms.components.SearchToolbar;
 import org.thoughtcrime.securesms.contacts.avatars.ContactColors;
@@ -65,7 +66,7 @@ import org.whispersystems.libsignal.util.guava.Optional;
 import java.util.List;
 
 public class ConversationListActivity extends PassphraseRequiredActionBarActivity
-    implements ConversationListFragment.ConversationSelectedListener
+    implements ConversationListFragment.ConversationSelectedListener, NavigationBarFragment.OnFragmentInteractionListener
 {
   @SuppressWarnings("unused")
   private static final String TAG = ConversationListActivity.class.getSimpleName();
@@ -74,10 +75,12 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
   private final DynamicLanguage dynamicLanguage = new DynamicLanguage();
 
   private ConversationListFragment conversationListFragment;
+  private NavigationBarFragment    navigationBarFragment;
   private SearchFragment           searchFragment;
   private SearchToolbar            searchToolbar;
   private ImageView                searchAction;
   private ViewGroup                fragmentContainer;
+  private ViewGroup                navigationBarContainer;
 
   @Override
   protected void onPreCreate() {
@@ -96,6 +99,8 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     searchAction             = findViewById(R.id.search_action);
     fragmentContainer        = findViewById(R.id.fragment_container);
     conversationListFragment = initFragment(R.id.fragment_container, new ConversationListFragment(), dynamicLanguage.getCurrentLocale());
+    navigationBarContainer   = findViewById(R.id.conversation_list_navigation_bar_container);
+    navigationBarFragment    = initFragment(R.id.conversation_list_navigation_bar_container, new NavigationBarFragment());
 
     initializeSearchListener();
 
@@ -255,6 +260,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
   private void handleDisplaySettings() {
     Intent preferencesIntent = new Intent(this, ApplicationPreferencesActivity.class);
     startActivity(preferencesIntent);
+    overridePendingTransition(R.anim.stationary, R.anim.stationary);
   }
 
   private void handleClearPassphrase() {
@@ -289,5 +295,10 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     } catch (ActivityNotFoundException e) {
       Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
     }
+  }
+
+  @Override
+  public void onFragmentInteraction(Uri uri) {
+
   }
 }

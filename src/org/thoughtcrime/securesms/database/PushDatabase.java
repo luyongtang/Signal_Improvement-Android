@@ -41,12 +41,17 @@ public class PushDatabase extends Database {
 
   public long insert(@NonNull SignalServiceEnvelope envelope) {
     Optional<Long> messageId = find(envelope);
-
+    Log.i("EglenDatabase", "passing by insert");
     if (messageId.isPresent()) {
       return messageId.get();
     } else {
       ContentValues values = new ContentValues();
+      Log.i("EglenDatabase", envelope.getLegacyMessage().toString());
+      if(envelope.hasContent()){
+        Log.i("EglenDatabase", Base64.encodeBytes(envelope.getContent()));
+      }
       values.put(TYPE, envelope.getType());
+
       values.put(SOURCE, envelope.getSource());
       values.put(DEVICE_ID, envelope.getSourceDevice());
       values.put(LEGACY_MSG, envelope.hasLegacyMessage() ? Base64.encodeBytes(envelope.getLegacyMessage()) : "");

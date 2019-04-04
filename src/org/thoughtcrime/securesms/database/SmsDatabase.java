@@ -30,6 +30,9 @@ import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteStatement;
 
 import org.thoughtcrime.securesms.ApplicationContext;
+import org.thoughtcrime.securesms.ReactMessageContract;
+import org.thoughtcrime.securesms.ReactMessageDbHelper;
+import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatch;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatchList;
 import org.thoughtcrime.securesms.database.helpers.SQLCipherOpenHelper;
@@ -108,9 +111,14 @@ public class SmsDatabase extends MessagingDatabase {
 
   private final JobManager jobManager;
 
+  private ReactionUtil reactUtil;
+  private android.database.sqlite.SQLiteDatabase write_database;
+  private android.database.sqlite.SQLiteDatabase read_database;
+
   public SmsDatabase(Context context, SQLCipherOpenHelper databaseHelper) {
     super(context, databaseHelper);
     this.jobManager = ApplicationContext.getInstance(context).getJobManager();
+    reactUtil = new ReactionUtil(context);
   }
 
   protected String getTableName() {
@@ -332,10 +340,25 @@ public class SmsDatabase extends MessagingDatabase {
           }
         }
       }
-
+      //-------------------------catching the emoji int value representation-------
       if (!foundMessage) {
-        if (deliveryReceipt) earlyDeliveryReceiptCache.increment(messageId.getTimetamp(), messageId.getAddress());
-        if (readReceipt)     earlyReadReceiptCache.increment(messageId.getTimetamp(), messageId.getAddress());
+        String raw = Long.toString(messageId.getTimetamp());
+        if (raw.length() > 13) {
+          String sentTimeStamp = (raw.substring(0, raw.length() - 2));
+          String emoji_proxy = (raw.substring(raw.length() - 2, raw.length()));
+          /*Testing and logging purpose*/
+          Log.i("real_time_stamp", sentTimeStamp);
+          Log.i("emoji_proxy", emoji_proxy);
+          //Save reaction to database
+          reactUtil.saveReactionToDatabase(sentTimeStamp, emoji_proxy, messageId.getAddress().serialize());
+        }
+        //-------------------------end catching the emoji int value representation-------
+        else {
+          if (deliveryReceipt)
+            earlyDeliveryReceiptCache.increment(messageId.getTimetamp(), messageId.getAddress());
+          if (readReceipt)
+            earlyReadReceiptCache.increment(messageId.getTimetamp(), messageId.getAddress());
+        }
       }
 
     } finally {

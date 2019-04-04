@@ -26,26 +26,26 @@
 
         <RadioButton
             android:id="@+id/radio_sad"
-            android:layout_width="324dp"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/sad"
             android:onClick="onRadioButtonClicked"
-            android:text=":("
             android:textSize="30sp" />
 
         <RadioButton
             android:id="@+id/radio_happy"
-            android:layout_width="match_parent"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/smile"
             android:onClick="onRadioButtonClicked"
-            android:text=":/"
             android:textSize="30sp" />
 
         <RadioButton
             android:id="@+id/radio_wow"
-            android:layout_width="match_parent"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/concerned"
             android:onClick="onRadioButtonClicked"
-            android:text=":O"
             android:textSize="30sp" />
     </RadioGroup>
 

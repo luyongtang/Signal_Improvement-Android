@@ -124,6 +124,7 @@
     <attr name="menu_accept_icon" format="reference" />
     <attr name="menu_refresh_directory" format="reference" />
     <attr name="menu_copy_icon" format="reference" />
+    <attr name="menu_textToSpeech_icon" format="reference" />
     <attr name="menu_unstar_icon" format="reference" />
     <attr name="menu_star_icon" format="reference" />
     <attr name="menu_info_icon" format="reference" />

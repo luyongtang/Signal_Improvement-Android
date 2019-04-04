@@ -36,7 +36,22 @@ public class ReactMessageDbHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
 
     }
-
+    public void saveReaction(ContentValues contentValues, SQLiteDatabase readDatabase, SQLiteDatabase writeDatabase){
+        String date_time = contentValues.getAsString(ReactMessageContract.ReactionEntry.DATE_TIME);
+        String phone_number = contentValues.getAsString(ReactMessageContract.ReactionEntry.PHONE_NUMBER);
+        Cursor cursor = readReaction(readDatabase,date_time);
+        //New reaction being made
+        if(cursor.getCount()==0){
+            addReactionData(contentValues, readDatabase);
+        }
+        //Update previous reaction
+        else{
+            updateReactionData(contentValues, date_time, phone_number,writeDatabase);
+        }
+    }
+    public void updateReactionData(ContentValues contentValues, String date_time, String phone_number, SQLiteDatabase database){
+        database.update(ReactMessageContract.ReactionEntry.TABLE_NAME,contentValues,ReactMessageContract.ReactionEntry.DATE_TIME + "='" + date_time +"' and "+ReactMessageContract.ReactionEntry.PHONE_NUMBER+"='"+phone_number+"'",null);
+    }
     public void addReactionData(ContentValues contentValues, SQLiteDatabase database)
     {
         System.out.println("DbHelper Test");
@@ -48,7 +63,7 @@ public class ReactMessageDbHelper extends SQLiteOpenHelper {
     public Cursor readReaction(SQLiteDatabase database,String date_time)
     {
         String[] projections = {ReactMessageContract.ReactionEntry.REACTION, ReactMessageContract.ReactionEntry.DATE_TIME,ReactMessageContract.ReactionEntry.PHONE_NUMBER};
-        Cursor cursor = database.query(true,ReactMessageContract.ReactionEntry.TABLE_NAME, projections,ReactMessageContract.ReactionEntry.DATE_TIME + "=" + date_time,null, null, null, ReactMessageContract.ReactionEntry.REACTION+" DESC", null);
+        Cursor cursor = database.query(true,ReactMessageContract.ReactionEntry.TABLE_NAME, projections,ReactMessageContract.ReactionEntry.DATE_TIME + "='" + date_time+"'",null, null, null, ReactMessageContract.ReactionEntry.REACTION+" DESC", null);
         Log.d("readMessage", "Messages are retrieved successfully");
         return cursor;
     }

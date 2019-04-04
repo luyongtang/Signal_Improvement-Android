@@ -141,7 +141,7 @@ public class RecipientPreferenceActivity extends PassphraseRequiredActionBarActi
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.preference_fragment);
+    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.preferences_fragment);
     fragment.onActivityResult(requestCode, resultCode, data);
   }
 
@@ -240,7 +240,7 @@ public class RecipientPreferenceActivity extends PassphraseRequiredActionBarActi
 
     Bundle bundle = new Bundle();
     bundle.putParcelable(ADDRESS_EXTRA, address);
-    initFragment(R.id.preference_fragment, new RecipientPreferenceFragment(), null, bundle);
+    initFragment(R.id.preferences_fragment, new RecipientPreferenceFragment(), null, bundle);
   }
 
   @Override

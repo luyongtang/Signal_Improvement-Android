@@ -8,65 +8,84 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-
-import org.thoughtcrime.securesms.database.MmsSmsDatabase;
-import org.thoughtcrime.securesms.database.model.MessageRecord;
+import org.thoughtcrime.securesms.database.Address;
+import org.thoughtcrime.securesms.jobs.SendReadReceiptJob;
 import org.thoughtcrime.securesms.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReactionActivity extends AppCompatActivity {
-    TextView textView;
-    String messageId;
-    String timeStamp;
-    String phoneNumber;
+    private ReactionUtil reactUtil;
+    private TextView textView;
+    private String message;
+    private String sentTimeStamp;
+    private String reaction_timeStamp;
+    private String phoneNumber;
+    private RadioButton radioButton;
+    private ReactMessageDbHelper db_react;
+    private SQLiteDatabase write_database;
+    private SQLiteDatabase read_database;
+    private String address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.reaction);
-        textView=(TextView)findViewById(R.id.sample);
-        messageId = getIntent().getStringExtra("messages");
-        timeStamp = getIntent().getStringExtra("date_time");
+        //attributes setup
+        message = getIntent().getStringExtra("message");
+        sentTimeStamp = getIntent().getStringExtra("date_time");
         phoneNumber = getIntent().getStringExtra("phone_number");
-        //textView.setText(messageId);
-        Log.i("Eglen Cecaj",messageId);
-        Log.i("Eglen Cecaj",timeStamp);
-        Log.i("Eglen Cecaj",phoneNumber);
-
+        address = getIntent().getStringExtra("address_serialize");
+        // util setup
+        reactUtil = new ReactionUtil(getApplicationContext());
+        // Setup view attributes
+        textView=findViewById(R.id.sample);
+        textView.setText(message);
+        applyPreviousReactionOnView();
+        /*For logging purpose*/
+        Log.i("intent_loader",message);
+        Log.i("intent_loader", sentTimeStamp);
+        Log.i("intent_loader",phoneNumber);
     }
-
-    private void handleStoreReaction(){
-        ReactMessageDbHelper reactMessageDbHelper = new ReactMessageDbHelper(getApplicationContext());
-        SQLiteDatabase database = reactMessageDbHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(ReactMessageContract.ReactionEntry.DATE_TIME ,  timeStamp);
-        contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, phoneNumber);
-        contentValues.put(ReactMessageContract.ReactionEntry.REACTION , textView.getText().toString());
-
-
-        reactMessageDbHelper.addReactionData(contentValues,database);
+    private void handleSelectedReaction(String reaction){
+        //Send reaction
+        reactUtil.sendReactionToRecipient(sentTimeStamp, reaction, address, ReactionActivity.this);
+        // Save reaction to database
+        reactUtil.saveReactionToDatabase(sentTimeStamp, reaction, address);
+        //return to previous reaction
+        finish();
     }
-
+    private void applyPreviousReactionOnView(){
+        String reaction = reactUtil.getReactionForCurrentMessage(sentTimeStamp);
+        if(reaction!=null) {
+            int radioId = reactUtil.reactionStringToRadioButtonId(reaction);
+            if(radioId>-1){
+                radioButton = findViewById(radioId);
+                radioButton.setChecked(true);
+            }
+        }
+    }
+    // Radio click listener
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
+        String reaction="";
         // Check which radio button was clicked
         switch(view.getId()) {
-            case R.id.radio_happy:
-                if (checked)
-                    // Pirates are the best
-                    textView.setText(":)");
-                    break;
             case R.id.radio_sad:
                 if (checked)
-                    textView.setText(":(");
-                    break;
+                    reaction="10";
+                break;
+            case R.id.radio_happy:
+                if (checked)
+                    reaction="11";
+                break;
             case R.id.radio_wow:
                 if (checked)
-                    textView.setText(":O");
-                    break;
+                    reaction="12";
+                break;
         }
-        handleStoreReaction();
+        handleSelectedReaction(reaction);
     }
 }
