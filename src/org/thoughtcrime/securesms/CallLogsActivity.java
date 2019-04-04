@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.thoughtcrime.securesms.components.NavigationBarFragment;
 import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
 import org.thoughtcrime.securesms.ConversationListActivity;
 import org.thoughtcrime.securesms.CallLogsActivity;
@@ -28,9 +27,6 @@ public class CallLogsActivity extends AppCompatActivity {
     TextView display;
     private static final String SELECTED_ITEM = "arg_selected_item";
 
-    private NavigationBarFragment mBottomNav;
-    private int mSelectedItem;
-
     //Get the bundle
     // Bundle bundle = getIntent().getExtras();
 
@@ -43,9 +39,12 @@ public class CallLogsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_logs);
-        display = findViewById(R.id.debug_display);
+        display = findViewById(R.id.call_logs_text_view);
 
-        BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.bottomNavigationView2);
+        BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.call_logs_navigation_bar);
+
+        navigationView.setSelectedItemId(R.id.navigation_bar_call_logs);
+
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -53,11 +52,13 @@ public class CallLogsActivity extends AppCompatActivity {
                     case R.id.navigation_bar_chats: {
                         Intent intent = new Intent(CallLogsActivity.this, ConversationListActivity.class);
                         startActivity(intent);
+                        CallLogsActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
                         break;
                     }
                     case R.id.navigation_bar_settings: {
                         Intent intent = new Intent(CallLogsActivity.this, ApplicationPreferencesActivity.class);
                         startActivity(intent);
+                        CallLogsActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
                         break;
                     }
 
@@ -65,7 +66,6 @@ public class CallLogsActivity extends AppCompatActivity {
                 return true;
             }
         });
-
 
 
     }
