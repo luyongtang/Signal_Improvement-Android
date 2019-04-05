@@ -3,16 +3,19 @@ package org.thoughtcrime.securesms;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
 
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class ScheduledMessageUtil {
 
-    public static boolean sendScheduledMsg(String messageBody, Recipient recipient, Long threadId, Context context) {
+    public static HashMap sendScheduledMsg(String messageBody, Recipient recipient, Long threadId, Context context) {
         Calendar current = Calendar.getInstance();
         int year = current.get(Calendar.YEAR);
         int month = current.get(Calendar.MONTH);
@@ -27,36 +30,30 @@ public class ScheduledMessageUtil {
 
         long delay= calendar.getTimeInMillis() - System.currentTimeMillis();
 
-        boolean dateNull = DatePickerFragment.DATE_YEAR == 0;
-        boolean timeNull = TimePickerFragment.TIME_HOURS == 0;
+        Log.d("yongtang","year is: "+DatePickerFragment.DATE_YEAR);
+        Log.d("yongtang","month is: "+DatePickerFragment.DATE_MONTH);
+        Log.d("yongtang","day is: "+DatePickerFragment.DATE_DAY);
+        Log.d("yongtang","hour is: "+TimePickerFragment.TIME_HOURS);
+        Log.d("yongtang","minute is: "+TimePickerFragment.TIME_MINUTE);
+        boolean dateNull = (DatePickerFragment.DATE_YEAR == 0 && DatePickerFragment.DATE_MONTH == 0 && DatePickerFragment.DATE_DAY == 0);
+        boolean timeNull = (TimePickerFragment.TIME_HOURS == -1 && TimePickerFragment.TIME_MINUTE == 0);
         boolean msgNull = messageBody.isEmpty();
+        HashMap<String,Boolean> results = new HashMap<>();
+        results.put("dateNull",dateNull);
+        results.put("timeNull",timeNull);
+        results.put("msgNull",msgNull);
+        results.put("pastTime",false);
+        results.put("success",false);
 
         if (dateNull || timeNull || msgNull) {
+            return results;
+        }
+        if (delay <= 0) {
+            results.put("pastTime",true);
 
-            String alertMsg = "Please select the following: \n";
-            if(dateNull)
-                alertMsg = alertMsg.concat("Date\n");
-            if(timeNull)
-                alertMsg = alertMsg.concat("Time\n");
-            if(msgNull)
-                alertMsg = alertMsg.concat("Message\n");
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage(alertMsg);
-            AlertDialog alert = builder.create();
-            alert.show();
-
-        } else if (delay <= 0) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Time must be in the future");
-            AlertDialog alert = builder.create();
-            alert.show();
-
-        } else {
-
+        }
+        else {
             Handler handler = new Handler();
-
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -66,12 +63,9 @@ public class ScheduledMessageUtil {
                     MessageSender.send(context, message, threadId, false, null);
                 }
             }, delay);
-
-            return true;
-
+            results.put("success",true);
         }
 
-        return false;
-
+        return results;
     }
 }
