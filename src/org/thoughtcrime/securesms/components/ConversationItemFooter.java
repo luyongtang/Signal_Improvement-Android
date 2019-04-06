@@ -102,9 +102,12 @@ public class ConversationItemFooter extends LinearLayout {
       SmsMessageRecord message = (SmsMessageRecord)messageRecord;
       if(message.hasReaction()){
         Log.i("FooterReaction","Found reaction");
+
         int emoji_id = ReactionUtil.reactionNumberToDrawableId(message.getReaction());
         //messageReaction.setText(message.getReaction());
         //messageReaction.setVisibility(VISIBLE);
+        Log.e("ReactionError","RAW: "+message.getReaction());
+        Log.e("ReactionError","Integer: "+Integer.toString(emoji_id));
         messageReactionEmoji.setImageResource(emoji_id);
         messageReactionEmoji.setVisibility(VISIBLE);
       }
