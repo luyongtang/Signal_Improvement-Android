@@ -25,6 +25,7 @@ public class ReactionUtil {
         db_react = new ReactMessageDbHelper(context);
         write_database = db_react.getWritableDatabase();
         read_database = db_react.getReadableDatabase();
+
     }
     //Retrieve reaction according to the time stamp
     public String getReactionForCurrentMessage(String sentTimeStamp){
@@ -53,6 +54,9 @@ public class ReactionUtil {
         contentValues.put(ReactMessageContract.ReactionEntry.REACTION , reaction);
         contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, phoneNumber);
         db_react.saveReaction(contentValues,read_database,write_database);
+    }
+    public void removeReaction(String sentTimeStamp){
+        db_react.deleteReaction(sentTimeStamp, write_database);
     }
     //Adapter method to radio id using reaction
     public int reactionStringToRadioButtonId(String reaction){

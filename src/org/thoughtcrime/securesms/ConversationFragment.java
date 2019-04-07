@@ -650,10 +650,8 @@ public class ConversationFragment extends Fragment
 
     return new ConversationLoader(getActivity(), threadId, offset, limit, lastSeen);
   }
-
   @Override
-  public void
-          (Loader<Cursor> cursorLoader, Cursor cursor) {
+  public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
     long loadTime = System.currentTimeMillis() - loaderStartTime;
     int  count    = cursor.getCount();
     Log.i(TAG, "onLoadFinished - took " + loadTime + " ms to load a cursor of size " + count);

@@ -21,6 +21,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -30,6 +32,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteStatement;
 
 import org.thoughtcrime.securesms.ApplicationContext;
+import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.ReactMessageContract;
 import org.thoughtcrime.securesms.ReactMessageDbHelper;
 import org.thoughtcrime.securesms.ReactionUtil;
@@ -315,10 +318,10 @@ public class SmsDatabase extends MessagingDatabase {
     Cursor         cursor       = null;
     boolean        foundMessage = false;
     String         rawTimeStamp = Long.toString(messageId.getTimetamp());
-    boolean        isReaction   = false;
+    boolean        isSetOrUpdateReaction   = false;
     String         emojiProxy   = "";
     if (rawTimeStamp.length() > 13) {
-      isReaction = true;
+      isSetOrUpdateReaction = true;
       //Do not change the order of the following two lines
       emojiProxy = (rawTimeStamp.substring(rawTimeStamp.length() - 2, rawTimeStamp.length()));
       rawTimeStamp = (rawTimeStamp.substring(0, rawTimeStamp.length() - 2));
@@ -330,12 +333,20 @@ public class SmsDatabase extends MessagingDatabase {
 
       while (cursor.moveToNext()) {
         long threadId = cursor.getLong(cursor.getColumnIndexOrThrow(THREAD_ID));
-        if(isReaction){
-          /*Testing and logging purpose*/
-          Log.i("real_time_stamp", rawTimeStamp);
-          Log.i("emoji_proxy", emojiProxy);
-          //Save reaction to database
-          reactUtil.saveReactionToDatabase(rawTimeStamp, emojiProxy, messageId.getAddress().serialize());
+        if(isSetOrUpdateReaction){
+          if (emojiProxy.equals("01")){
+            /*Testing and logging purpose*/
+            Log.i("Refresh","Removal Reaction");
+            //Remove reaction from database
+            reactUtil.removeReaction(rawTimeStamp);
+          }
+          else{
+            /*Testing and logging purpose*/
+            Log.i("real_time_stamp", rawTimeStamp);
+            Log.i("emoji_proxy", emojiProxy);
+            //Save reaction to database
+            reactUtil.saveReactionToDatabase(rawTimeStamp, emojiProxy, messageId.getAddress().serialize());
+          }
           notifyConversationListeners(threadId);
         }
         else if (Types.isOutgoingMessageType(cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)))) {

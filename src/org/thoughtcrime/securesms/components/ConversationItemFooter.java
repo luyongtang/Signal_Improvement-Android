@@ -113,6 +113,10 @@ public class ConversationItemFooter extends LinearLayout {
       }
     }
   }
+  public void setNoReaction(){
+    messageReactionEmoji.setImageResource(0);
+    messageReactionEmoji.setVisibility(GONE);
+  }
   public void setTextColor(int color) {
     dateView.setTextColor(color);
     simView.setTextColor(color);
