@@ -35,6 +35,7 @@ import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.ReactMessageContract;
 import org.thoughtcrime.securesms.ReactMessageDbHelper;
+import org.thoughtcrime.securesms.ReactionNotification;
 import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatch;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatchList;
@@ -346,6 +347,8 @@ public class SmsDatabase extends MessagingDatabase {
             Log.i("emoji_proxy", emojiProxy);
             //Save reaction to database
             reactUtil.saveReactionToDatabase(rawTimeStamp, emojiProxy, messageId.getAddress().serialize());
+            //Reaction Notification
+            ReactionNotification.pushApplicableReactionNotification(context,messageId.getAddress(), cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)),threadId, emojiProxy);
           }
           notifyConversationListeners(threadId);
         }
