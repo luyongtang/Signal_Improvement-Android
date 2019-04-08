@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.TooltipCompat;
 import android.text.TextUtils;
@@ -39,7 +40,6 @@ import android.widget.Toast;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.thoughtcrime.securesms.color.MaterialColor;
-import org.thoughtcrime.securesms.components.NavigationBarFragment;
 import org.thoughtcrime.securesms.components.RatingManager;
 import org.thoughtcrime.securesms.components.SearchToolbar;
 import org.thoughtcrime.securesms.contacts.avatars.ContactColors;
@@ -66,7 +66,7 @@ import org.whispersystems.libsignal.util.guava.Optional;
 import java.util.List;
 
 public class ConversationListActivity extends PassphraseRequiredActionBarActivity
-    implements ConversationListFragment.ConversationSelectedListener, NavigationBarFragment.OnFragmentInteractionListener
+    implements ConversationListFragment.ConversationSelectedListener
 {
   @SuppressWarnings("unused")
   private static final String TAG = ConversationListActivity.class.getSimpleName();
@@ -75,12 +75,11 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
   private final DynamicLanguage dynamicLanguage = new DynamicLanguage();
 
   private ConversationListFragment conversationListFragment;
-  private NavigationBarFragment    navigationBarFragment;
   private SearchFragment           searchFragment;
   private SearchToolbar            searchToolbar;
   private ImageView                searchAction;
   private ViewGroup                fragmentContainer;
-  private ViewGroup                navigationBarContainer;
+  private BottomNavigationView     navigationView;
 
   @Override
   protected void onPreCreate() {
@@ -99,8 +98,30 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     searchAction             = findViewById(R.id.search_action);
     fragmentContainer        = findViewById(R.id.fragment_container);
     conversationListFragment = initFragment(R.id.fragment_container, new ConversationListFragment(), dynamicLanguage.getCurrentLocale());
-    navigationBarContainer   = findViewById(R.id.conversation_list_navigation_bar_container);
-    navigationBarFragment    = initFragment(R.id.conversation_list_navigation_bar_container, new NavigationBarFragment());
+
+    navigationView = (BottomNavigationView)findViewById(R.id.conversation_list_navigation_bar);
+
+    navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+          case R.id.navigation_bar_call_logs: {
+            Intent intent = new Intent(ConversationListActivity.this, CallLogsActivity.class);
+            startActivity(intent);
+            ConversationListActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
+            break;
+          }
+          case R.id.navigation_bar_settings: {
+            Intent intent = new Intent(ConversationListActivity.this, ApplicationPreferencesActivity.class);
+            startActivity(intent);
+            ConversationListActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
+            break;
+          }
+
+        }
+        return true;
+      }
+    });
 
     initializeSearchListener();
 
@@ -119,6 +140,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     LifecycleBoundTask.run(getLifecycle(), () -> {
       return Recipient.from(this, Address.fromSerialized(TextSecurePreferences.getLocalNumber(this)), false);
     }, this::initializeProfileIcon);
+    navigationView.setSelectedItemId(R.id.navigation_bar_chats);
   }
 
   @Override
@@ -136,6 +158,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     menu.findItem(R.id.menu_clear_passphrase).setVisible(!TextSecurePreferences.isPasswordDisabled(this));
 
     super.onPrepareOptionsMenu(menu);
+    navigationView.setSelectedItemId(R.id.navigation_bar_chats);
     return true;
   }
 
@@ -295,10 +318,5 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     } catch (ActivityNotFoundException e) {
       Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
     }
-  }
-
-  @Override
-  public void onFragmentInteraction(Uri uri) {
-
   }
 }
