@@ -678,7 +678,6 @@ public class ConversationFragment extends Fragment
 
     return new ConversationLoader(getActivity(), threadId, offset, limit, lastSeen);
   }
-
   @Override
   public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
     long loadTime = System.currentTimeMillis() - loaderStartTime;

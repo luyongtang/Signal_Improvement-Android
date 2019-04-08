@@ -67,11 +67,10 @@ public class ReactMessageDbHelper extends SQLiteOpenHelper {
         Log.d("readMessage", "Messages are retrieved successfully");
         return cursor;
     }
-
     // For future use
-    public void deleteReaction(SQLiteDatabase database, String msgId, String threadId)
+    public void deleteReaction(String sentTimeStamp,SQLiteDatabase database)
     {
-        String selection = ReactMessageContract.ReactionEntry.DATE_TIME+" = "+msgId+" AND "+ReactMessageContract.ReactionEntry.PHONE_NUMBER+" = "+threadId;
+        String selection = ReactMessageContract.ReactionEntry.DATE_TIME+" = "+sentTimeStamp;
         Log.d("deleteMessage", selection);
         database.delete(ReactMessageContract.ReactionEntry.TABLE_NAME, selection,null);
         Log.d("deleteMessage", "Messages are removed successfully");
