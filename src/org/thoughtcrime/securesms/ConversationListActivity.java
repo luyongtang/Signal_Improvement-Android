@@ -209,12 +209,13 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     super.onOptionsItemSelected(item);
 
     switch (item.getItemId()) {
-    case R.id.menu_new_group:         createGroup();           return true;
-    case R.id.menu_settings:          handleDisplaySettings(); return true;
-    case R.id.menu_clear_passphrase:  handleClearPassphrase(); return true;
-    case R.id.menu_mark_all_read:     handleMarkAllRead();     return true;
-    case R.id.menu_invite:            handleInvite();          return true;
-    case R.id.menu_help:              handleHelp();            return true;
+    case R.id.menu_new_group:         createGroup();            return true;
+    case R.id.menu_settings:          handleDisplaySettings();  return true;
+    case R.id.menu_clear_passphrase:  handleClearPassphrase();  return true;
+    case R.id.menu_mark_all_read:     handleMarkAllRead();      return true;
+    case R.id.menu_invite:            handleInvite();           return true;
+    case R.id.menu_help:              handleHelp();             return true;
+    case R.id.menu_broadcast_message: handleBroadcastMessage(); return true;
     }
 
     return false;
@@ -295,6 +296,10 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     } catch (ActivityNotFoundException e) {
       Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
     }
+  }
+
+  private void handleBroadcastMessage() {
+    startActivity(new Intent(this, BroadcastMessageActivity.class));
   }
 
   @Override

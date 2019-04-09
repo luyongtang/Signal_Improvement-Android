@@ -106,6 +106,7 @@
         <activity android:name=".CallLogsActivity"></activity>
         <activity android:name=".StarredMessageActivity" />
         <activity android:name=".ScheduledMessageActivity" />
+        <activity android:name=".BroadcastMessageActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

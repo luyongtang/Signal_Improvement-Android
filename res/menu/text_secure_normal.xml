@@ -19,4 +19,7 @@
     <item android:title="@string/text_secure_normal__help"
           android:id="@+id/menu_help"/>
 
+    <item android:title="@string/text_secure_special__broadcast_message"
+        android:id="@+id/menu_broadcast_message"/>
+
 </menu>
