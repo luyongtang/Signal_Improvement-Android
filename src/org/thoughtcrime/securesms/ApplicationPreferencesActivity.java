@@ -27,15 +27,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.preference.Preference;
+import android.view.MenuItem;
 
-import org.thoughtcrime.securesms.components.NavigationBarFragment;
 import org.thoughtcrime.securesms.preferences.AdvancedPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AnalyticsPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.CustomizationPreferenceFragment;
@@ -61,7 +63,7 @@ import org.thoughtcrime.securesms.util.TextSecurePreferences;
  */
 
 public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarActivity
-    implements SharedPreferences.OnSharedPreferenceChangeListener, NavigationBarFragment.OnFragmentInteractionListener
+    implements SharedPreferences.OnSharedPreferenceChangeListener
 {
   @SuppressWarnings("unused")
   private static final String TAG = ApplicationPreferencesActivity.class.getSimpleName();
@@ -93,7 +95,36 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
     this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     setContentView(R.layout.application_preference_activity);
 
-    initFragment(R.id.application_preference_navigation_bar_container, new NavigationBarFragment());
+    BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.application_preference_navigation_bar);
+
+    navigationView.setSelectedItemId(R.id.navigation_bar_settings);
+
+    navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+          case R.id.navigation_bar_call_logs: {
+            Intent intent = new Intent(ApplicationPreferencesActivity.this, CallLogsActivity.class);
+            startActivity(intent);
+            ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
+            break;
+          }
+          case R.id.navigation_bar_chats: {
+            Intent intent = new Intent(ApplicationPreferencesActivity.this, ConversationListActivity.class);
+            startActivity(intent);
+            ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
+            break;
+          }
+          case R.id.navigation_bar_settings: {
+            Intent intent = new Intent(ApplicationPreferencesActivity.this, ApplicationPreferencesActivity.class);
+            startActivity(intent);
+            ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
+            break;
+          }
+        }
+        return true;
+      }
+    });
 
     if (getIntent() != null && getIntent().getCategories() != null && getIntent().getCategories().contains("android.intent.category.NOTIFICATION_PREFERENCES")) {
       initFragment(android.R.id.content, new NotificationsPreferenceFragment());
@@ -159,9 +190,6 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
       finish();
     }
   }
-
-  @Override
-  public void onFragmentInteraction(Uri uri){}
 
   public static class ApplicationPreferenceFragment extends CorrectedPreferenceFragment {
 

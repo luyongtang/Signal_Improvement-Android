@@ -21,6 +21,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -30,8 +32,10 @@ import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteStatement;
 
 import org.thoughtcrime.securesms.ApplicationContext;
+import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.ReactMessageContract;
 import org.thoughtcrime.securesms.ReactMessageDbHelper;
+import org.thoughtcrime.securesms.ReactionNotification;
 import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatch;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatchList;
@@ -314,20 +318,46 @@ public class SmsDatabase extends MessagingDatabase {
     SQLiteDatabase database     = databaseHelper.getWritableDatabase();
     Cursor         cursor       = null;
     boolean        foundMessage = false;
-
+    String         rawTimeStamp = Long.toString(messageId.getTimetamp());
+    boolean        isSetOrUpdateReaction   = false;
+    String         emojiProxy   = "";
+    if (rawTimeStamp.length() > 13) {
+      isSetOrUpdateReaction = true;
+      //Do not change the order of the following two lines
+      emojiProxy = (rawTimeStamp.substring(rawTimeStamp.length() - 2, rawTimeStamp.length()));
+      rawTimeStamp = (rawTimeStamp.substring(0, rawTimeStamp.length() - 2));
+    }
     try {
       cursor = database.query(TABLE_NAME, new String[] {ID, THREAD_ID, ADDRESS, TYPE},
-                              DATE_SENT + " = ?", new String[] {String.valueOf(messageId.getTimetamp())},
+                              DATE_SENT + " = ?", new String[] {String.valueOf(rawTimeStamp)},
                               null, null, null, null);
 
       while (cursor.moveToNext()) {
-        if (Types.isOutgoingMessageType(cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)))) {
+        long threadId = cursor.getLong(cursor.getColumnIndexOrThrow(THREAD_ID));
+        if(isSetOrUpdateReaction){
+          if (emojiProxy.equals("01")){
+            /*Testing and logging purpose*/
+            Log.i("Refresh","Removal Reaction");
+            //Remove reaction from database
+            reactUtil.removeReaction(rawTimeStamp);
+          }
+          else{
+            /*Testing and logging purpose*/
+            Log.i("real_time_stamp", rawTimeStamp);
+            Log.i("emoji_proxy", emojiProxy);
+            //Save reaction to database
+            reactUtil.saveReactionToDatabase(rawTimeStamp, emojiProxy, messageId.getAddress().serialize());
+            //Reaction Notification
+            ReactionNotification.pushApplicableReactionNotification(context,messageId.getAddress(), cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)),threadId, emojiProxy);
+          }
+          notifyConversationListeners(threadId);
+        }
+        else if (Types.isOutgoingMessageType(cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)))) {
           Address theirAddress = messageId.getAddress();
           Address ourAddress   = Address.fromSerialized(cursor.getString(cursor.getColumnIndexOrThrow(ADDRESS)));
           String  columnName   = deliveryReceipt ? DELIVERY_RECEIPT_COUNT : READ_RECEIPT_COUNT;
 
           if (ourAddress.equals(theirAddress)) {
-            long threadId = cursor.getLong(cursor.getColumnIndexOrThrow(THREAD_ID));
 
             database.execSQL("UPDATE " + TABLE_NAME +
                              " SET " + columnName + " = " + columnName + " + 1 WHERE " +
@@ -335,6 +365,7 @@ public class SmsDatabase extends MessagingDatabase {
                              new String[] {String.valueOf(cursor.getLong(cursor.getColumnIndexOrThrow(ID)))});
 
             DatabaseFactory.getThreadDatabase(context).update(threadId, false);
+            Log.i("loadInfo","Passing BY");
             notifyConversationListeners(threadId);
             foundMessage = true;
           }
@@ -342,23 +373,19 @@ public class SmsDatabase extends MessagingDatabase {
       }
       //-------------------------catching the emoji int value representation-------
       if (!foundMessage) {
+        /*
         String raw = Long.toString(messageId.getTimetamp());
         if (raw.length() > 13) {
           String sentTimeStamp = (raw.substring(0, raw.length() - 2));
           String emoji_proxy = (raw.substring(raw.length() - 2, raw.length()));
-          /*Testing and logging purpose*/
-          Log.i("real_time_stamp", sentTimeStamp);
-          Log.i("emoji_proxy", emoji_proxy);
-          //Save reaction to database
-          reactUtil.saveReactionToDatabase(sentTimeStamp, emoji_proxy, messageId.getAddress().serialize());
         }
         //-------------------------end catching the emoji int value representation-------
-        else {
+        else {*/
           if (deliveryReceipt)
             earlyDeliveryReceiptCache.increment(messageId.getTimetamp(), messageId.getAddress());
           if (readReceipt)
             earlyReadReceiptCache.increment(messageId.getTimetamp(), messageId.getAddress());
-        }
+        //}
       }
 
     } finally {
