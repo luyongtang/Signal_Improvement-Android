@@ -258,6 +258,8 @@ public class ScheduledMessagesUITests {
 
     @Test
     public void sendMessageTest(){
+        Calendar current = Calendar.getInstance();
+        int millies = current.get(Calendar.MILLISECOND);
         onView(withContentDescription("New conversation")).perform(click());
         SystemClock.sleep(1000);
         onView(withId(R.id.search_view)).perform(typeText("5145493505"));
@@ -270,7 +272,7 @@ public class ScheduledMessagesUITests {
         SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
         SystemClock.sleep(1000);
-        onView(withId(R.id.scheduled_body)).perform(typeText("Hey Eglen from UI test"));
+        onView(withId(R.id.scheduled_body)).perform(typeText("Hey Eglen from UI test"+millies));
         SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
         SystemClock.sleep(1000);
@@ -278,7 +280,6 @@ public class ScheduledMessagesUITests {
         SystemClock.sleep(1000);
         onView(withText("Pick Time")).perform(click());
         SystemClock.sleep(1000);
-        Calendar current = Calendar.getInstance();
         int hour = current.get(Calendar.HOUR_OF_DAY);
         int min = current.get(Calendar.MINUTE);
         SystemClock.sleep(1000);
@@ -288,6 +289,6 @@ public class ScheduledMessagesUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(90000);
-        onView(withText("Hey Eglen from UI test")).check(matches(isDisplayed()));
+        onView(withText("Hey Eglen from UI test"+millies)).check(matches(isDisplayed()));
     }
 }
