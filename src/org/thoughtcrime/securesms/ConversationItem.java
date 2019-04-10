@@ -680,6 +680,7 @@ public class ConversationItem extends LinearLayout
     private void setFooter(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> next, @NonNull Locale locale, boolean isGroupThread) {
         ViewUtil.updateLayoutParams(footer, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         footer.setVisibility(GONE);
+        footer.setNoReaction();
         if (sharedContactStub.resolved()) sharedContactStub.get().getFooter().setVisibility(GONE);
         if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().getFooter().setVisibility(GONE);
 
@@ -695,7 +696,6 @@ public class ConversationItem extends LinearLayout
             footer.setFooterReaction(messageRecord);
             footer.setVisibility(VISIBLE);
         }
-
     }
 
     private ConversationItemFooter getActiveFooter(@NonNull MessageRecord messageRecord) {

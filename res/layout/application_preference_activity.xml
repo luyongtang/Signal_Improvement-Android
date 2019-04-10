@@ -11,13 +11,18 @@
     <FrameLayout
         android:id="@+id/preferences_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp" />
 
-    <FrameLayout
-        android:id="@+id/application_preference_navigation_bar_container"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/application_preference_navigation_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginTop="-55dp"
+        android:background="@color/blue_500"
         android:layout_below="@id/preferences_fragment"
-        android:layout_marginTop="-55dp" />
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/navigation_bar_context" />
 
 </RelativeLayout>
