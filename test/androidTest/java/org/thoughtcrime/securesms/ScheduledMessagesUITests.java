@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import java.util.Calendar;
 
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -31,135 +32,262 @@ import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class ScheduledMessagesUITests {
     @Rule
-    //In order to run those tests, an existing conversation with +15146556003 is required
     public ActivityTestRule<ConversationListActivity> myActivity = new ActivityTestRule<>(ConversationListActivity.class);
 
     @Test
     public void pickDateInPast_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("2019")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("2018")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
-        onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Date must be in the future")).check(matches(isDisplayed()));
     }
 
     @Test
     public void pickDateInFuture_ExpectNoError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("2019")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("2020")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Date must be in the future")).check(doesNotExist());
     }
 
     @Test
     public void emptyMessage_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Time")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nMessage\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void emptyTime_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withId(R.id.scheduled_body)).perform(typeText("Hello"));
+        SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nTime\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void emptyDate_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withId(R.id.scheduled_body)).perform(typeText("Hello"));
+        SystemClock.sleep(1000);
         onView(withText("Pick Time")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nDate\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void emptyTimeAndMessage_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nTime\nMessage\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void emptyDateAndMessage_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Time")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nDate\nMessage\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void emptyTimeAndMessageAndDate_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nDate\nTime\nMessage\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void emptyTimeAndDate_ExpectError(){
-        onView(withText("+15146556003")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
+        SystemClock.sleep(1000);
         onView(withId(R.id.scheduled_body)).perform(typeText("Hello"));
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Please select the following: \nDate\nTime\n")).check(matches(isDisplayed()));
     }
 
     @Test
     public void sendMessageTest(){
-        onView(withText("Eglen")).perform(click());
+        onView(withContentDescription("New conversation")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.search_view)).perform(typeText("5145493505"));
+        SystemClock.sleep(1000);
+        onView(withText("New message to...")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withContentDescription("More options")).perform(closeSoftKeyboard());
+        SystemClock.sleep(1000);
         onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Scheduled message")).perform(click());
-        onView(withId(R.id.scheduled_body)).perform(typeText("Hey Eglen"));
+        SystemClock.sleep(1000);
+        onView(withId(R.id.scheduled_body)).perform(typeText("Hey Eglen from UI test"));
+        SystemClock.sleep(1000);
         onView(withText("Pick Date")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("Pick Time")).perform(click());
+        SystemClock.sleep(1000);
         Calendar current = Calendar.getInstance();
         int hour = current.get(Calendar.HOUR_OF_DAY);
         int min = current.get(Calendar.MINUTE);
+        SystemClock.sleep(1000);
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(hour, ++min));
+        SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
+        SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(90000);
-        onView(withText("Hey Eglen")).check(matches(isDisplayed()));
+        onView(withText("Hey Eglen from UI test")).check(matches(isDisplayed()));
     }
 }
