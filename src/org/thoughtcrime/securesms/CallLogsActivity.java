@@ -72,6 +72,8 @@ public class CallLogsActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 emptyCallLogs();
+                finish();
+                startActivity(getIntent());
             }
         });
 
