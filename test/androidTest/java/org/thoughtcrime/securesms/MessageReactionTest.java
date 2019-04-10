@@ -23,6 +23,8 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -30,19 +32,15 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MessageReactionTest {
 
     @Rule
-    public ActivityTestRule<ConversationListActivity> mActivityTestRule = new ActivityTestRule<>(ConversationListActivity.class);
+    public ActivityTestRule<ConversationListActivity> myActivity = new ActivityTestRule<>(ConversationListActivity.class);
 
-    @Rule
-    public GrantPermissionRule mGrantPermissionRule =
-            GrantPermissionRule.grant(
-                    "android.permission.READ_EXTERNAL_STORAGE",
-                    "android.permission.WRITE_EXTERNAL_STORAGE");
 
     @Test
     public void messageReactionTest() {
@@ -56,7 +54,7 @@ public class MessageReactionTest {
             e.printStackTrace();
         }
 
-        ViewInteraction clickOnText = onView(withText("+15144029057"));
+        ViewInteraction clickOnText = onView(withText("+15145493505"));
         clickOnText.perform(click());
 
         ViewInteraction composeText2 = onView(
@@ -132,6 +130,9 @@ public class MessageReactionTest {
             e.printStackTrace();
         }
 
+        //checks that the message has no reaction
+        onView(withId(R.id.removeReaction)).check(matches(not(isDisplayed())));
+
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.radio_sad),
                         childAtPosition(
@@ -143,9 +144,20 @@ public class MessageReactionTest {
                         isDisplayed()));
         appCompatRadioButton.perform(click());
 
-//        // Verify
-//        ViewInteraction imageView = onView(withText("I love Mikeez"));
-//        imageView.check(matches(withId(emoji_reaction_sad)));
+
+        //checks if the reaction is displayed
+        onView(withId(R.id.footer_emoji_reaction)).check(matches(isDisplayed()));
+
+        emojiTextView.perform(longClick());
+        actionMenuItemView.perform(click());
+
+        //the Below line checks thaat the button "removeReaction" is displayed so the reaction to the message exists
+        onView(withId(R.id.removeReaction)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.removeReaction)).perform(click());
+        onView(withId(R.id.footer_emoji_reaction)).check(matches(isDisplayed()));
+
+
     }
 
 

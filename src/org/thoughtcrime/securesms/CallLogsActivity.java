@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -67,6 +68,15 @@ public class CallLogsActivity extends AppCompatActivity {
             }
         });
 
+        final Button button = findViewById(R.id.button5);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                emptyCallLogs();
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
 
     }
 
@@ -93,6 +103,16 @@ public class CallLogsActivity extends AppCompatActivity {
         else {
             display.setText(logs);
         }
+
+        callLogDbHelper.close();
+    }
+
+    private void emptyCallLogs()
+    {
+        CallLogDbHelper callLogDbHelper = new CallLogDbHelper(this);
+        SQLiteDatabase database_write = callLogDbHelper.getWritableDatabase();
+
+        callLogDbHelper.deleteAllCallLogs(database_write);
 
         callLogDbHelper.close();
     }
