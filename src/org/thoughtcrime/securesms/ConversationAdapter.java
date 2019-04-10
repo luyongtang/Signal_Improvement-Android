@@ -202,7 +202,6 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
     MessageRecord nextRecord      = adapterPosition > 0 && !isHeaderPosition(adapterPosition - 1) ? getRecordForPositionOrThrow(adapterPosition - 1) : null;
     Long timeStampL = (messageRecord.getDateSent());
     String timeStamp = timeStampL.toString();
-    String address = messageRecord.getRecipient().getAddress().toString();
     Cursor cursor = db_react.readReaction(read_database, timeStamp);
     Log.i("ClassType",messageRecord.getClass().getSimpleName());
     Log.i("retrieveTimeSignal",timeStamp);

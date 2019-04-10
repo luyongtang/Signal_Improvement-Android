@@ -3,11 +3,6 @@ package org.thoughtcrime.securesms.util;
 import android.content.Context;
 
 public class DynamicBubbleBody {
-    private String currentBubbleColor;
-
-    public void onCreate(Context context) {
-        currentBubbleColor = getSelectedBubbleColor(context);
-    }
 
     /*public void onResume(Activity activity) {
         if (currentBubbleColor != getSelectedBubbleColor(activity)) {

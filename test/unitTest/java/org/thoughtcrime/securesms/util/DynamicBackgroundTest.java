@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class DynamicBackgroundTest {
 
-    @Test
-    public void onResume() {
-    }
+//    @Test
+//    public void onResume() {
+//    }
 }
