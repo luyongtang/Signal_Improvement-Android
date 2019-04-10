@@ -89,7 +89,6 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
             if(msgNull)
                 alertMsg = alertMsg.concat("\nMessage");
 
-            alertMsg.concat(".");
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(alertMsg);
             AlertDialog alert = builder.create();
