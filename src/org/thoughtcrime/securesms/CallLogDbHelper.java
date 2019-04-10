@@ -58,5 +58,12 @@ public class CallLogDbHelper extends SQLiteOpenHelper {
         Log.i("CallLogDbHelper", "A call log is deleted");
     }
 
+    // used for testing
+    public void deleteAllCallLogs(SQLiteDatabase database) {
+
+        database.delete(CallLogContract.MessageEntry.TABLE_NAME, null, null);
+        Log.i("CallLogDbHelper", "A call log is deleted");
+    }
+
 
 }

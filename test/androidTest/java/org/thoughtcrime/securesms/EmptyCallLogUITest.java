@@ -22,8 +22,10 @@ public class EmptyCallLogUITest {
     //for this test to puss you must have never had a missed, outgoing, incoming call
     public void emptyCallLog() {
         onView(withId(R.id.navigation_bar_call_logs)).perform(click());
-        onView(withText("History is empty")).check(matches(isDisplayed()));
+        onView(withId(R.id.button5)).perform(click());
         onView(withId(R.id.navigation_bar_chats)).perform(click());
         onView(withContentDescription("New conversation")).check(matches(isDisplayed()));
+        onView(withId(R.id.navigation_bar_call_logs)).perform(click());
+        onView(withText("History is empty")).check(matches(isDisplayed()));
     }
 }

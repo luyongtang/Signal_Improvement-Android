@@ -97,6 +97,7 @@ public class CallLogsUITest {
         onView(withContentDescription("New conversation")).check(matches(isDisplayed()));
     }
 
+
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
