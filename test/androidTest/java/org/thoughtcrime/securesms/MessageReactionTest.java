@@ -135,7 +135,7 @@ public class MessageReactionTest {
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.radio_sad),
                         childAtPosition(
-                                allOf(withId(R.id.radioGroup),
+                                allOf(withId(R.id.radioGroupReaction),
                                         childAtPosition(
                                                 withClassName(is("android.support.constraint.ConstraintLayout")),
                                                 0)),
