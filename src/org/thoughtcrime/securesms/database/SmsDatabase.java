@@ -111,8 +111,6 @@ public class SmsDatabase extends MessagingDatabase {
   private final JobManager jobManager;
 
   private ReactionUtil reactUtil;
-  private android.database.sqlite.SQLiteDatabase write_database;
-  private android.database.sqlite.SQLiteDatabase read_database;
 
   public SmsDatabase(Context context, SQLCipherOpenHelper databaseHelper) {
     super(context, databaseHelper);

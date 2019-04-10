@@ -1,7 +1,6 @@
 package org.thoughtcrime.securesms;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import java.util.HashMap;
 public class ScheduledMessageActivity extends AppCompatActivity {
     TextView display;
     private String  messageBody;
-    private Context context;
     private Recipient recipient;
     private long threadId;
 
@@ -28,7 +26,6 @@ public class ScheduledMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduled_message);
         display   = findViewById(R.id.debug_display);
-        context   = getApplicationContext();
         recipient = Recipient.from(this, Address.fromSerialized(getIntent().getExtras().getSerializable("address").toString()), true);
         threadId  = getIntent().getExtras().getLong("threadId");
         initPickersData();

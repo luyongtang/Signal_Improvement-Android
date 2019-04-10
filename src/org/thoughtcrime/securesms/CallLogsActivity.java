@@ -19,7 +19,6 @@ import java.util.Date;
 public class CallLogsActivity extends AppCompatActivity {
 
     TextView display;
-    private static final String SELECTED_ITEM = "arg_selected_item";
 
     //Get the bundle
     // Bundle bundle = getIntent().getExtras();

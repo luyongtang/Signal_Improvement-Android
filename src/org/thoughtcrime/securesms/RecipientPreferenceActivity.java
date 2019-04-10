@@ -364,8 +364,6 @@ public class RecipientPreferenceActivity extends PassphraseRequiredActionBarActi
       PreferenceCategory    aboutCategory             = (PreferenceCategory)this.findPreference("about");
       PreferenceCategory    aboutDivider              = (PreferenceCategory)this.findPreference("about_divider");
       ContactPreference     aboutPreference           = (ContactPreference)this.findPreference(PREFERENCE_ABOUT);
-      PreferenceCategory    privacyCategory           = (PreferenceCategory) this.findPreference("privacy_settings");
-      PreferenceCategory    divider                   = (PreferenceCategory) this.findPreference("divider");
 
       mutePreference.setChecked(recipient.isMuted());
 
