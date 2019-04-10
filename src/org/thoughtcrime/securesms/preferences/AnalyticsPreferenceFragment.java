@@ -43,8 +43,6 @@ public class AnalyticsPreferenceFragment extends ListSummaryPreferenceFragment {
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener((ApplicationPreferencesActivity) getActivity());
     }
 
-    public AnalyticsPreferenceFragment() {
-    }
     public static String getLastMessageReceived(Context context){
         return Analytic.getLastRecipientReceivedMessage(context);
     }

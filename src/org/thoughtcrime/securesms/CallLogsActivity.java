@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class CallLogsActivity extends AppCompatActivity {
 
-    TextView display;
+    private TextView display;
 
     //Get the bundle
     // Bundle bundle = getIntent().getExtras();
@@ -53,6 +53,9 @@ public class CallLogsActivity extends AppCompatActivity {
                         startActivity(intent);
                         CallLogsActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
                         break;
+                    }
+                    default: {
+                        return true;
                     }
 
                 }
@@ -89,7 +92,7 @@ public class CallLogsActivity extends AppCompatActivity {
             timeStamp = convertTime(tmp);
             logs = logs + "\n\nFrom: "+from+"\nType: "+type+"\nDate: "+timeStamp;
         }
-        if(logs.equals("")) {
+        if("".equals(logs)) {
             display.setText("History is empty");
         }
         else {

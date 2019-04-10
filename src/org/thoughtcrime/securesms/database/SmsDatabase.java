@@ -328,7 +328,7 @@ public class SmsDatabase extends MessagingDatabase {
       while (cursor.moveToNext()) {
         long threadId = cursor.getLong(cursor.getColumnIndexOrThrow(THREAD_ID));
         if(isSetOrUpdateReaction){
-          if (emojiProxy.equals("01")){
+          if ("01".equals(emojiProxy)){
             /*Testing and logging purpose*/
             Log.i("Refresh","Removal Reaction");
             //Remove reaction from database

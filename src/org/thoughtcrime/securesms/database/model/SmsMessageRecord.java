@@ -61,7 +61,7 @@ public class SmsMessageRecord extends MessageRecord {
     this.reaction=reaction;
   }
   public boolean hasReaction(){
-    if(!reaction.equals("")){
+    if(!"".equals(reaction)){
       return true;
     }
     return false;

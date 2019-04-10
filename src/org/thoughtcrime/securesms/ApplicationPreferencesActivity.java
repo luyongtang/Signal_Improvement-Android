@@ -114,7 +114,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
             ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
             break;
           }
-          case R.id.navigation_bar_settings: {
+          default: {
             Intent intent = new Intent(ApplicationPreferencesActivity.this, ApplicationPreferencesActivity.class);
             startActivity(intent);
             ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);

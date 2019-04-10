@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.thoughtcrime.securesms.components.PushRecipientsPanel;
 import org.thoughtcrime.securesms.contacts.ContactsCursorLoader;
@@ -24,8 +23,6 @@ import org.thoughtcrime.securesms.util.ViewUtil;
 import java.util.List;
 
 public class BroadcastMessageActivity extends AppCompatActivity implements SelectedRecipientsAdapter.OnRecipientDeletedListener, PushRecipientsPanel.RecipientsPanelChangedListener {
-    TextView display;
-    private String   messageBody;
     private Context  context;
     private ListView lv;
 
@@ -77,7 +74,7 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
 
     public void sendBroadcastMessage(View v) {
 
-        messageBody = ((EditText) findViewById(R.id.broadcast_message_body)).getText().toString();
+        String messageBody = ((EditText) findViewById(R.id.broadcast_message_body)).getText().toString();
 
         boolean msgNull = messageBody.isEmpty();
 

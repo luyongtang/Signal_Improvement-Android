@@ -113,6 +113,9 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
             ConversationListActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
             break;
           }
+          default: {
+            return true;
+          }
 
         }
         return true;

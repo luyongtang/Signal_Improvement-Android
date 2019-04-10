@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.thoughtcrime.securesms.database.Address;
 import org.thoughtcrime.securesms.recipients.Recipient;
@@ -15,8 +14,6 @@ import org.thoughtcrime.securesms.recipients.Recipient;
 import java.util.HashMap;
 
 public class ScheduledMessageActivity extends AppCompatActivity {
-    TextView display;
-    private String  messageBody;
     private Recipient recipient;
     private long threadId;
 
@@ -25,7 +22,6 @@ public class ScheduledMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduled_message);
-        display   = findViewById(R.id.debug_display);
         recipient = Recipient.from(this, Address.fromSerialized(getIntent().getExtras().getSerializable("address").toString()), true);
         threadId  = getIntent().getExtras().getLong("threadId");
         initPickersData();
@@ -55,7 +51,7 @@ public class ScheduledMessageActivity extends AppCompatActivity {
     public void sendScheduledMessage(View v) {
 
 
-        messageBody = ((EditText) findViewById(R.id.scheduled_body)).getText().toString();
+        String messageBody = ((EditText) findViewById(R.id.scheduled_body)).getText().toString();
 
         HashMap<String,Boolean> tmp = ScheduledMessageUtil.sendScheduledMsg(messageBody,recipient, threadId, this);
 
