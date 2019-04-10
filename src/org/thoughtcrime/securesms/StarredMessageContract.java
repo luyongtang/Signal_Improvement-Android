@@ -1,7 +1,5 @@
 package org.thoughtcrime.securesms;
 
-import org.w3c.dom.Text;
-
 public final class StarredMessageContract {
 
     private StarredMessageContract(){}

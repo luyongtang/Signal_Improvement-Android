@@ -1,9 +1,7 @@
 package org.thoughtcrime.securesms.database;
 
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
-import org.thoughtcrime.securesms.ReactMessageContract;
 import org.thoughtcrime.securesms.ReactMessageDbHelper;
 import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.util.LRUCache;

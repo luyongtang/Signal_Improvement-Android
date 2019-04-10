@@ -1,19 +1,19 @@
 package org.thoughtcrime.securesms.database.loaders;
 
 
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
+
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+
+import org.whispersystems.signalservice.api.util.PhoneNumberFormatter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
-
-
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import org.whispersystems.signalservice.api.util.PhoneNumberFormatter;
 
 public class CountryListLoader extends AsyncTaskLoader<ArrayList<Map<String, String>>> {
 

@@ -36,8 +36,6 @@ import android.support.v4.util.Pair;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import org.thoughtcrime.securesms.logging.Log;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
@@ -60,6 +58,7 @@ import org.thoughtcrime.securesms.components.viewpager.ExtendedOnPageChangedList
 import org.thoughtcrime.securesms.database.Address;
 import org.thoughtcrime.securesms.database.MediaDatabase.MediaRecord;
 import org.thoughtcrime.securesms.database.loaders.PagingMediaLoader;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.mediapreview.AlbumRailAdapter;
 import org.thoughtcrime.securesms.mediapreview.MediaPreviewViewModel;
 import org.thoughtcrime.securesms.mms.GlideApp;

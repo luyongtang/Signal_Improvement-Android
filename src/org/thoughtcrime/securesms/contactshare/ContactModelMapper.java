@@ -1,10 +1,8 @@
 package org.thoughtcrime.securesms.contactshare;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import org.thoughtcrime.securesms.attachments.Attachment;
-import org.thoughtcrime.securesms.attachments.AttachmentId;
 import org.thoughtcrime.securesms.attachments.PointerAttachment;
 import org.whispersystems.libsignal.util.guava.Optional;
 import org.whispersystems.signalservice.api.messages.shared.SharedContact;
@@ -13,7 +11,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.thoughtcrime.securesms.contactshare.Contact.*;
+import static org.thoughtcrime.securesms.contactshare.Contact.Avatar;
+import static org.thoughtcrime.securesms.contactshare.Contact.Email;
+import static org.thoughtcrime.securesms.contactshare.Contact.Name;
+import static org.thoughtcrime.securesms.contactshare.Contact.Phone;
+import static org.thoughtcrime.securesms.contactshare.Contact.PostalAddress;
 
 public class ContactModelMapper {
 

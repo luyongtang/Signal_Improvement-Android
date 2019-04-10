@@ -5,9 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-
-import org.thoughtcrime.securesms.components.emoji.EmojiPageViewGridAdapter.VariationSelectorListener;
-import org.thoughtcrime.securesms.logging.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +20,8 @@ import org.thoughtcrime.securesms.components.InputAwareLayout.InputView;
 import org.thoughtcrime.securesms.components.RepeatableImageKey;
 import org.thoughtcrime.securesms.components.RepeatableImageKey.KeyEventListener;
 import org.thoughtcrime.securesms.components.emoji.EmojiPageView.EmojiSelectionListener;
+import org.thoughtcrime.securesms.components.emoji.EmojiPageViewGridAdapter.VariationSelectorListener;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.util.ResUtil;
 
 import java.util.LinkedList;

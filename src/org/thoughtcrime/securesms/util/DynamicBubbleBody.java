@@ -1,8 +1,6 @@
 package org.thoughtcrime.securesms.util;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 
 public class DynamicBubbleBody {
     private String currentBubbleColor;

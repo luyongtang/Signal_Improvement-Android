@@ -3,13 +3,14 @@ package org.thoughtcrime.securesms.glide.cache;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import org.thoughtcrime.securesms.logging.Log;
 
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.ResourceDecoder;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.load.resource.gif.StreamGifDecoder;
+
+import org.thoughtcrime.securesms.logging.Log;
 
 import java.io.File;
 import java.io.IOException;

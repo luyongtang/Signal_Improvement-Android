@@ -3,12 +3,13 @@ package org.thoughtcrime.securesms.qr;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import org.thoughtcrime.securesms.logging.Log;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import org.thoughtcrime.securesms.logging.Log;
 
 public class QrCode {
 

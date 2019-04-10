@@ -10,9 +10,9 @@ import android.support.annotation.Nullable;
 import org.thoughtcrime.securesms.attachments.Attachment;
 import org.thoughtcrime.securesms.attachments.AttachmentId;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
-import org.thoughtcrime.securesms.providers.PersistentBlobProvider;
-import org.thoughtcrime.securesms.providers.PartProvider;
 import org.thoughtcrime.securesms.providers.MemoryBlobProvider;
+import org.thoughtcrime.securesms.providers.PartProvider;
+import org.thoughtcrime.securesms.providers.PersistentBlobProvider;
 
 import java.io.IOException;
 import java.io.InputStream;

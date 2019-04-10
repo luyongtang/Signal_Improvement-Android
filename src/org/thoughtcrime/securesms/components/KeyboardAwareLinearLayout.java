@@ -24,11 +24,11 @@ import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
-import org.thoughtcrime.securesms.logging.Log;
 import android.view.Surface;
 import android.view.View;
 
 import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.util.ServiceUtil;
 import org.thoughtcrime.securesms.util.Util;
 

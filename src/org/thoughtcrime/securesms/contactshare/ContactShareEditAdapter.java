@@ -10,17 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import org.thoughtcrime.securesms.R;
-import org.thoughtcrime.securesms.components.AvatarImageView;
 import org.thoughtcrime.securesms.mms.GlideRequests;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static org.thoughtcrime.securesms.contactshare.Contact.*;
+import static org.thoughtcrime.securesms.contactshare.Contact.Name;
 
 public class ContactShareEditAdapter extends RecyclerView.Adapter<ContactShareEditAdapter.ContactEditViewHolder> {
 

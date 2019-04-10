@@ -25,13 +25,13 @@ import org.thoughtcrime.securesms.crypto.AttachmentSecret;
 import org.thoughtcrime.securesms.crypto.AttachmentSecretProvider;
 import org.thoughtcrime.securesms.giph.model.GiphyPaddedUrl;
 import org.thoughtcrime.securesms.glide.ContactPhotoLoader;
-import org.thoughtcrime.securesms.glide.cache.EncryptedBitmapCacheDecoder;
-import org.thoughtcrime.securesms.glide.cache.EncryptedCacheEncoder;
-import org.thoughtcrime.securesms.glide.cache.EncryptedGifCacheDecoder;
-import org.thoughtcrime.securesms.glide.cache.EncryptedBitmapResourceEncoder;
-import org.thoughtcrime.securesms.glide.cache.EncryptedGifDrawableResourceEncoder;
 import org.thoughtcrime.securesms.glide.GiphyPaddedUrlLoader;
 import org.thoughtcrime.securesms.glide.OkHttpUrlLoader;
+import org.thoughtcrime.securesms.glide.cache.EncryptedBitmapCacheDecoder;
+import org.thoughtcrime.securesms.glide.cache.EncryptedBitmapResourceEncoder;
+import org.thoughtcrime.securesms.glide.cache.EncryptedCacheEncoder;
+import org.thoughtcrime.securesms.glide.cache.EncryptedGifCacheDecoder;
+import org.thoughtcrime.securesms.glide.cache.EncryptedGifDrawableResourceEncoder;
 import org.thoughtcrime.securesms.mms.AttachmentStreamUriLoader.AttachmentModel;
 import org.thoughtcrime.securesms.mms.DecryptableStreamUriLoader.DecryptableUri;
 

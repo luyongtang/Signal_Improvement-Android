@@ -10,7 +10,6 @@ import android.text.TextUtils;
 
 import com.annimon.stream.Stream;
 
-
 import org.thoughtcrime.securesms.contacts.ContactAccessor;
 import org.thoughtcrime.securesms.contacts.ContactsDatabase;
 import org.thoughtcrime.securesms.database.Address;

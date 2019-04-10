@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import org.thoughtcrime.securesms.database.Address;
 import org.thoughtcrime.securesms.jobs.SendReadReceiptJob;

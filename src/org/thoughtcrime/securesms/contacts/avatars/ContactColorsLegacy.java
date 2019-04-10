@@ -3,7 +3,6 @@ package org.thoughtcrime.securesms.contacts.avatars;
 import android.support.annotation.NonNull;
 
 import org.thoughtcrime.securesms.color.MaterialColor;
-import org.thoughtcrime.securesms.color.MaterialColors;
 
 /**
  * Used for migrating legacy colors to modern colors. For normal color generation, use

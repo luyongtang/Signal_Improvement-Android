@@ -3,9 +3,6 @@ package org.thoughtcrime.securesms.jobs;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-
-import org.thoughtcrime.securesms.jobmanager.SafeData;
-import org.thoughtcrime.securesms.logging.Log;
 import android.webkit.MimeTypeMap;
 
 import com.android.mms.dom.smil.parser.SmilXmlSerializer;
@@ -29,6 +26,8 @@ import org.thoughtcrime.securesms.database.MmsDatabase;
 import org.thoughtcrime.securesms.database.NoSuchMessageException;
 import org.thoughtcrime.securesms.database.ThreadDatabase;
 import org.thoughtcrime.securesms.jobmanager.JobParameters;
+import org.thoughtcrime.securesms.jobmanager.SafeData;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.mms.CompatMmsConnection;
 import org.thoughtcrime.securesms.mms.MediaConstraints;
 import org.thoughtcrime.securesms.mms.MmsException;

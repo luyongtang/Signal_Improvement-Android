@@ -3,6 +3,7 @@ package org.thoughtcrime.securesms.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import org.thoughtcrime.securesms.R;
 
 public class Analytic{

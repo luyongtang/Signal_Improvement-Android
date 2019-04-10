@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.thoughtcrime.securesms.jobmanager.dependencies.ContextDependent;
-import org.thoughtcrime.securesms.jobmanager.requirements.Requirement;
 import org.thoughtcrime.securesms.jobmanager.requirements.SimpleRequirement;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
 

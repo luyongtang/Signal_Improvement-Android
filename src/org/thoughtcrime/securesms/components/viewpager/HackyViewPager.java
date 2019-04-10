@@ -4,8 +4,9 @@ package org.thoughtcrime.securesms.components.viewpager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import org.thoughtcrime.securesms.logging.Log;
 import android.view.MotionEvent;
+
+import org.thoughtcrime.securesms.logging.Log;
 
 /**
  * Hacky fix for http://code.google.com/p/android/issues/detail?id=18990

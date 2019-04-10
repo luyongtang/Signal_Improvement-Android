@@ -18,7 +18,6 @@ package org.thoughtcrime.securesms;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build.VERSION;
@@ -32,11 +31,9 @@ import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amulyakhare.textdrawable.TextDrawable;
 import com.annimon.stream.Stream;
 
 import org.thoughtcrime.securesms.components.AlertView;
@@ -59,8 +56,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-
-import static org.thoughtcrime.securesms.util.SpanUtil.color;
 
 public class ConversationListItem extends RelativeLayout
                                   implements RecipientModifiedListener,

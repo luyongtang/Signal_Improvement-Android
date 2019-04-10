@@ -1,9 +1,7 @@
 package org.thoughtcrime.securesms.webrtc;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.DrawableRes;
@@ -16,7 +14,6 @@ import org.thoughtcrime.securesms.WebRtcCallActivity;
 import org.thoughtcrime.securesms.notifications.NotificationChannels;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.service.WebRtcCallService;
-import org.thoughtcrime.securesms.util.ServiceUtil;
 
 /**
  * Manages the state of the WebRtc items in the Android notification bar.

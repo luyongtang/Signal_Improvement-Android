@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
+
 import org.thoughtcrime.securesms.logging.Log;
 
 import java.util.Locale;
