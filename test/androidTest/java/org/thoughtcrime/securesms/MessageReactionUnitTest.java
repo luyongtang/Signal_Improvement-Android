@@ -13,7 +13,6 @@ import org.thoughtcrime.securesms.database.SmsDatabase;
 import org.thoughtcrime.securesms.database.helpers.SQLCipherOpenHelper;
 
 import java.util.Date;
-import java.util.Random;
 
 import javax.inject.Inject;
 

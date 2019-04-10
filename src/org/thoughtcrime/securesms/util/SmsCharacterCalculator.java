@@ -17,6 +17,7 @@
 package org.thoughtcrime.securesms.util;
 
 import android.telephony.SmsMessage;
+
 import org.thoughtcrime.securesms.logging.Log;
 
 public class SmsCharacterCalculator extends CharacterCalculator {

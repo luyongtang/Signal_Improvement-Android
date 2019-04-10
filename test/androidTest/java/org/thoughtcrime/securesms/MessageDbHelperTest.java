@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,11 +12,13 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
-import androidx.test.core.app.ApplicationProvider;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class MessageDbHelperTest {

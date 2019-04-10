@@ -1,6 +1,5 @@
 package org.thoughtcrime.securesms;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
@@ -10,7 +9,6 @@ import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class ScheduledMessageUtil {

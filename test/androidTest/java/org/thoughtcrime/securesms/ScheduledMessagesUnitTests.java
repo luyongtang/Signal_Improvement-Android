@@ -1,18 +1,11 @@
 package org.thoughtcrime.securesms;
 
 import android.content.Context;
-import android.os.Handler;
-import android.widget.TimePicker;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import org.mockito.invocation.InvocationOnMock;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.mockito.stubbing.Answer;
 import org.thoughtcrime.securesms.crypto.DatabaseSecret;
 import org.thoughtcrime.securesms.crypto.DatabaseSecretProvider;
 import org.thoughtcrime.securesms.database.Address;
@@ -29,7 +22,13 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
+//import org.mockito.Mock;
+//import org.mockito.Mockito;
+//import org.mockito.invocation.InvocationOnMock;
+//import org.mockito.junit.MockitoJUnitRunner;
+//import org.mockito.stubbing.Answer;
 //import static org.mockito.ArgumentMatchers.any;
 //import static org.mockito.ArgumentMatchers.anyLong;
 //import static org.mockito.Mockito.when;

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-
 import org.thoughtcrime.securesms.database.loaders.CountryListLoader;
 
 import java.util.ArrayList;

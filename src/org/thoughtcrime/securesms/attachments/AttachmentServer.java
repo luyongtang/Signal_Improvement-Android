@@ -4,9 +4,9 @@ package org.thoughtcrime.securesms.attachments;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import org.thoughtcrime.securesms.logging.Log;
 
 import org.spongycastle.util.encoders.Hex;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.mms.PartAuthority;
 import org.thoughtcrime.securesms.util.Util;
 

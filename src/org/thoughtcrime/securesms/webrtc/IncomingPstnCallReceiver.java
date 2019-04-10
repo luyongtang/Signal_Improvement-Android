@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.telephony.TelephonyManager;
-import org.thoughtcrime.securesms.logging.Log;
 
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.service.WebRtcCallService;
 
 import java.lang.reflect.InvocationTargetException;

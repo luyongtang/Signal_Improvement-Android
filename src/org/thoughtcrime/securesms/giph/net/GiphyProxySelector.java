@@ -2,9 +2,9 @@ package org.thoughtcrime.securesms.giph.net;
 
 
 import android.os.AsyncTask;
-import org.thoughtcrime.securesms.logging.Log;
 
 import org.thoughtcrime.securesms.BuildConfig;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.util.Util;
 
 import java.io.IOException;

@@ -23,6 +23,7 @@
 package org.thoughtcrime.securesms.scribbles.viewmodel;
 
 import android.support.annotation.FloatRange;
+
 import org.thoughtcrime.securesms.logging.Log;
 
 public class Layer {

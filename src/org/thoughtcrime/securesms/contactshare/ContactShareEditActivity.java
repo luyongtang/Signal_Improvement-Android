@@ -14,8 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.annimon.stream.Stream;
-
 import org.thoughtcrime.securesms.PassphraseRequiredActionBarActivity;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
@@ -26,8 +24,9 @@ import org.thoughtcrime.securesms.util.DynamicTheme;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.thoughtcrime.securesms.contactshare.Contact.*;
-import static org.thoughtcrime.securesms.contactshare.ContactShareEditViewModel.*;
+import static org.thoughtcrime.securesms.contactshare.Contact.Name;
+import static org.thoughtcrime.securesms.contactshare.ContactShareEditViewModel.Event;
+import static org.thoughtcrime.securesms.contactshare.ContactShareEditViewModel.Factory;
 
 public class ContactShareEditActivity extends PassphraseRequiredActionBarActivity implements ContactShareEditAdapter.EventListener {
 

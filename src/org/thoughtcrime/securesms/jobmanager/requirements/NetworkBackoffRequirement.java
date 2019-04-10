@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import org.thoughtcrime.securesms.jobmanager.Job;
 import org.thoughtcrime.securesms.jobmanager.dependencies.ContextDependent;
-import org.thoughtcrime.securesms.logging.Log;
 
 import java.util.concurrent.TimeUnit;
 

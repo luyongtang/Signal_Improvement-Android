@@ -1,4 +1,5 @@
 package org.thoughtcrime.securesms;
+
 import android.content.Context;
 
 import org.junit.Before;
@@ -15,9 +16,9 @@ import androidx.test.runner.AndroidJUnit4;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest

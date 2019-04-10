@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
-import org.thoughtcrime.securesms.logging.Log;
 import android.util.Pair;
 
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.providers.PersistentBlobProvider;
 import org.thoughtcrime.securesms.util.MediaUtil;
 import org.thoughtcrime.securesms.util.ThreadUtil;

@@ -1,11 +1,11 @@
 package org.thoughtcrime.securesms;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MessageDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "star_db";

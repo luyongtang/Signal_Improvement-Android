@@ -1,7 +1,6 @@
 package org.thoughtcrime.securesms.util;
 
 import android.content.Context;
-import android.content.Intent;
 
 public class DynamicTextColor {
     private String currentTextColor;

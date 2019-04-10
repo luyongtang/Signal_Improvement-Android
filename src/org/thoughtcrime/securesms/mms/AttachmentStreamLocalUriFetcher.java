@@ -1,12 +1,12 @@
 package org.thoughtcrime.securesms.mms;
 
 import android.support.annotation.NonNull;
-import org.thoughtcrime.securesms.logging.Log;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.data.DataFetcher;
 
+import org.thoughtcrime.securesms.logging.Log;
 import org.whispersystems.libsignal.InvalidMessageException;
 import org.whispersystems.libsignal.util.guava.Optional;
 import org.whispersystems.signalservice.api.crypto.AttachmentCipherInputStream;
