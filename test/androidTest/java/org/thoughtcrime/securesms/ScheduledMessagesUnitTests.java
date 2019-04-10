@@ -24,35 +24,18 @@ import androidx.test.filters.LargeTest;
 
 import static org.junit.Assert.assertTrue;
 
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import org.mockito.invocation.InvocationOnMock;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.mockito.stubbing.Answer;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.ArgumentMatchers.anyLong;
-//import static org.mockito.Mockito.when;
-
 
 @LargeTest
-//@RunWith(MockitoJUnitRunner.class)
 @RunWith(AndroidJUnit4.class)
 public class ScheduledMessagesUnitTests {
 
     @Inject
     Context mContext;
-
-//    @Mock
-//    Handler mockHandler = new Handler();
-
-
     ScheduledMessageActivity scheduledMessageActivity;
     SmsDatabase database;
     SQLCipherOpenHelper databaseHelper;
     DatabaseSecret databaseSecret;
-
     Calendar current;
-
     String outgoingNum = "5336635678";
     Address address;
 
@@ -64,17 +47,6 @@ public class ScheduledMessagesUnitTests {
         database = new SmsDatabase(mContext,databaseHelper);
         address = Address.fromSerialized(outgoingNum);
         current = Calendar.getInstance();
-
-//        when(mockHandler.postDelayed(any(Runnable.class), anyLong())).thenAnswer(new Answer() {
-//
-//            @Override
-//            public Object answer(InvocationOnMock invocation) throws Throwable {
-//                Runnable runnable = (Runnable) invocation.getArgument(0);
-//                runnable.run();
-//                return null;
-//            }
-//
-//        });
     }
 
     @Test
