@@ -11,7 +11,6 @@ import org.thoughtcrime.securesms.logging.Log;
 
 public class ReactionActivity extends AppCompatActivity {
     private ReactionUtil reactUtil;
-    private String message;
     private String sentTimeStamp;
     private RadioButton radioButton;
     private Button  removeReactionButton;
@@ -22,7 +21,7 @@ public class ReactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reaction);
         //attributes setup
-        message = getIntent().getStringExtra("message");
+        String message = getIntent().getStringExtra("message");
         sentTimeStamp = getIntent().getStringExtra("date_time");
         String phoneNumber = getIntent().getStringExtra("phone_number");
         address = getIntent().getStringExtra("address_serialize");

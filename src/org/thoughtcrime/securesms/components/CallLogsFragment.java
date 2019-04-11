@@ -40,8 +40,8 @@ public class CallLogsFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new TypeNotPresentException(context.toString()
-                    + " must implement OnFragmentInteractionListener", new Throwable());
+            throw new NullPointerException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
