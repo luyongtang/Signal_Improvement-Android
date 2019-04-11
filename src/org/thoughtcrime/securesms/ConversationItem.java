@@ -155,8 +155,8 @@ public class ConversationItem extends LinearLayout
     private final SharedContactClickListener sharedContactClickListener = new SharedContactClickListener();
 
     // AssetManager gets the content from Assets
-    AssetManager am = getContext().getApplicationContext().getAssets();
-    Typeface fontFace = Typeface.createFromAsset(am,
+    private AssetManager am = getContext().getApplicationContext().getAssets();
+    private Typeface fontFace = Typeface.createFromAsset(am,
             String.format(Locale.US, "fonts/%s", customFont));
 
     private final Context context;

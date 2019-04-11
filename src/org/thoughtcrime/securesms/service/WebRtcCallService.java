@@ -213,20 +213,20 @@ public class WebRtcCallService extends Service implements InjectableType,
       else if (intent.getAction().equals(ACTION_INCOMING_CALL))             handleIncomingCall(intent);
       else if (intent.getAction().equals(ACTION_OUTGOING_CALL) && isIdle()) handleOutgoingCall(intent);
       else if (intent.getAction().equals(ACTION_ANSWER_CALL))               handleAnswerCall(intent);
-      else if (intent.getAction().equals(ACTION_DENY_CALL))                 handleDenyCall(intent);
-      else if (intent.getAction().equals(ACTION_LOCAL_HANGUP))              handleLocalHangup(intent);
+      else if (intent.getAction().equals(ACTION_DENY_CALL))                 handleDenyCall();
+      else if (intent.getAction().equals(ACTION_LOCAL_HANGUP))              handleLocalHangup();
       else if (intent.getAction().equals(ACTION_REMOTE_HANGUP))             handleRemoteHangup(intent);
       else if (intent.getAction().equals(ACTION_SET_MUTE_AUDIO))            handleSetMuteAudio(intent);
       else if (intent.getAction().equals(ACTION_SET_MUTE_VIDEO))            handleSetMuteVideo(intent);
-      else if (intent.getAction().equals(ACTION_FLIP_CAMERA))           handleSetCameraFlip(intent);
+      else if (intent.getAction().equals(ACTION_FLIP_CAMERA))               handleSetCameraFlip();
       else if (intent.getAction().equals(ACTION_BLUETOOTH_CHANGE))          handleBluetoothChange(intent);
       else if (intent.getAction().equals(ACTION_WIRED_HEADSET_CHANGE))      handleWiredHeadsetChange(intent);
-      else if (intent.getAction().equals((ACTION_SCREEN_OFF)))              handleScreenOffChange(intent);
+      else if (intent.getAction().equals((ACTION_SCREEN_OFF)))              handleScreenOffChange();
       else if (intent.getAction().equals(ACTION_REMOTE_VIDEO_MUTE))         handleRemoteVideoMute(intent);
       else if (intent.getAction().equals(ACTION_RESPONSE_MESSAGE))          handleResponseMessage(intent);
       else if (intent.getAction().equals(ACTION_ICE_MESSAGE))               handleRemoteIceCandidate(intent);
       else if (intent.getAction().equals(ACTION_ICE_CANDIDATE))             handleLocalIceCandidate(intent);
-      else if (intent.getAction().equals(ACTION_ICE_CONNECTED))             handleIceConnected(intent);
+      else if (intent.getAction().equals(ACTION_ICE_CONNECTED))             handleIceConnected();
       else if (intent.getAction().equals(ACTION_CALL_CONNECTED))            handleCallConnected(intent);
       else if (intent.getAction().equals(ACTION_CHECK_TIMEOUT))             handleCheckTimeout(intent);
       else if (intent.getAction().equals(ACTION_IS_IN_CALL_QUERY))          handleIsInCallQuery(intent);
@@ -566,7 +566,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     });
   }
 
-  private void handleIceConnected(Intent intent) {
+  private void handleIceConnected() {
     if (callState == CallState.STATE_ANSWERING) {
       if (this.recipient == null) throw new AssertionError("assert");
 
@@ -747,7 +747,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     handleCallConnected(intent);
   }
 
-  private void handleDenyCall(Intent intent) {
+  private void handleDenyCall() {
     if (callState != CallState.STATE_LOCAL_RINGING) {
       Log.w(TAG, "Can only deny from ringing!");
       return;
@@ -768,7 +768,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     this.terminate();
   }
 
-  private void handleLocalHangup(Intent intent) {
+  private void handleLocalHangup() {
     if (this.dataChannel != null && this.recipient != null && this.callId != null) {
       this.accountManager.cancelInFlightRequests();
       this.messageSender.cancelInFlightRequests();
@@ -846,7 +846,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     sendMessage(viewModelStateFor(callState), this.recipient, localCameraState, remoteVideoEnabled, bluetoothAvailable, microphoneEnabled);
   }
 
-  private void handleSetCameraFlip(Intent intent) {
+  private void handleSetCameraFlip() {
     Log.i(TAG, "handleSetCameraFlip()...");
 
     if (localCameraState.isEnabled() && peerConnection != null) {
@@ -889,7 +889,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     }
   }
 
-  private void handleScreenOffChange(Intent intent) {
+  private void handleScreenOffChange() {
     if (callState == CallState.STATE_ANSWERING ||
         callState == CallState.STATE_LOCAL_RINGING)
     {

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReactionUtil {
-    private String reaction_timeStamp;
     private ReactMessageDbHelper db_react;
     private SQLiteDatabase write_database;
     private SQLiteDatabase read_database;
@@ -37,7 +36,7 @@ public class ReactionUtil {
     // Send reaction over sms network
     public void sendReactionToRecipient(String sentTimeStamp, String reaction, String address, Context context){
         //Send reaction
-        reaction_timeStamp= sentTimeStamp.concat(reaction);
+        String reaction_timeStamp= sentTimeStamp.concat(reaction);
         List<Long> timeStampList = new ArrayList<Long>();
         timeStampList.add(Long.parseLong(reaction_timeStamp));
         ApplicationContext.getInstance(context)
@@ -70,6 +69,8 @@ public class ReactionUtil {
             case "12":
                 radio_type=R.id.radio_wow;
                 break;
+            default:
+                break;
         }
         return radio_type;
     }
@@ -86,6 +87,8 @@ public class ReactionUtil {
                 break;
             case "12":
                 drawable_type=R.drawable.concerned;
+                break;
+            default:
                 break;
         }
         return drawable_type;

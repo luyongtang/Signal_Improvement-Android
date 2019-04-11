@@ -45,11 +45,7 @@ public class ReactionNotification {
         List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
         ComponentName componentInfo = taskInfo.get(0).topActivity;
         Log.i("Package Name", componentInfo.getPackageName());
-        if (componentInfo.getPackageName().equalsIgnoreCase("org.thoughtcrime.securesms")) {
-            return true;
-        } else {
-            return false;
-        }
+        return componentInfo.getPackageName().equalsIgnoreCase("org.thoughtcrime.securesms");
     }
     //Adapter method to text reaction reaction for notication
     private static String reactionStringIdToText(String reaction){
@@ -64,6 +60,8 @@ public class ReactionNotification {
                 break;
             case "12":
                 react="WOW";
+                break;
+            default:
                 break;
         }
         return react;

@@ -14,10 +14,6 @@ import java.util.HashMap;
 public class ScheduledMessageUtil {
 
     public static HashMap sendScheduledMsg(String messageBody, Recipient recipient, Long threadId, Context context) {
-        Calendar current = Calendar.getInstance();
-        int year = current.get(Calendar.YEAR);
-        int month = current.get(Calendar.MONTH);
-        int day = current.get(Calendar.DAY_OF_MONTH);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, TimePickerFragment.TIME_HOURS);

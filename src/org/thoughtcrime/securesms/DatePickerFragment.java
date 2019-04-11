@@ -15,9 +15,6 @@ public class DatePickerFragment extends DialogFragment
     public static int DATE_YEAR;
     public static int DATE_MONTH;
     public static int DATE_DAY;
-    public DatePickerFragment(){
-
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

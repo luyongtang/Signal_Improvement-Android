@@ -502,11 +502,6 @@ public class ConversationFragment extends Fragment
     if (!TextUtils.isEmpty(result))
         clipboard.setText(result);
   }
-  private void handleReactionMessage(final Set<MessageRecord> messageRecords) {
-    List<MessageRecord> messageList = new LinkedList<>(messageRecords);
-
-
-  }
 
   private void handleDeleteMessages(final Set<MessageRecord> messageRecords) {
     int                 messagesCount = messageRecords.size();
