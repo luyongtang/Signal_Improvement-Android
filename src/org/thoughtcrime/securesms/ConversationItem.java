@@ -156,7 +156,7 @@ public class ConversationItem extends LinearLayout
 
     // AssetManager gets the content from Assets
     private AssetManager am = getContext().getApplicationContext().getAssets();
-    Typeface fontFace = Typeface.createFromAsset(am,
+    private Typeface fontFace = Typeface.createFromAsset(am,
             String.format(Locale.US, "fonts/%s", customFont));
 
     private final Context context;

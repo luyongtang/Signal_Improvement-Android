@@ -69,6 +69,8 @@ public class ReactionUtil {
             case "12":
                 radio_type=R.id.radio_wow;
                 break;
+            default:
+                break;
         }
         return radio_type;
     }

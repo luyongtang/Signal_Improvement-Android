@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class StarredMessageActivity extends AppCompatActivity {
 
-    TextView display;
+    private TextView display;
 
     //Get the bundle
    // Bundle bundle = getIntent().getExtras();
@@ -20,7 +20,7 @@ public class StarredMessageActivity extends AppCompatActivity {
     //Extract the data
    // String test = bundle.getString("threadId");
 
-    String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
+    private String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class StarredMessageActivity extends AppCompatActivity {
             timeStamp = convertTime(tmp);
             msgs = msgs + "\n\nsender: "+cntc+"\nbody: "+msgBody+"\ntime: "+timeStamp;
         }
-        if(msgs.equals("")) {
+        if("".equals(msgs)) {
             display.setText("No starred messages with this user");
         }
         else {
