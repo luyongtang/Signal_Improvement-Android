@@ -1,10 +1,14 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.R;
 
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -28,7 +32,7 @@ public class EmptyCallLogUITest {
     public void callMyself(){
 
         ViewInteraction pulsingFloatingActionButton = onView(
-                allOf(withId(R.id.fab), withContentDescription("New conversation"),
+                Matchers.allOf(ViewMatchers.withId(R.id.fab), withContentDescription("New conversation"),
 
                         isDisplayed()));
         pulsingFloatingActionButton.perform(click());

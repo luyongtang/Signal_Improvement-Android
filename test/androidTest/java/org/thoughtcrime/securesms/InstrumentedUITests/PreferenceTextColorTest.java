@@ -1,8 +1,10 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
+
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
 
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -16,22 +18,23 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class PreferenceBubbleBodyColorTest {
+public class PreferenceTextColorTest {
     @Rule
     //Start application at chosen activity: ApplicationPreferencesActivity
     public ActivityTestRule<ApplicationPreferencesActivity> myActivity = new ActivityTestRule<>(ApplicationPreferencesActivity.class);
 
     @Test
-    public void changeBodyBubbleColorTest(){
-        //Chosen color to apply on bubble body chat
-        String newColor = "Lime";
-        //Navigate to Bubble Color preference
+    public void changeTextColorTest(){
+        //Chosen color to apply on bubble text chat
+        String newColor = "Blue";
+        //Navigate to text Color preference
         onView(withText("Customization")).perform(click());
-        onView(withText("Bubble Color")).perform(click());
+        onView(withText("Text Color")).perform(click());
         //select the color from list
         onView(withText(newColor)).perform(click());
         //the new selected color is now displayed as the selected one,
-        // which is the reference value used to create the color for the bubble body chat
+        // which is the reference value used to create the color for the bubble text chat
         onView(withText(newColor)).check(matches(isDisplayed()));
     }
 }
+
