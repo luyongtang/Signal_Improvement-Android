@@ -1,10 +1,13 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUnitTests;
 
 import android.content.Context;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.crypto.DatabaseSecret;
 import org.thoughtcrime.securesms.crypto.DatabaseSecretProvider;
 import org.thoughtcrime.securesms.database.Address;
@@ -63,7 +66,7 @@ public class MessageReactionUnitTest {
         //Test if all three reactions are correctly mapped
         //From reaction id to radio id
         reactionId = reactUtil.reactionStringToRadioButtonId(sadReactionId);
-        assertEquals(R.id.radio_sad,reactionId);
+        Assert.assertEquals(R.id.radio_sad,reactionId);
         reactionId = reactUtil.reactionStringToRadioButtonId(smileyReactionId);
         assertEquals(R.id.radio_happy,reactionId);
         reactionId = reactUtil.reactionStringToRadioButtonId(concernedReactionId);

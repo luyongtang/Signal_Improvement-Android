@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUnitTests;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.MessageDbHelper;
+import org.thoughtcrime.securesms.StarredMessageContract;
 
 import javax.inject.Inject;
 

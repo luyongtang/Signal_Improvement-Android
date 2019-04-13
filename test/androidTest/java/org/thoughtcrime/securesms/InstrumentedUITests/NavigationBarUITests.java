@@ -1,9 +1,12 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.R;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -25,7 +28,7 @@ public class NavigationBarUITests {
 
     @Test
     public void selectSettingsThenBackToConversation(){
-        onView(withId(R.id.navigation_bar_settings)).perform(click());
+        onView(ViewMatchers.withId(R.id.navigation_bar_settings)).perform(click());
         onView(withText("Analytics Report")).check(matches(isDisplayed()));
         onView(withId(R.id.navigation_bar_chats)).perform(click());
         onView(withContentDescription("New conversation")).check(matches(isDisplayed()));

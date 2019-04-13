@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
 
 
 import android.view.View;
@@ -7,12 +7,16 @@ import android.view.ViewParent;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.R;
 
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -56,7 +60,7 @@ public class MessageReactionTest {
         clickOnText.perform(click());
 
         ViewInteraction composeText2 = onView(
-                allOf(withId(R.id.embedded_text_editor), withContentDescription("Message composition"),
+                Matchers.allOf(ViewMatchers.withId(R.id.embedded_text_editor), withContentDescription("Message composition"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.FrameLayout")),

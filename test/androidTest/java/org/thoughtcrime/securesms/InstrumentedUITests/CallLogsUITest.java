@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,13 +6,17 @@ import android.view.ViewParent;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.R;
 
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -37,7 +41,7 @@ public class CallLogsUITest {
     public void callMyself(){
 
         ViewInteraction pulsingFloatingActionButton = onView(
-                allOf(withId(R.id.fab), withContentDescription("New conversation"),
+                Matchers.allOf(ViewMatchers.withId(R.id.fab), withContentDescription("New conversation"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragment_container),

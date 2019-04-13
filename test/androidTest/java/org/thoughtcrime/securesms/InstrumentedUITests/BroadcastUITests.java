@@ -1,13 +1,16 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
 
 import android.os.SystemClock;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.R;
 
 import java.util.Calendar;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -46,7 +49,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("Broadcast message")).perform(click());
         SystemClock.sleep(1000);
-        onView(withId(R.id.broadcast_message_body)).perform(typeText("Hello"));
+        onView(ViewMatchers.withId(R.id.broadcast_message_body)).perform(typeText("Hello"));
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);

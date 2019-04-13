@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUnitTests;
 
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUnitTests;
 
 import android.content.Context;
 
@@ -6,6 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.DatePickerFragment;
+import org.thoughtcrime.securesms.ScheduledMessageActivity;
+import org.thoughtcrime.securesms.ScheduledMessageUtil;
+import org.thoughtcrime.securesms.TimePickerFragment;
 import org.thoughtcrime.securesms.crypto.DatabaseSecret;
 import org.thoughtcrime.securesms.crypto.DatabaseSecretProvider;
 import org.thoughtcrime.securesms.database.Address;

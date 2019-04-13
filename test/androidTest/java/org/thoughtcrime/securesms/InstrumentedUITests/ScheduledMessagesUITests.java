@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUITests;
 
 import android.os.SystemClock;
 import android.widget.TimePicker;
@@ -7,10 +7,13 @@ import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.thoughtcrime.securesms.ConversationListActivity;
+import org.thoughtcrime.securesms.R;
 
 import java.util.Calendar;
 
 import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -37,7 +40,7 @@ public class ScheduledMessagesUITests {
     public void pickDateInPast_ExpectError(){
         onView(withContentDescription("New conversation")).perform(click());
         SystemClock.sleep(1000);
-        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
+        onView(ViewMatchers.withId(R.id.search_view)).perform(typeText("5146556003"));
         SystemClock.sleep(1000);
         onView(withText("New message to...")).perform(click());
         SystemClock.sleep(1000);
