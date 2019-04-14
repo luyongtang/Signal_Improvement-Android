@@ -1,11 +1,11 @@
 package org.thoughtcrime.securesms;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MessageDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "star_db";
@@ -71,20 +71,19 @@ public class MessageDbHelper extends SQLiteOpenHelper {
     {
         boolean isStarred = false;
         Cursor cursor = database.query(true,StarredMessageContract.MessageEntry.TABLE_NAME, null,StarredMessageContract.MessageEntry.THREAD_ID_STAR + "=" + threadId,null, null, null, StarredMessageContract.MessageEntry.TIME_STAMP+" DESC", null);
-        for (int i = 0; i < cursor.getColumnNames().length; i++)
-        {
-        Log.d("column names", cursor.getColumnNames()[i]);
-        }
+
         while(cursor.moveToNext())
         {
             Long dbMsgId = cursor.getLong(cursor.getColumnIndex(StarredMessageContract.MessageEntry.MESSAGE_ID_STAR));
-            //long dbMsgId = Long.parseLong(dbMsgIdStr);
-            if (dbMsgId == msgId)
+            if (dbMsgId.equals(msgId))
             {
                 isStarred = true;
                 break;
             }
         }
+
+        cursor.close();
+
         return isStarred;
     }
 

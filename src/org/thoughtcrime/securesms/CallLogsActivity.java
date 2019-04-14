@@ -3,20 +3,14 @@ package org.thoughtcrime.securesms;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ScrollView;
+import android.widget.Button;
 import android.widget.TextView;
-
-import org.thoughtcrime.securesms.ApplicationPreferencesActivity;
-import org.thoughtcrime.securesms.ConversationListActivity;
-import org.thoughtcrime.securesms.CallLogsActivity;
-import org.thoughtcrime.securesms.InviteActivity;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -24,16 +18,7 @@ import java.util.Date;
 
 public class CallLogsActivity extends AppCompatActivity {
 
-    TextView display;
-    private static final String SELECTED_ITEM = "arg_selected_item";
-
-    //Get the bundle
-    // Bundle bundle = getIntent().getExtras();
-
-    //Extract the data
-    // String test = bundle.getString("threadId");
-
-    //String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
+    private TextView display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +46,21 @@ public class CallLogsActivity extends AppCompatActivity {
                         CallLogsActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
                         break;
                     }
+                    default: {
+                        return true;
+                    }
 
                 }
                 return true;
+            }
+        });
+
+        final Button button = findViewById(R.id.button5);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                emptyCallLogs();
+                finish();
+                startActivity(getIntent());
             }
         });
 
@@ -87,12 +84,22 @@ public class CallLogsActivity extends AppCompatActivity {
             timeStamp = convertTime(tmp);
             logs = logs + "\n\nFrom: "+from+"\nType: "+type+"\nDate: "+timeStamp;
         }
-        if(logs.equals("")) {
+        if("".equals(logs)) {
             display.setText("History is empty");
         }
         else {
             display.setText(logs);
         }
+
+        callLogDbHelper.close();
+    }
+
+    private void emptyCallLogs()
+    {
+        CallLogDbHelper callLogDbHelper = new CallLogDbHelper(this);
+        SQLiteDatabase database_write = callLogDbHelper.getWritableDatabase();
+
+        callLogDbHelper.deleteAllCallLogs(database_write);
 
         callLogDbHelper.close();
     }

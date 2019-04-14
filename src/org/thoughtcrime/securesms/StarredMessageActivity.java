@@ -2,11 +2,8 @@ package org.thoughtcrime.securesms;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ScrollView;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import java.text.Format;
@@ -15,7 +12,7 @@ import java.util.Date;
 
 public class StarredMessageActivity extends AppCompatActivity {
 
-    TextView display;
+    private TextView display;
 
     //Get the bundle
    // Bundle bundle = getIntent().getExtras();
@@ -23,7 +20,7 @@ public class StarredMessageActivity extends AppCompatActivity {
     //Extract the data
    // String test = bundle.getString("threadId");
 
-    String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
+    private String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +48,7 @@ public class StarredMessageActivity extends AppCompatActivity {
             timeStamp = convertTime(tmp);
             msgs = msgs + "\n\nsender: "+cntc+"\nbody: "+msgBody+"\ntime: "+timeStamp;
         }
-        if(msgs.equals("")) {
+        if("".equals(msgs)) {
             display.setText("No starred messages with this user");
         }
         else {

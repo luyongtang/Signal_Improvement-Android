@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
@@ -40,18 +39,18 @@ import android.view.MenuItem;
 
 import org.thoughtcrime.securesms.preferences.AdvancedPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AnalyticsPreferenceFragment;
-import org.thoughtcrime.securesms.preferences.CustomizationPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AppProtectionPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AppearancePreferenceFragment;
 import org.thoughtcrime.securesms.preferences.ChatsPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.CorrectedPreferenceFragment;
+import org.thoughtcrime.securesms.preferences.CustomizationPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.NotificationsPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.SmsMmsPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.widgets.ProfilePreference;
 import org.thoughtcrime.securesms.service.KeyCachingService;
+import org.thoughtcrime.securesms.util.DynamicBackground;
 import org.thoughtcrime.securesms.util.DynamicLanguage;
 import org.thoughtcrime.securesms.util.DynamicTheme;
-import org.thoughtcrime.securesms.util.DynamicBackground;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
 
 
@@ -115,7 +114,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActionBarA
             ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
             break;
           }
-          case R.id.navigation_bar_settings: {
+          default: {
             Intent intent = new Intent(ApplicationPreferencesActivity.this, ApplicationPreferencesActivity.class);
             startActivity(intent);
             ApplicationPreferencesActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);

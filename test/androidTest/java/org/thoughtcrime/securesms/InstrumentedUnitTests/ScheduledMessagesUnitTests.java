@@ -1,18 +1,15 @@
-package org.thoughtcrime.securesms;
+package org.thoughtcrime.securesms.InstrumentedUnitTests;
 
 import android.content.Context;
-import android.os.Handler;
-import android.widget.TimePicker;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import org.mockito.invocation.InvocationOnMock;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.mockito.stubbing.Answer;
+import org.thoughtcrime.securesms.DatePickerFragment;
+import org.thoughtcrime.securesms.ScheduledMessageActivity;
+import org.thoughtcrime.securesms.ScheduledMessageUtil;
+import org.thoughtcrime.securesms.TimePickerFragment;
 import org.thoughtcrime.securesms.crypto.DatabaseSecret;
 import org.thoughtcrime.securesms.crypto.DatabaseSecretProvider;
 import org.thoughtcrime.securesms.database.Address;
@@ -29,31 +26,20 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import static org.junit.Assert.*;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.ArgumentMatchers.anyLong;
-//import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertTrue;
 
 
 @LargeTest
-//@RunWith(MockitoJUnitRunner.class)
 @RunWith(AndroidJUnit4.class)
 public class ScheduledMessagesUnitTests {
 
     @Inject
     Context mContext;
-
-//    @Mock
-//    Handler mockHandler = new Handler();
-
-
     ScheduledMessageActivity scheduledMessageActivity;
     SmsDatabase database;
     SQLCipherOpenHelper databaseHelper;
     DatabaseSecret databaseSecret;
-
     Calendar current;
-
     String outgoingNum = "5336635678";
     Address address;
 
@@ -65,17 +51,6 @@ public class ScheduledMessagesUnitTests {
         database = new SmsDatabase(mContext,databaseHelper);
         address = Address.fromSerialized(outgoingNum);
         current = Calendar.getInstance();
-
-//        when(mockHandler.postDelayed(any(Runnable.class), anyLong())).thenAnswer(new Answer() {
-//
-//            @Override
-//            public Object answer(InvocationOnMock invocation) throws Throwable {
-//                Runnable runnable = (Runnable) invocation.getArgument(0);
-//                runnable.run();
-//                return null;
-//            }
-//
-//        });
     }
 
     @Test

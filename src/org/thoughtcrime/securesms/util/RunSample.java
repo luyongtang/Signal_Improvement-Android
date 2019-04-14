@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import org.thoughtcrime.securesms.logging.Log;
 
-public class runSample extends AppCompatActivity {
+public class RunSample extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

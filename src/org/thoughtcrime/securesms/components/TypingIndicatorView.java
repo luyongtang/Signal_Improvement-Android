@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import org.thoughtcrime.securesms.R;
-import org.thoughtcrime.securesms.logging.Log;
 
 public class TypingIndicatorView extends LinearLayout {
 

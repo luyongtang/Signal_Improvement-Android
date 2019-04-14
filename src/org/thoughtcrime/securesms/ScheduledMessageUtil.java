@@ -1,6 +1,5 @@
 package org.thoughtcrime.securesms;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
@@ -10,16 +9,11 @@ import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class ScheduledMessageUtil {
 
     public static HashMap sendScheduledMsg(String messageBody, Recipient recipient, Long threadId, Context context) {
-        Calendar current = Calendar.getInstance();
-        int year = current.get(Calendar.YEAR);
-        int month = current.get(Calendar.MONTH);
-        int day = current.get(Calendar.DAY_OF_MONTH);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, TimePickerFragment.TIME_HOURS);

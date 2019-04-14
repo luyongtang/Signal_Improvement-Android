@@ -24,9 +24,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
-
-import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
-import org.thoughtcrime.securesms.logging.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +39,8 @@ import org.thoughtcrime.securesms.database.MmsSmsColumns;
 import org.thoughtcrime.securesms.database.MmsSmsDatabase;
 import org.thoughtcrime.securesms.database.model.MessageRecord;
 import org.thoughtcrime.securesms.database.model.MmsMessageRecord;
+import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.mms.GlideRequests;
 import org.thoughtcrime.securesms.mms.SlideDeck;
 import org.thoughtcrime.securesms.recipients.Recipient;
@@ -203,8 +202,7 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
     MessageRecord nextRecord      = adapterPosition > 0 && !isHeaderPosition(adapterPosition - 1) ? getRecordForPositionOrThrow(adapterPosition - 1) : null;
     Long timeStampL = (messageRecord.getDateSent());
     String timeStamp = timeStampL.toString();
-    String address = messageRecord.getRecipient().getAddress().toString();
-    Cursor cursor = db_react.readReaction(read_database, timeStamp.toString());
+    Cursor cursor = db_react.readReaction(read_database, timeStamp);
     Log.i("ClassType",messageRecord.getClass().getSimpleName());
     Log.i("retrieveTimeSignal",timeStamp);
     Log.i("retrieveCount", Integer.toString(cursor.getCount()));

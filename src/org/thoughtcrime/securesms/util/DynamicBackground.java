@@ -25,7 +25,7 @@ public class DynamicBackground {
     }
 
     private static final class OverridePendingTransition {
-        static void invoke(Activity activity) {
+        private static void invoke(Activity activity) {
             activity.overridePendingTransition(0, 0);
         }
     }

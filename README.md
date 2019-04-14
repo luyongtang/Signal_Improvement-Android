@@ -1,6 +1,6 @@
 # Signal Android 
 [![Build Status](https://travis-ci.com/eglenceco/SignalAndroid.svg?token=ZrkYzBc8W8bQ9sGFXZjD&branch=master)](https://travis-ci.com/eglenceco/SignalAndroid)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c5c1f077ef64abea0e28310c365021f)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=eglenceco/SignalAndroid&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4dfb43787a2446a0aecce0828c8db046)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=eglenceco/SignalAndroid&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/6c5c1f077ef64abea0e28310c365021f)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=eglenceco/SignalAndroid&utm_campaign=Badge_Coverage)
 
 Signal is a messaging app for simple private communication with friends.

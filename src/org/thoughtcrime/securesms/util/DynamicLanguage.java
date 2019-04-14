@@ -1,6 +1,5 @@
 package org.thoughtcrime.securesms.util;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;

@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.thoughtcrime.securesms.mms.DecryptableStreamUriLoader.*;
+import static org.thoughtcrime.securesms.mms.DecryptableStreamUriLoader.DecryptableUri;
 
 public class SharedContactDetailsActivity extends PassphraseRequiredActionBarActivity implements RecipientModifiedListener {
 

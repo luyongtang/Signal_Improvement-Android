@@ -75,7 +75,6 @@ import org.thoughtcrime.securesms.mms.SlideClickListener;
 import org.thoughtcrime.securesms.mms.SlidesClickedListener;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientModifiedListener;
-import org.thoughtcrime.securesms.util.Analytic;
 import org.thoughtcrime.securesms.util.DateUtils;
 import org.thoughtcrime.securesms.util.DynamicBubbleBody;
 import org.thoughtcrime.securesms.util.DynamicTextColor;
@@ -156,8 +155,8 @@ public class ConversationItem extends LinearLayout
     private final SharedContactClickListener sharedContactClickListener = new SharedContactClickListener();
 
     // AssetManager gets the content from Assets
-    AssetManager am = getContext().getApplicationContext().getAssets();
-    Typeface fontFace = Typeface.createFromAsset(am,
+    private AssetManager am = getContext().getApplicationContext().getAssets();
+    private Typeface fontFace = Typeface.createFromAsset(am,
             String.format(Locale.US, "fonts/%s", customFont));
 
     private final Context context;

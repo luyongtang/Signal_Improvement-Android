@@ -18,6 +18,7 @@
 package org.thoughtcrime.securesms.crypto;
 
 import org.thoughtcrime.securesms.util.Base64;
+import org.thoughtcrime.securesms.util.Conversions;
 import org.thoughtcrime.securesms.util.Util;
 import org.whispersystems.libsignal.InvalidKeyException;
 import org.whispersystems.libsignal.InvalidMessageException;
@@ -25,7 +26,6 @@ import org.whispersystems.libsignal.ecc.Curve;
 import org.whispersystems.libsignal.ecc.ECKeyPair;
 import org.whispersystems.libsignal.ecc.ECPrivateKey;
 import org.whispersystems.libsignal.ecc.ECPublicKey;
-import org.thoughtcrime.securesms.util.Conversions;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

@@ -4,11 +4,9 @@ package org.thoughtcrime.securesms.service;
 import android.Manifest;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -21,17 +19,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.telephony.TelephonyManager;
-
-import org.thoughtcrime.securesms.CallLogContract;
-import org.thoughtcrime.securesms.CallLogDbHelper;
-import org.thoughtcrime.securesms.database.MmsSmsColumns;
-import org.thoughtcrime.securesms.logging.Log;
 import android.util.Pair;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.thoughtcrime.securesms.ApplicationContext;
+import org.thoughtcrime.securesms.CallLogUtil;
 import org.thoughtcrime.securesms.WebRtcCallActivity;
 import org.thoughtcrime.securesms.contacts.ContactAccessor;
 import org.thoughtcrime.securesms.crypto.UnidentifiedAccessUtil;
@@ -40,6 +34,7 @@ import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.RecipientDatabase.VibrateState;
 import org.thoughtcrime.securesms.dependencies.InjectableType;
 import org.thoughtcrime.securesms.events.WebRtcViewModel;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.notifications.MessageNotifier;
 import org.thoughtcrime.securesms.permissions.Permissions;
 import org.thoughtcrime.securesms.recipients.Recipient;
@@ -215,20 +210,20 @@ public class WebRtcCallService extends Service implements InjectableType,
       else if (intent.getAction().equals(ACTION_INCOMING_CALL))             handleIncomingCall(intent);
       else if (intent.getAction().equals(ACTION_OUTGOING_CALL) && isIdle()) handleOutgoingCall(intent);
       else if (intent.getAction().equals(ACTION_ANSWER_CALL))               handleAnswerCall(intent);
-      else if (intent.getAction().equals(ACTION_DENY_CALL))                 handleDenyCall(intent);
-      else if (intent.getAction().equals(ACTION_LOCAL_HANGUP))              handleLocalHangup(intent);
+      else if (intent.getAction().equals(ACTION_DENY_CALL))                 handleDenyCall();
+      else if (intent.getAction().equals(ACTION_LOCAL_HANGUP))              handleLocalHangup();
       else if (intent.getAction().equals(ACTION_REMOTE_HANGUP))             handleRemoteHangup(intent);
       else if (intent.getAction().equals(ACTION_SET_MUTE_AUDIO))            handleSetMuteAudio(intent);
       else if (intent.getAction().equals(ACTION_SET_MUTE_VIDEO))            handleSetMuteVideo(intent);
-      else if (intent.getAction().equals(ACTION_FLIP_CAMERA))           handleSetCameraFlip(intent);
+      else if (intent.getAction().equals(ACTION_FLIP_CAMERA))               handleSetCameraFlip();
       else if (intent.getAction().equals(ACTION_BLUETOOTH_CHANGE))          handleBluetoothChange(intent);
       else if (intent.getAction().equals(ACTION_WIRED_HEADSET_CHANGE))      handleWiredHeadsetChange(intent);
-      else if (intent.getAction().equals((ACTION_SCREEN_OFF)))              handleScreenOffChange(intent);
+      else if (intent.getAction().equals((ACTION_SCREEN_OFF)))              handleScreenOffChange();
       else if (intent.getAction().equals(ACTION_REMOTE_VIDEO_MUTE))         handleRemoteVideoMute(intent);
       else if (intent.getAction().equals(ACTION_RESPONSE_MESSAGE))          handleResponseMessage(intent);
       else if (intent.getAction().equals(ACTION_ICE_MESSAGE))               handleRemoteIceCandidate(intent);
       else if (intent.getAction().equals(ACTION_ICE_CANDIDATE))             handleLocalIceCandidate(intent);
-      else if (intent.getAction().equals(ACTION_ICE_CONNECTED))             handleIceConnected(intent);
+      else if (intent.getAction().equals(ACTION_ICE_CONNECTED))             handleIceConnected();
       else if (intent.getAction().equals(ACTION_CALL_CONNECTED))            handleCallConnected(intent);
       else if (intent.getAction().equals(ACTION_CHECK_TIMEOUT))             handleCheckTimeout(intent);
       else if (intent.getAction().equals(ACTION_IS_IN_CALL_QUERY))          handleIsInCallQuery(intent);
@@ -434,7 +429,7 @@ public class WebRtcCallService extends Service implements InjectableType,
       DatabaseFactory.getSmsDatabase(this).insertOutgoingCall(recipient.getAddress());
 
       // add a call log record to our new database
-      addCallLog(recipient.getAddress(),"OUTGOING");
+      CallLogUtil.saveCallInfo(this, recipient.getAddress(), "OUTGOING");
 
       timeoutExecutor.schedule(new TimeoutRunnable(this.callId), 2, TimeUnit.MINUTES);
 
@@ -568,7 +563,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     });
   }
 
-  private void handleIceConnected(Intent intent) {
+  private void handleIceConnected() {
     if (callState == CallState.STATE_ANSWERING) {
       if (this.recipient == null) throw new AssertionError("assert");
 
@@ -720,7 +715,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     Pair<Long, Long> messageAndThreadId = DatabaseFactory.getSmsDatabase(this).insertMissedCall(recipient.getAddress());
 
     // add a call log record to our new database
-    addCallLog(recipient.getAddress(),"MISSED");
+    CallLogUtil.saveCallInfo(this, recipient.getAddress(), "MISSED");
 
     MessageNotifier.updateNotification(this, messageAndThreadId.second, signal);
   }
@@ -738,7 +733,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     DatabaseFactory.getSmsDatabase(this).insertReceivedCall(recipient.getAddress());
 
     // add a call log record to our new database
-    addCallLog(recipient.getAddress(),"INCOMING");
+    CallLogUtil.saveCallInfo(this, recipient.getAddress(), "INCOMING");
 
     this.peerConnection.setAudioEnabled(true);
     this.peerConnection.setVideoEnabled(true);
@@ -749,7 +744,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     handleCallConnected(intent);
   }
 
-  private void handleDenyCall(Intent intent) {
+  private void handleDenyCall() {
     if (callState != CallState.STATE_LOCAL_RINGING) {
       Log.w(TAG, "Can only deny from ringing!");
       return;
@@ -765,12 +760,12 @@ public class WebRtcCallService extends Service implements InjectableType,
     DatabaseFactory.getSmsDatabase(this).insertMissedCall(recipient.getAddress());
 
     // add a call log record to our new database
-    addCallLog(recipient.getAddress(),"MISSED");
+    CallLogUtil.saveCallInfo(this, recipient.getAddress(), "MISSED");
 
     this.terminate();
   }
 
-  private void handleLocalHangup(Intent intent) {
+  private void handleLocalHangup() {
     if (this.dataChannel != null && this.recipient != null && this.callId != null) {
       this.accountManager.cancelInFlightRequests();
       this.messageSender.cancelInFlightRequests();
@@ -848,7 +843,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     sendMessage(viewModelStateFor(callState), this.recipient, localCameraState, remoteVideoEnabled, bluetoothAvailable, microphoneEnabled);
   }
 
-  private void handleSetCameraFlip(Intent intent) {
+  private void handleSetCameraFlip() {
     Log.i(TAG, "handleSetCameraFlip()...");
 
     if (localCameraState.isEnabled() && peerConnection != null) {
@@ -891,7 +886,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     }
   }
 
-  private void handleScreenOffChange(Intent intent) {
+  private void handleScreenOffChange() {
     if (callState == CallState.STATE_ANSWERING ||
         callState == CallState.STATE_LOCAL_RINGING)
     {
@@ -914,19 +909,6 @@ public class WebRtcCallService extends Service implements InjectableType,
   }
 
   /// Helper Methods
-
-  private void addCallLog(Address address, String type) {
-    // To store a call log record
-    ContentValues cLogRecord = new ContentValues();
-    cLogRecord.put(CallLogContract.MessageEntry.ADDRESS_CLOG, address.toString());
-    cLogRecord.put(CallLogContract.MessageEntry.TYPE_CLOG, type);
-    cLogRecord.put(CallLogContract.MessageEntry.DATE_CLOG, System.currentTimeMillis());
-
-    CallLogDbHelper callLogDbHelper = new CallLogDbHelper(this);
-    SQLiteDatabase database = callLogDbHelper.getWritableDatabase();
-    callLogDbHelper.addCallLog(cLogRecord, database);
-    callLogDbHelper.close();
-  }
 
   private boolean isBusy() {
     TelephonyManager telephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);

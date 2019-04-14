@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 
 import org.thoughtcrime.securesms.util.Util;
 
-import java.util.concurrent.Callable;
-
 public class LifecycleBoundTask {
 
   /**

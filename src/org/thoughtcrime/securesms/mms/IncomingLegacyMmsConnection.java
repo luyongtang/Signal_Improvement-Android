@@ -20,7 +20,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import org.thoughtcrime.securesms.logging.Log;
 
 import com.google.android.mms.InvalidHeaderValueException;
 import com.google.android.mms.pdu_alt.NotifyRespInd;
@@ -34,6 +33,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGetHC4;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.thoughtcrime.securesms.logging.Log;
 
 import java.io.IOException;
 import java.util.Arrays;

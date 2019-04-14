@@ -33,7 +33,7 @@ import java.util.concurrent.Executor;
 import ezvcard.Ezvcard;
 import ezvcard.VCard;
 
-import static org.thoughtcrime.securesms.contactshare.Contact.*;
+import static org.thoughtcrime.securesms.contactshare.Contact.Avatar;
 
 public class ContactRepository {
 

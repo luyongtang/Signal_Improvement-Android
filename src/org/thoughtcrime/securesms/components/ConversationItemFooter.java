@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.R;
-import org.thoughtcrime.securesms.ReactionActivity;
 import org.thoughtcrime.securesms.ReactionUtil;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.model.MessageRecord;

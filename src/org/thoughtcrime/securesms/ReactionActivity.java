@@ -1,22 +1,17 @@
 package org.thoughtcrime.securesms;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import org.thoughtcrime.securesms.logging.Log;
 
 public class ReactionActivity extends AppCompatActivity {
     private ReactionUtil reactUtil;
-    private TextView textView;
-    private String message;
     private String sentTimeStamp;
-    private String phoneNumber;
     private RadioButton radioButton;
     private Button  removeReactionButton;
     private String address;
@@ -26,14 +21,14 @@ public class ReactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reaction);
         //attributes setup
-        message = getIntent().getStringExtra("message");
+        String message = getIntent().getStringExtra("message");
         sentTimeStamp = getIntent().getStringExtra("date_time");
-        phoneNumber = getIntent().getStringExtra("phone_number");
+        String phoneNumber = getIntent().getStringExtra("phone_number");
         address = getIntent().getStringExtra("address_serialize");
         // util setup
         reactUtil = new ReactionUtil(getApplicationContext());
         // Setup view attributes
-        textView=findViewById(R.id.sample);
+        TextView textView=findViewById(R.id.sample);
         textView.setText(message);
         removeReactionButton = findViewById(R.id.removeReaction);
         applyPreviouslySavedReactionOnView();
@@ -61,27 +56,23 @@ public class ReactionActivity extends AppCompatActivity {
             }
         }
     }
-    // Radio click listener
+
     public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-        String reaction="";
-        // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.radio_sad:
-                if (checked)
-                    reaction="10";
+                handleSelectedReaction("10");
                 break;
             case R.id.radio_happy:
-                if (checked)
-                    reaction="11";
+                handleSelectedReaction("11");
                 break;
             case R.id.radio_wow:
-                if (checked)
-                    reaction="12";
+                handleSelectedReaction("12");
                 break;
+            default: {
+                handleSelectedReaction("01");
+                break;
+            }
         }
-        handleSelectedReaction(reaction);
     }
     // Remove button listener
     public void onRemoveButtonClicked(View view) {

@@ -33,7 +33,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -74,11 +73,9 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
   private final DynamicTheme    dynamicTheme    = new DynamicNoActionBarTheme();
   private final DynamicLanguage dynamicLanguage = new DynamicLanguage();
 
-  private ConversationListFragment conversationListFragment;
   private SearchFragment           searchFragment;
   private SearchToolbar            searchToolbar;
   private ImageView                searchAction;
-  private ViewGroup                fragmentContainer;
   private BottomNavigationView     navigationView;
 
   @Override
@@ -96,8 +93,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
 
     searchToolbar            = findViewById(R.id.search_toolbar);
     searchAction             = findViewById(R.id.search_action);
-    fragmentContainer        = findViewById(R.id.fragment_container);
-    conversationListFragment = initFragment(R.id.fragment_container, new ConversationListFragment(), dynamicLanguage.getCurrentLocale());
+    initFragment(R.id.fragment_container, new ConversationListFragment(), dynamicLanguage.getCurrentLocale());
 
     navigationView = (BottomNavigationView)findViewById(R.id.conversation_list_navigation_bar);
 
@@ -116,6 +112,9 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
             startActivity(intent);
             ConversationListActivity.this.overridePendingTransition(R.anim.stationary, R.anim.stationary);
             break;
+          }
+          default: {
+            return true;
           }
 
         }

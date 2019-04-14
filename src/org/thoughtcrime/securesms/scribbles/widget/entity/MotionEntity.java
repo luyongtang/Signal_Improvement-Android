@@ -29,8 +29,8 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.thoughtcrime.securesms.util.MathUtils;
 import org.thoughtcrime.securesms.scribbles.viewmodel.Layer;
+import org.thoughtcrime.securesms.util.MathUtils;
 
 
 @SuppressWarnings({"WeakerAccess"})

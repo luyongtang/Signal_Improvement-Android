@@ -15,10 +15,6 @@ public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
     public static int TIME_HOURS;
     public static int TIME_MINUTE;
-    //Empty Constructor
-    public TimePickerFragment(){
-
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
