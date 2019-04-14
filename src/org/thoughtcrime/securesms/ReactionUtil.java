@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.thoughtcrime.securesms.database.Address;
+import org.thoughtcrime.securesms.database.MessagingDatabase;
 import org.thoughtcrime.securesms.jobs.SendReadReceiptJob;
 import org.thoughtcrime.securesms.logging.Log;
 
@@ -16,9 +17,11 @@ public class ReactionUtil {
     private ReactMessageDbHelper db_react;
     private SQLiteDatabase write_database;
     private SQLiteDatabase read_database;
+    private Context context;
 
     public ReactionUtil(Context context){
         //Database setup
+        this.context = context;
         db_react = new ReactMessageDbHelper(context);
         write_database = db_react.getWritableDatabase();
         read_database = db_react.getReadableDatabase();
@@ -51,6 +54,24 @@ public class ReactionUtil {
         contentValues.put(ReactMessageContract.ReactionEntry.REACTION , reaction);
         contentValues.put(ReactMessageContract.ReactionEntry.PHONE_NUMBER, phoneNumber);
         db_react.saveReaction(contentValues,read_database,write_database);
+    }
+    // process incoming reaction from network
+    public void processIncomingReaction(String emojiProxy, String rawTimeStamp, long type, MessagingDatabase.SyncMessageId messageId, long threadId){
+        if ("01".equals(emojiProxy)){
+            /*Testing and logging purpose*/
+            Log.i("Refresh","Removal Reaction");
+            //Remove reaction from database
+            removeReaction(rawTimeStamp);
+        }
+        else{
+            /*Testing and logging purpose*/
+            Log.i("real_time_stamp", rawTimeStamp);
+            Log.i("emoji_proxy", emojiProxy);
+            //Save reaction to database
+            saveReactionToDatabase(rawTimeStamp, emojiProxy, messageId.getAddress().serialize());
+            //Reaction Notification
+            ReactionNotification.pushApplicableReactionNotification(context,messageId.getAddress(), type, threadId, emojiProxy);
+        }
     }
     public void removeReaction(String sentTimeStamp){
         db_react.deleteReaction(sentTimeStamp, write_database);
