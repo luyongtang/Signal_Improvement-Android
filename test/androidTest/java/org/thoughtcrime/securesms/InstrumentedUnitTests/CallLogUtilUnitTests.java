@@ -23,18 +23,18 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class CallLogUtilTest {
+public class CallLogUtilUnitTests {
 
     @Inject
-    Context mContext;
+    private Context mContext;
 
-    CallLogDbHelper callLogDbHelper;
-    SQLiteDatabase writableDatabase;
-    SQLiteDatabase readableDatabase;
+    private CallLogDbHelper callLogDbHelper;
+    private SQLiteDatabase writableDatabase;
+    private SQLiteDatabase readableDatabase;
 
-    Address outgoingAddress;
-    Address incomingAddress;
-    Address missedAddress;
+    private Address outgoingAddress;
+    private Address incomingAddress;
+    private Address missedAddress;
 
     @Before
     public void setUp() throws Exception {

@@ -23,18 +23,18 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class CallLogDbHelperTest {
+public class CallLogDbHelperUnitTests {
 
     @Inject
-    Context mContext;
+    private Context mContext;
 
-    CallLogDbHelper callLogDbHelper;
-    ContentValues outgoingRecord;
-    ContentValues incomingRecord;
-    ContentValues missedRecord;
-    ContentValues nullRecord;
-    SQLiteDatabase writableDatabase;
-    SQLiteDatabase readableDatabase;
+    private CallLogDbHelper callLogDbHelper;
+    private ContentValues outgoingRecord;
+    private ContentValues incomingRecord;
+    private ContentValues missedRecord;
+    private ContentValues nullRecord;
+    private SQLiteDatabase writableDatabase;
+    private SQLiteDatabase readableDatabase;
 
     @Before
     public void setUp() throws Exception {
