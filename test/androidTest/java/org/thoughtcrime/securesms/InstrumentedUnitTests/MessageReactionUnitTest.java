@@ -25,6 +25,8 @@ import androidx.test.filters.LargeTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -33,7 +35,7 @@ public class MessageReactionUnitTest {
     Context sampleContext;
     ReactionUtil reactUtil;
     String sampleSentTimeStamp;
-    Long sampleSentTimeStampIncoming;
+    String sampleSentTimeStampIncoming;
     SmsDatabase smsDatabase;
     final String sadReactionId = "10";
     final String smileyReactionId = "11";
@@ -46,7 +48,7 @@ public class MessageReactionUnitTest {
         //random timeStamp
         Long timeStamp = (new Date()).getTime();
         sampleSentTimeStamp = Long.toString(timeStamp);
-        sampleSentTimeStampIncoming = (new Date()).getTime()+100;
+        sampleSentTimeStampIncoming = Long.toString((new Date()).getTime()+100);
         // ReactionUtil is the class containing all methods to handle reactions
         reactUtil = new ReactionUtil(sampleContext);
         //Database used to listen for incoming reaction
@@ -115,14 +117,25 @@ public class MessageReactionUnitTest {
     }
     @Test
     public void incomingReactionFromNetwork(){
-        //Append reaction (smiley reaction code)
-        String appendedReaction = Long.toString(sampleSentTimeStampIncoming)+smileyReactionId;
         //Reaction has been received and being processed
-        MessagingDatabase.SyncMessageId messageId = new MessagingDatabase.SyncMessageId(Address.fromSerialized(phoneNumberIncoming), Long.parseLong(appendedReaction));
-        //Save the message to Signal database, and the reaction to reaction database
-        smsDatabase.incrementReceiptCount(messageId,false,true);
+        MessagingDatabase.SyncMessageId messageId = new MessagingDatabase.SyncMessageId(Address.fromSerialized(phoneNumberIncoming), Long.parseLong(sampleSentTimeStampIncoming));
+        //Process incoming reaction
+        reactUtil.processIncomingReaction(smileyReactionId, sampleSentTimeStampIncoming,10485783,messageId, 1 );
         //retrieve the reaction
-        String reaction = reactUtil.getReactionForCurrentMessage(Long.toString(sampleSentTimeStampIncoming));
+        String reaction = reactUtil.getReactionForCurrentMessage(sampleSentTimeStampIncoming);
         assertEquals(smileyReactionId,reaction);
+    }
+    @Test
+    public void removeReaction(){
+        //save reaction
+        reactUtil.saveReactionToDatabase(sampleSentTimeStamp,smileyReactionId,phoneNumber);
+        //A reaction is saved for a message
+        String savedReaction = reactUtil.getReactionForCurrentMessage(sampleSentTimeStamp);
+        assertNotNull(savedReaction);
+        //Remove the reaction
+        reactUtil.removeReaction(sampleSentTimeStamp);
+        //No reaction found for the selected message
+        String noReaction = reactUtil.getReactionForCurrentMessage(sampleSentTimeStamp);
+        assertNull(noReaction);
     }
 }

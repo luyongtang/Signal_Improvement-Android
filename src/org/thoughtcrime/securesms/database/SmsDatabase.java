@@ -324,25 +324,11 @@ public class SmsDatabase extends MessagingDatabase {
       cursor = database.query(TABLE_NAME, new String[] {ID, THREAD_ID, ADDRESS, TYPE},
                               DATE_SENT + " = ?", new String[] {String.valueOf(rawTimeStamp)},
                               null, null, null, null);
-
       while (cursor.moveToNext()) {
         long threadId = cursor.getLong(cursor.getColumnIndexOrThrow(THREAD_ID));
         if(isSetOrUpdateReaction){
-          if ("01".equals(emojiProxy)){
-            /*Testing and logging purpose*/
-            Log.i("Refresh","Removal Reaction");
-            //Remove reaction from database
-            reactUtil.removeReaction(rawTimeStamp);
-          }
-          else{
-            /*Testing and logging purpose*/
-            Log.i("real_time_stamp", rawTimeStamp);
-            Log.i("emoji_proxy", emojiProxy);
-            //Save reaction to database
-            reactUtil.saveReactionToDatabase(rawTimeStamp, emojiProxy, messageId.getAddress().serialize());
-            //Reaction Notification
-            ReactionNotification.pushApplicableReactionNotification(context,messageId.getAddress(), cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)),threadId, emojiProxy);
-          }
+          Long type = cursor.getLong(cursor.getColumnIndexOrThrow(TYPE));
+          reactUtil.processIncomingReaction( emojiProxy,rawTimeStamp,type,messageId,threadId );
           notifyConversationListeners(threadId);
         }
         else if (Types.isOutgoingMessageType(cursor.getLong(cursor.getColumnIndexOrThrow(TYPE)))) {
