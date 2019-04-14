@@ -20,14 +20,6 @@ public class CallLogsActivity extends AppCompatActivity {
 
     private TextView display;
 
-    //Get the bundle
-    // Bundle bundle = getIntent().getExtras();
-
-    //Extract the data
-    // String test = bundle.getString("threadId");
-
-    //String threadId = StarredMessageContract.MessageEntry.CURRENT_THREAD;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

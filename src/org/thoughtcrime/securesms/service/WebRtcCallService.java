@@ -4,11 +4,9 @@ package org.thoughtcrime.securesms.service;
 import android.Manifest;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -27,8 +25,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.thoughtcrime.securesms.ApplicationContext;
-import org.thoughtcrime.securesms.CallLogContract;
-import org.thoughtcrime.securesms.CallLogDbHelper;
+import org.thoughtcrime.securesms.CallLogUtil;
 import org.thoughtcrime.securesms.WebRtcCallActivity;
 import org.thoughtcrime.securesms.contacts.ContactAccessor;
 import org.thoughtcrime.securesms.crypto.UnidentifiedAccessUtil;
@@ -432,7 +429,7 @@ public class WebRtcCallService extends Service implements InjectableType,
       DatabaseFactory.getSmsDatabase(this).insertOutgoingCall(recipient.getAddress());
 
       // add a call log record to our new database
-      addCallLog(recipient.getAddress(),"OUTGOING");
+      CallLogUtil.saveCallInfo(this, recipient.getAddress(), "OUTGOING");
 
       timeoutExecutor.schedule(new TimeoutRunnable(this.callId), 2, TimeUnit.MINUTES);
 
@@ -718,7 +715,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     Pair<Long, Long> messageAndThreadId = DatabaseFactory.getSmsDatabase(this).insertMissedCall(recipient.getAddress());
 
     // add a call log record to our new database
-    addCallLog(recipient.getAddress(),"MISSED");
+    CallLogUtil.saveCallInfo(this, recipient.getAddress(), "MISSED");
 
     MessageNotifier.updateNotification(this, messageAndThreadId.second, signal);
   }
@@ -736,7 +733,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     DatabaseFactory.getSmsDatabase(this).insertReceivedCall(recipient.getAddress());
 
     // add a call log record to our new database
-    addCallLog(recipient.getAddress(),"INCOMING");
+    CallLogUtil.saveCallInfo(this, recipient.getAddress(), "INCOMING");
 
     this.peerConnection.setAudioEnabled(true);
     this.peerConnection.setVideoEnabled(true);
@@ -763,7 +760,7 @@ public class WebRtcCallService extends Service implements InjectableType,
     DatabaseFactory.getSmsDatabase(this).insertMissedCall(recipient.getAddress());
 
     // add a call log record to our new database
-    addCallLog(recipient.getAddress(),"MISSED");
+    CallLogUtil.saveCallInfo(this, recipient.getAddress(), "MISSED");
 
     this.terminate();
   }
@@ -912,19 +909,6 @@ public class WebRtcCallService extends Service implements InjectableType,
   }
 
   /// Helper Methods
-
-  private void addCallLog(Address address, String type) {
-    // To store a call log record
-    ContentValues cLogRecord = new ContentValues();
-    cLogRecord.put(CallLogContract.MessageEntry.ADDRESS_CLOG, address.toString());
-    cLogRecord.put(CallLogContract.MessageEntry.TYPE_CLOG, type);
-    cLogRecord.put(CallLogContract.MessageEntry.DATE_CLOG, System.currentTimeMillis());
-
-    CallLogDbHelper callLogDbHelper = new CallLogDbHelper(this);
-    SQLiteDatabase database = callLogDbHelper.getWritableDatabase();
-    callLogDbHelper.addCallLog(cLogRecord, database);
-    callLogDbHelper.close();
-  }
 
   private boolean isBusy() {
     TelephonyManager telephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
