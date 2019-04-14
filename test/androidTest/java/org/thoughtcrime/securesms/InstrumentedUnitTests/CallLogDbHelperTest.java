@@ -184,4 +184,25 @@ public class CallLogDbHelperTest {
         // the number of call log records should be zero
         assertEquals(0, cursor.getCount());
     }
+
+    @Test
+    public void deleteOneRecord () {
+
+        // add multiple call log records
+        callLogDbHelper.addCallLog(outgoingRecord, writableDatabase);
+        callLogDbHelper.addCallLog(incomingRecord, writableDatabase);
+        callLogDbHelper.addCallLog(missedRecord, writableDatabase);
+        Cursor cursor = callLogDbHelper.readAllCallLog(readableDatabase);
+
+        // the number of call log records should be three
+        assertEquals(3, cursor.getCount());
+
+        // delete the missed call record
+        callLogDbHelper.deleteCallLog(writableDatabase,missedRecord.get(CallLogContract.MessageEntry.ADDRESS_CLOG).toString(),missedRecord.get(CallLogContract.MessageEntry.DATE_CLOG).toString());
+        cursor = callLogDbHelper.readAllCallLog(readableDatabase);
+        assertEquals(2, cursor.getCount());
+
+        // clean up the test data
+        callLogDbHelper.deleteAllCallLogs(writableDatabase);
+    }
 }
