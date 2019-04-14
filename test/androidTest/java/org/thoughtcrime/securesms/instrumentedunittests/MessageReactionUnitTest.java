@@ -30,7 +30,7 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MessageReactionUnitTest {
+public class MessageReactionUnitTest { 
     @Inject
     Context sampleContext;
     ReactionUtil reactUtil;
