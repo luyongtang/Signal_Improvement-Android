@@ -71,6 +71,9 @@ import androidx.work.Configuration;
 import androidx.work.WorkManager;
 import dagger.ObjectGraph;
 
+import com.appdynamics.eumagent.runtime.AgentConfiguration;
+import com.appdynamics.eumagent.runtime.Instrumentation;
+
 /**
  * Will be called once when the TextSecure process is created.
  *
@@ -119,6 +122,11 @@ public class ApplicationContext extends MultiDexApplication implements Dependenc
     initializeUnidentifiedDeliveryAbilityRefresh();
     NotificationChannels.create(this);
     ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+      // Start the AppDynamics Instrumentation
+Instrumentation.start(AgentConfiguration.builder()
+        .withContext(getApplicationContext())
+        .withAppKey("AD-AAB-AAP-KRU")
+        .build());
   }
 
   @Override
