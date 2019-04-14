@@ -14,6 +14,7 @@ import org.thoughtcrime.securesms.components.PushRecipientsPanel;
 import org.thoughtcrime.securesms.contacts.ContactsCursorLoader;
 import org.thoughtcrime.securesms.contacts.RecipientsEditor;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
+import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
@@ -25,6 +26,7 @@ import java.util.List;
 public class BroadcastMessageActivity extends AppCompatActivity implements SelectedRecipientsAdapter.OnRecipientDeletedListener, PushRecipientsPanel.RecipientsPanelChangedListener {
     private Context  context;
     private ListView lv;
+    private BroadcastUtil broadcastUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
 
         RecipientsEditor recipientsEditor   = ViewUtil.findById(this, R.id.recipients_text);
         PushRecipientsPanel recipientsPanel = ViewUtil.findById(this, R.id.broadcast_recipients);
-
+        recipientsPanel.findViewById(R.id.contacts_button).setVisibility(View.GONE);
         context = getApplicationContext();
         lv      = findViewById(R.id.broadcast_selected_contacts_list);
 
@@ -43,6 +45,8 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
         recipientsEditor.setHint(R.string.recipients_panel__add_members);
         recipientsPanel.setPanelChangeListener(this);
         findViewById(R.id.contacts_button).setOnClickListener(new AddRecipientButtonListener());
+
+        broadcastUtil = new BroadcastUtil(context);
 
         super.onCreate(savedInstanceState);
     }
@@ -73,9 +77,16 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
     }
 
     public void sendBroadcastMessage(View v) {
-
         String messageBody = ((EditText) findViewById(R.id.broadcast_message_body)).getText().toString();
 
+        boolean success = broadcastUtil.sendBroadcastMessage(messageBody,getAdapter());
+        /*Logging*/
+        Log.i("broadcastState", String.valueOf(success));
+        Log.i("broadcastState", broadcastUtil.getLastOperationStatus());
+
+        if(success) onBackPressed();
+        else showErrorDialog(broadcastUtil.getLastOperationStatus());
+        /*
         boolean msgNull = messageBody.isEmpty();
 
         if (getAdapter().getCount() < 1 || msgNull) {
@@ -108,7 +119,14 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
             }
             onBackPressed();
         }
+        */
 
+    }
+    private void showErrorDialog(String alertMsg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(alertMsg);
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private class AddRecipientButtonListener implements View.OnClickListener {

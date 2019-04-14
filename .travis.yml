@@ -66,4 +66,4 @@ jobs:
     #- "./gradlew test"
     #- "./gradlew testPlayDebugUnitTest"
     #- "./gradlew connectedAndroidTest" #This one will run the UI test
-    - "./gradlew -Pandroid.testInstrumentationRunnerArguments.package=org.thoughtcrime.securesms.InstrumentedUnitTests connectedAndroidTest"
+    - "./gradlew -Pandroid.testInstrumentationRunnerArguments.package=org.thoughtcrime.securesms.instrumentedunittests connectedAndroidTest"
