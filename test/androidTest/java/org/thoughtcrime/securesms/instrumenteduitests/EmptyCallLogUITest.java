@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms.InstrumentedUITests;
+package org.thoughtcrime.securesms.instrumenteduitests;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
