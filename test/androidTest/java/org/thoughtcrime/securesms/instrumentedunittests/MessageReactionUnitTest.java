@@ -1,4 +1,4 @@
-package org.thoughtcrime.securesms.InstrumentedUnitTests;
+package org.thoughtcrime.securesms.instrumentedunittests;
 
 import android.content.Context;
 
@@ -30,7 +30,7 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MessageReactionUnitTest {
+public class MessageReactionUnitTest { 
     @Inject
     Context sampleContext;
     ReactionUtil reactUtil;

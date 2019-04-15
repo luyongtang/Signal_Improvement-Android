@@ -82,7 +82,7 @@
                     android:id="@+id/scheduled_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/grey_50"
                     android:gravity="top"
                     android:inputType="textShortMessage|textMultiLine"
                     android:minLines="2"

@@ -6,6 +6,7 @@ import java.security.MessageDigest
 
 buildscript {
     repositories {
+        jcenter()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
@@ -18,12 +19,14 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath files('libs/gradle-witness.jar')
+        classpath 'com.appdynamics:appdynamics-gradle-plugin:5.+'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'witness'
 apply plugin: 'jacoco'
+apply plugin: 'adeum'
 
 repositories {
     maven {
