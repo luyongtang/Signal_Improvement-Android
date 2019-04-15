@@ -13,11 +13,8 @@ import android.widget.ListView;
 import org.thoughtcrime.securesms.components.PushRecipientsPanel;
 import org.thoughtcrime.securesms.contacts.ContactsCursorLoader;
 import org.thoughtcrime.securesms.contacts.RecipientsEditor;
-import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.recipients.Recipient;
-import org.thoughtcrime.securesms.sms.MessageSender;
-import org.thoughtcrime.securesms.sms.OutgoingTextMessage;
 import org.thoughtcrime.securesms.util.SelectedRecipientsAdapter;
 import org.thoughtcrime.securesms.util.ViewUtil;
 
@@ -86,40 +83,6 @@ public class BroadcastMessageActivity extends AppCompatActivity implements Selec
 
         if(success) onBackPressed();
         else showErrorDialog(broadcastUtil.getLastOperationStatus());
-        /*
-        boolean msgNull = messageBody.isEmpty();
-
-        if (getAdapter().getCount() < 1 || msgNull) {
-
-            String alertMsg = "Please enter the following: \n";
-            if(getAdapter().getCount() < 1)
-                alertMsg = alertMsg.concat("Contacts");
-            if(msgNull)
-                alertMsg = alertMsg.concat("\nMessage");
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(alertMsg);
-            AlertDialog alert = builder.create();
-            alert.show();
-
-        } else {
-
-            for (Recipient recipient : getAdapter().getRecipients()) {
-                OutgoingTextMessage message;
-                long threadId;
-
-                message = new OutgoingTextMessage(recipient, messageBody, -1);
-                threadId = DatabaseFactory.getThreadDatabase(this).getThreadIdIfExistsFor(recipient);
-
-                if (threadId != -1L){
-                    MessageSender.send(context, message, threadId, false, null);
-                } else {
-                    MessageSender.send(context, message, threadId, true, null);
-                }
-            }
-            onBackPressed();
-        }
-        */
 
     }
     private void showErrorDialog(String alertMsg){
