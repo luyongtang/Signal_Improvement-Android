@@ -37,7 +37,7 @@ public class TextToSpeechUITests {
         int millies = current.get(Calendar.MILLISECOND);
         onView(withContentDescription("New conversation")).perform(click());
         SystemClock.sleep(1000);
-        onView(withId(R.id.search_view)).perform(typeText("5145493505"));
+        onView(withId(R.id.search_view)).perform(typeText("5149619291"));
         SystemClock.sleep(1000);
         onView(withText("New message to...")).perform(click());
         SystemClock.sleep(1000);
