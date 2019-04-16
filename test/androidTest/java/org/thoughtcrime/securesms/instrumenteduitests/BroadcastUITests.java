@@ -40,7 +40,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);
-        onView(withText("Please enter the following: \nContacts\nMessage")).check(matches(isDisplayed()));
+        onView(withText("Please enter the following:\n Message Contacts")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);
-        onView(withText("Please enter the following: \nContacts")).check(matches(isDisplayed()));
+        onView(withText("Please enter the following:\n Contacts")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);
-        onView(withText("Please enter the following: \n\nMessage")).check(matches(isDisplayed()));
+        onView(withText("Please enter the following:\n Message")).check(matches(isDisplayed()));
     }
 
     @Test

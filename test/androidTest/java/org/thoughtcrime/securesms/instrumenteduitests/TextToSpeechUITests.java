@@ -54,7 +54,19 @@ public class TextToSpeechUITests {
     public void iconIsDisplayedInGroups(){
         Calendar current = Calendar.getInstance();
         int millies = current.get(Calendar.MILLISECOND);
-        onView(withText("testing")).perform(click());
+        onView(withContentDescription("More options")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withText("New group")).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.group_name)).perform(typeText("testing"+millies));
+        SystemClock.sleep(1000);
+        onView(withId(R.id.recipients_text)).perform(typeText("5149619291"));
+        SystemClock.sleep(1000);
+        onView(withId(R.id.recipients_text)).perform(pressImeActionButton());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.menu_create_group)).perform(click());
+        current = Calendar.getInstance();
+        millies = current.get(Calendar.MILLISECOND);
         SystemClock.sleep(1000);
         onView(withId(R.id.embedded_text_editor)).perform(typeText("Hey Erdem from UI test"+millies));
         SystemClock.sleep(1000);

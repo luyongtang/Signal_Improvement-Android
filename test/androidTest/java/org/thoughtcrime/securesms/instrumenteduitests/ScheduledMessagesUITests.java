@@ -275,15 +275,16 @@ public class ScheduledMessagesUITests {
         SystemClock.sleep(1000);
         onView(withText("Pick Time")).perform(click());
         SystemClock.sleep(1000);
+        current = Calendar.getInstance();
         int hour = current.get(Calendar.HOUR_OF_DAY);
         int min = current.get(Calendar.MINUTE);
         SystemClock.sleep(1000);
-        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(hour, ++min));
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(hour, min+2));
         SystemClock.sleep(1000);
         onView(withText("OK")).perform(click());
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
-        SystemClock.sleep(90000);
+        SystemClock.sleep(180000);
         onView(withText("Hey Eglen from UI test"+millies)).check(matches(isDisplayed()));
     }
 }
