@@ -56,11 +56,30 @@ public class MessageReactionTest {
             e.printStackTrace();
         }
 
-        ViewInteraction clickOnText = onView(withText("+15145493505"));
-        clickOnText.perform(click());
+        ViewInteraction pulsingFloatingActionButton = onView(
+                Matchers.allOf(ViewMatchers.withId(R.id.fab), withContentDescription("New conversation"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                3),
+                        isDisplayed()));
+        pulsingFloatingActionButton.perform(click());
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.search_view),isDisplayed()));
+        appCompatEditText4.perform(replaceText("4383511225"), closeSoftKeyboard());
+
+        onView(withText("New message to...")).perform(click());
 
         ViewInteraction composeText2 = onView(
-                Matchers.allOf(ViewMatchers.withId(R.id.embedded_text_editor), withContentDescription("Message composition"),
+                allOf(withId(R.id.embedded_text_editor), withContentDescription("Message composition"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.FrameLayout")),
@@ -181,4 +200,6 @@ public class MessageReactionTest {
             }
         };
     }
+
+
 }
