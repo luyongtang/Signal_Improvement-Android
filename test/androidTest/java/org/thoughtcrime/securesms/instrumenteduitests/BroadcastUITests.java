@@ -40,7 +40,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);
-        onView(withText("Please enter the following: \nContacts\nMessage")).check(matches(isDisplayed()));
+        onView(withText("Please enter the following:\n Message Contacts")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);
-        onView(withText("Please enter the following: \nContacts")).check(matches(isDisplayed()));
+        onView(withText("Please enter the following:\n Contacts")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("CONFIRM")).perform(click());
         SystemClock.sleep(1000);
-        onView(withText("Please enter the following: \n\nMessage")).check(matches(isDisplayed()));
+        onView(withText("Please enter the following:\n Message")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withText("Broadcast message")).perform(click());
         SystemClock.sleep(1000);
-        onView(withId(R.id.recipients_text)).perform(typeText("5145493505"));
+        onView(withId(R.id.recipients_text)).perform(typeText("5146556003"));
         SystemClock.sleep(1000);
         onView(withId(R.id.recipients_text)).perform(pressImeActionButton());
         SystemClock.sleep(1000);
@@ -94,7 +94,7 @@ public class BroadcastUITests {
         SystemClock.sleep(1000);
         onView(withContentDescription("New conversation")).perform(click());
         SystemClock.sleep(1000);
-        onView(withId(R.id.search_view)).perform(typeText("5145493505"));
+        onView(withId(R.id.search_view)).perform(typeText("5146556003"));
         SystemClock.sleep(1000);
         onView(withText("New message to...")).perform(click());
         SystemClock.sleep(1000);
