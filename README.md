@@ -1,7 +1,6 @@
 # Signal Android 
 [![Build Status](https://travis-ci.com/eglenceco/SignalAndroid.svg?token=ZrkYzBc8W8bQ9sGFXZjD&branch=master)](https://travis-ci.com/eglenceco/SignalAndroid)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4dfb43787a2446a0aecce0828c8db046)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=eglenceco/SignalAndroid&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/6c5c1f077ef64abea0e28310c365021f)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=eglenceco/SignalAndroid&utm_campaign=Badge_Coverage)
 
 Signal is a messaging app for simple private communication with friends.
 
@@ -10,6 +9,9 @@ Signal uses your phone's data connection (WiFi/3G/4G) to communicate securely, o
 Currently available on the Play store.
 
 <a href='https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='80px'/></a>
+
+## Project Description
+This is a school project in which we worked on adding new features to the existing Android messaging app Signal. During the six iterations, we implemented some interesting features, such as starred messages, scheduled messages and message reaction.
 
 ## Team Members
 We are team Room3. Our team is composed of 7 members:
